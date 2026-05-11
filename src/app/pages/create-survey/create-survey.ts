@@ -56,8 +56,8 @@ export class CreateSurvey {
 
     this.question = '';
     this.answers = ['', ''];
-    this.errorMessage = '';
     this.allowMultipleAnswers = false;
+    this.errorMessage = '';
   }
 
   removeQuestion(index: number): void {
