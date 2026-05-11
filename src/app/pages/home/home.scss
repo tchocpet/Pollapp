@@ -1,0 +1,142 @@
+.home-page {
+  min-height: 100vh;
+  padding: 48px;
+  background: #1b1230;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  color: #ff9f43;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 48px;
+  margin: 0;
+}
+
+.new-survey-btn {
+  background: #ff9f43;
+  color: #1b1230;
+  padding: 14px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.ending-soon,
+.survey-list {
+  background: #28183f;
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.survey-list {
+  margin-top: 24px;
+}
+
+.tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  button {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    background: #38204f;
+    color: white;
+  }
+
+  .active {
+    background: #ff9f43;
+    color: #1b1230;
+    font-weight: 700;
+  }
+}
+
+.survey-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.survey-card {
+  display: block;
+  background: #38204f;
+  border-radius: 18px;
+  padding: 20px;
+  text-decoration: none;
+  color: white;
+  transition: 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.survey-card:hover {
+  transform: translateY(-4px);
+  border: 1px solid #ff9f43;
+}
+
+.survey-card h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+.survey-card p {
+  color: #d6cde2;
+  margin-bottom: 12px;
+}
+
+.survey-card span {
+  color: #ff9f43;
+  font-size: 14px;
+}
+
+.empty-state {
+  background: #38204f;
+  padding: 32px;
+  border-radius: 18px;
+  text-align: center;
+  color: #d6cde2;
+}
+
+.past-card {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .home-page {
+    padding: 24px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .new-survey-btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .tabs {
+    flex-direction: column;
+  }
+}

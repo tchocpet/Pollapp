@@ -1,0 +1,64 @@
+<main class="home-page">
+  <header class="header">
+    <div>
+      <p class="eyebrow">Poll App</p>
+      <h1>Your surveys</h1>
+    </div>
+
+    <a routerLink="/create-survey" class="new-survey-btn"> New Survey </a>
+  </header>
+
+  <section class="ending-soon">
+    <h2>Ending soon surveys</h2>
+
+    <div class="survey-grid">
+      @for (survey of endingSoonSurveys; track survey.id) {
+        <a class="survey-card" [routerLink]="['/survey', survey.id]">
+          <h3>{{ survey.title }}</h3>
+          <p>{{ survey.description }}</p>
+          <span>Deadline: {{ survey.deadline }}</span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <section class="survey-list">
+    <div class="tabs">
+      <button [class.active]="activeTab === 'running'" (click)="setTab('running')">Running</button>
+
+      <button [class.active]="activeTab === 'past'" (click)="setTab('past')">Past Survey</button>
+    </div>
+
+    @if (activeTab === 'running') {
+      @if (runningSurveys.length > 0) {
+        <div class="survey-grid">
+          @for (survey of runningSurveys; track survey.id) {
+            <a class="survey-card" [routerLink]="['/survey', survey.id]">
+              <h3>{{ survey.title }}</h3>
+              <p>{{ survey.description }}</p>
+              <span>Deadline: {{ survey.deadline }}</span>
+            </a>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">No running surveys yet.</div>
+      }
+    }
+
+    @if (activeTab === 'past') {
+      @if (pastSurveys.length > 0) {
+        <div class="survey-grid">
+          @for (survey of pastSurveys; track survey.id) {
+            <div class="survey-card past-card">
+              <h3>{{ survey.title }}</h3>
+              <p>{{ survey.description }}</p>
+              <span>Deadline: {{ survey.deadline }}</span>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="empty-state">No past surveys yet.</div>
+      }
+    }
+  </section>
+</main>

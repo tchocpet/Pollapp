@@ -1,0 +1,51 @@
+@if (survey) {
+  <main class="survey-detail-page">
+    <section class="survey-box">
+      <h1>{{ survey.title }}</h1>
+
+      <p class="survey-description">
+        {{ survey.description }}
+      </p>
+
+      <div class="survey-meta">
+        <span> Category: {{ survey.category }} </span>
+
+        <span> Deadline: {{ survey.deadline }} </span>
+      </div>
+
+      <h3>{{ currentQuestion?.text }}</h3>
+
+      @for (answer of currentQuestion?.answers ?? []; track answer.text; let index = $index) {
+        <label class="answer-item">
+          <input
+            type="radio"
+            name="answer"
+            [checked]="selectedIndex === index"
+            (change)="vote(index)"
+          />
+
+          {{ answer.text }}
+        </label>
+      }
+
+      <button class="complete-btn" (click)="completeSurvey()">Complete Survey</button>
+      <button class="complete-btn" type="button" (click)="nextQuestion()">Next Question</button>
+    </section>
+
+    <section class="results-box">
+      <h2>Survey Results LIVE</h2>
+
+      @for (answer of currentQuestion?.answers ?? []; track answer.text) {
+        <div class="result-item">
+          <p>{{ answer.text }}</p>
+
+          <div class="bar">
+            <div class="fill" [style.width.%]="getPercentage(answer.votes)"></div>
+          </div>
+
+          <span> {{ getPercentage(answer.votes) }}% </span>
+        </div>
+      }
+    </section>
+  </main>
+}
