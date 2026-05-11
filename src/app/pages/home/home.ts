@@ -10,12 +10,17 @@ import { SurveyService } from '../../services/survey';
   styleUrl: './home.scss',
 })
 export class Home {
-  surveys: Survey[] = [];
-  activeTab: 'running' | 'past' = 'running';
-
-  constructor(private surveyService: SurveyService) {
-    this.surveys = this.surveyService.getSurveys();
+  get surveys(): Survey[] {
+    return this.surveyService.getSurveys();
   }
+  activeTab: 'running' | 'past' = 'running';
+  selectedCategory = 'All';
+
+  setCategory(category: string) {
+    this.selectedCategory = category;
+  }
+
+  constructor(private surveyService: SurveyService) {}
 
   get runningSurveys(): Survey[] {
     const today = new Date();
@@ -37,5 +42,37 @@ export class Home {
 
   setTab(tab: 'running' | 'past') {
     this.activeTab = tab;
+  }
+  deleteSurvey(id: number) {
+    const confirmed = confirm('Are you sure you want to delete this survey?');
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.surveyService.deleteSurvey(id);
+  }
+
+  get categories(): string[] {
+    const categories = this.surveys
+      .map((survey) => survey.category.trim())
+      .filter((category) => category);
+
+    return ['All', ...new Set(categories)];
+  }
+
+  get filteredRunningSurveys(): Survey[] {
+    if (this.selectedCategory === 'All') {
+      return this.runningSurveys;
+    }
+
+    return this.runningSurveys.filter((survey) => survey.category === this.selectedCategory);
+  }
+  get filteredPastSurveys(): Survey[] {
+    if (this.selectedCategory === 'All') {
+      return this.pastSurveys;
+    }
+
+    return this.pastSurveys.filter((survey) => survey.category === this.selectedCategory);
   }
 }

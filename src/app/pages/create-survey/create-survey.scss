@@ -109,8 +109,16 @@ textarea {
   padding: 12px;
   border-radius: 12px;
   margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.checkbox-row {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
 @media (max-width: 700px) {
   .create-survey-page {
     padding: 24px;

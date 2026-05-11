@@ -5,6 +5,7 @@ export interface Answer {
 
 export interface Question {
   text: string;
+  allowMultipleAnswers: boolean;
   answers: Answer[];
 }
 

@@ -15,8 +15,10 @@
       @for (survey of endingSoonSurveys; track survey.id) {
         <a class="survey-card" [routerLink]="['/survey', survey.id]">
           <h3>{{ survey.title }}</h3>
+
           <p>{{ survey.description }}</p>
-          <span>Deadline: {{ survey.deadline }}</span>
+
+          <span> Deadline: {{ survey.deadline }} </span>
         </a>
       }
     </div>
@@ -28,15 +30,30 @@
 
       <button [class.active]="activeTab === 'past'" (click)="setTab('past')">Past Survey</button>
     </div>
+    <div class="category-filter">
+      @for (category of categories; track category) {
+        <button [class.active]="selectedCategory === category" (click)="setCategory(category)">
+          {{ category }}
+        </button>
+      }
+    </div>
 
     @if (activeTab === 'running') {
-      @if (runningSurveys.length > 0) {
+      @if (filteredRunningSurveys.length > 0) {
         <div class="survey-grid">
-          @for (survey of runningSurveys; track survey.id) {
+          @for (survey of filteredRunningSurveys; track survey.id) {
             <a class="survey-card" [routerLink]="['/survey', survey.id]">
               <h3>{{ survey.title }}</h3>
               <p>{{ survey.description }}</p>
               <span>Deadline: {{ survey.deadline }}</span>
+
+              <button
+                class="delete-btn"
+                type="button"
+                (click)="deleteSurvey(survey.id); $event.preventDefault(); $event.stopPropagation()"
+              >
+                Delete
+              </button>
             </a>
           }
         </div>
@@ -46,9 +63,9 @@
     }
 
     @if (activeTab === 'past') {
-      @if (pastSurveys.length > 0) {
+      @if (filteredPastSurveys.length > 0) {
         <div class="survey-grid">
-          @for (survey of pastSurveys; track survey.id) {
+          @for (survey of filteredPastSurveys; track survey.id) {
             <div class="survey-card past-card">
               <h3>{{ survey.title }}</h3>
               <p>{{ survey.description }}</p>

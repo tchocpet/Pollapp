@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Survey } from '../../models/survey';
 import { SurveyService } from '../../services/survey';
 
 @Component({
   selector: 'app-survey-detail',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './survey-detail.html',
   styleUrl: './survey-detail.scss',
 })
 export class SurveyDetail {
   survey?: Survey;
   selectedIndex: number | null = null;
+  selectedIndexes: number[] = [];
   currentQuestionIndex = 0;
+  surveyCompleted = false;
   get currentQuestion() {
     return this.survey?.questions[this.currentQuestionIndex];
   }
@@ -26,7 +28,9 @@ export class SurveyDetail {
   }
 
   vote(index: number) {
-    this.selectedIndex = index;
+    if (this.survey && this.currentQuestionIndex === this.survey.questions.length - 1) {
+      this.surveyCompleted = true;
+    }
   }
   nextQuestion() {
     if (!this.survey) {
@@ -39,16 +43,43 @@ export class SurveyDetail {
     }
   }
 
-  completeSurvey() {
-    if (!this.survey || this.selectedIndex === null) {
+  completeSurvey(): void {
+    if (!this.survey || !this.currentQuestion) {
       return;
     }
 
-    if (this.currentQuestion && this.selectedIndex !== null) {
+    if (this.currentQuestion.allowMultipleAnswers) {
+      if (this.selectedIndexes.length === 0) {
+        return;
+      }
+
+      const currentQuestion = this.currentQuestion;
+
+      if (!currentQuestion) {
+        return;
+      }
+
+      this.selectedIndexes.forEach((index) => {
+        currentQuestion.answers[index].votes++;
+      });
+    } else {
+      if (this.selectedIndex === null) {
+        return;
+      }
+
       this.currentQuestion.answers[this.selectedIndex].votes++;
     }
 
+    this.surveyService.saveSurveys();
+
     this.selectedIndex = null;
+    this.selectedIndexes = [];
+
+    if (this.currentQuestionIndex < this.survey.questions.length - 1) {
+      this.currentQuestionIndex++;
+    } else {
+      this.surveyCompleted = true;
+    }
   }
 
   getTotalVotes(): number {

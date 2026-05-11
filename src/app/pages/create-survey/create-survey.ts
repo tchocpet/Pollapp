@@ -16,6 +16,7 @@ export class CreateSurvey {
   deadline = '';
   category = '';
   question = '';
+  allowMultipleAnswers = false;
   answers = ['', ''];
   questions: Question[] = [];
   errorMessage = '';
@@ -40,12 +41,13 @@ export class CreateSurvey {
 
     if (this.question.trim() === '' || hasEmptyAnswer) {
       this.errorMessage = 'Please fill the question and all answer options.';
-
       return;
     }
 
     this.questions.push({
       text: this.question,
+      allowMultipleAnswers: this.allowMultipleAnswers,
+
       answers: this.answers.map((answer) => ({
         text: answer,
         votes: 0,
@@ -55,24 +57,30 @@ export class CreateSurvey {
     this.question = '';
     this.answers = ['', ''];
     this.errorMessage = '';
+    this.allowMultipleAnswers = false;
+  }
+
+  removeQuestion(index: number) {
+    this.questions.splice(index, 1);
   }
 
   publishSurvey() {
-    const hasEmptyAnswer = this.answers.some((answer) => answer.trim() === '');
+    if (this.questions.length === 0 && this.question.trim() === '') {
+      this.errorMessage = 'Please add at least one question.';
+      return;
+    }
+    if (this.question.trim() !== '') {
+      this.addQuestion();
+    }
 
     if (
       this.title.trim() === '' ||
       this.deadline.trim() === '' ||
       this.category.trim() === '' ||
-      this.question.trim() === '' ||
-      hasEmptyAnswer
+      this.questions.length === 0
     ) {
       this.errorMessage = 'Please fill all required fields.';
       return;
-    }
-
-    if (this.question.trim() !== '') {
-      this.addQuestion();
     }
 
     this.surveyService.addSurvey({
@@ -82,7 +90,6 @@ export class CreateSurvey {
       deadline: this.deadline,
       category: this.category,
       questions: this.questions,
-
       isPast: false,
     });
 
@@ -92,7 +99,9 @@ export class CreateSurvey {
     this.category = '';
     this.question = '';
     this.answers = ['', ''];
+    this.questions = [];
     this.errorMessage = '';
+
     this.router.navigate(['/']);
   }
 }

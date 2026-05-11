@@ -5,37 +5,15 @@ import { Survey } from '../models/survey';
   providedIn: 'root',
 })
 export class SurveyService {
-  private surveys: Survey[] = [
-    {
-      id: 1,
-      title: 'Team Event',
-      description: 'Choose activities for the event',
-      deadline: '2026-05-20',
-      category: 'Work',
+  private surveys: Survey[] = [];
 
-      questions: [
-        {
-          text: 'Which date would work best for you?',
-          answers: [
-            {
-              text: '19.09.2026 Friday',
-              votes: 2,
-            },
-            {
-              text: '10.10.2026 Friday',
-              votes: 5,
-            },
-            {
-              text: '11.10.2026 Saturday',
-              votes: 1,
-            },
-          ],
-        },
-      ],
+  constructor() {
+    const savedSurveys = localStorage.getItem('surveys');
 
-      isPast: false,
-    },
-  ];
+    if (savedSurveys) {
+      this.surveys = JSON.parse(savedSurveys);
+    }
+  }
 
   getSurveys(): Survey[] {
     return this.surveys;
@@ -47,5 +25,17 @@ export class SurveyService {
 
   addSurvey(survey: Survey): void {
     this.surveys.push(survey);
+
+    localStorage.setItem('surveys', JSON.stringify(this.surveys));
+  }
+
+  deleteSurvey(id: number): void {
+    this.surveys = this.surveys.filter((survey) => survey.id !== id);
+
+    localStorage.setItem('surveys', JSON.stringify(this.surveys));
+  }
+
+  saveSurveys(): void {
+    localStorage.setItem('surveys', JSON.stringify(this.surveys));
   }
 }
