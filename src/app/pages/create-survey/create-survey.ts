@@ -26,17 +26,17 @@ export class CreateSurvey {
     private router: Router,
   ) {}
 
-  addAnswer() {
+  addAnswer(): void {
     this.answers.push('');
   }
 
-  removeAnswer(index: number) {
+  removeAnswer(index: number): void {
     if (this.answers.length > 2) {
       this.answers.splice(index, 1);
     }
   }
 
-  addQuestion() {
+  addQuestion(): void {
     const hasEmptyAnswer = this.answers.some((answer) => answer.trim() === '');
 
     if (this.question.trim() === '' || hasEmptyAnswer) {
@@ -60,11 +60,11 @@ export class CreateSurvey {
     this.allowMultipleAnswers = false;
   }
 
-  removeQuestion(index: number) {
+  removeQuestion(index: number): void {
     this.questions.splice(index, 1);
   }
 
-  publishSurvey() {
+  publishSurvey(): void {
     if (this.questions.length === 0 && this.question.trim() === '') {
       this.errorMessage = 'Please add at least one question.';
       return;

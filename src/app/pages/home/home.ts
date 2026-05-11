@@ -16,7 +16,7 @@ export class Home {
   activeTab: 'running' | 'past' = 'running';
   selectedCategory = 'All';
 
-  setCategory(category: string) {
+  setCategory(category: string): void {
     this.selectedCategory = category;
   }
 
@@ -40,10 +40,10 @@ export class Home {
       .slice(0, 3);
   }
 
-  setTab(tab: 'running' | 'past') {
+  setTab(tab: 'running' | 'past'): void {
     this.activeTab = tab;
   }
-  deleteSurvey(id: number) {
+  deleteSurvey(id: number): void {
     const confirmed = confirm('Are you sure you want to delete this survey?');
 
     if (!confirmed) {

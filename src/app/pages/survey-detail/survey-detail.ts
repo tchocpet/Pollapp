@@ -27,12 +27,12 @@ export class SurveyDetail {
     this.survey = this.surveyService.getSurveyById(id);
   }
 
-  vote(index: number) {
+  vote(index: number): void {
     if (this.survey && this.currentQuestionIndex === this.survey.questions.length - 1) {
       this.surveyCompleted = true;
     }
   }
-  nextQuestion() {
+  nextQuestion(): void {
     if (!this.survey) {
       return;
     }
