@@ -1,18 +1,4 @@
 @if (survey) {
-  @if (!surveyCompleted) {
-    <button
-      class="complete-btn"
-      [disabled]="
-        currentQuestion?.allowMultipleAnswers
-          ? selectedIndexes.length === 0
-          : selectedIndex === null
-      "
-      (click)="completeSurvey()"
-    >
-      Complete Survey
-    </button>
-  }
-
   <main class="survey-detail-page">
     <a routerLink="/" class="back-link"> ← Back to Home </a>
     <section class="survey-box">
@@ -40,7 +26,7 @@
                 ? selectedIndexes.includes(index)
                 : selectedIndex === index
             "
-            (change)="vote(index)"
+            (click)="vote(index)"
           />
 
           {{ answer.text }}

@@ -1,5 +1,18 @@
 <main class="home-page">
   <header class="header">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Welcome to Poll App</p>
+
+        <h2>
+          Collect Feedback,
+          <br />
+          Unlock Ideas
+        </h2>
+
+        <p class="hero-text">Create surveys, collect answers and view live results.</p>
+      </div>
+    </section>
     <div>
       <p class="eyebrow">Poll App</p>
       <h1>Your surveys</h1>
@@ -11,17 +24,26 @@
   <section class="ending-soon">
     <h2>Ending soon surveys</h2>
 
-    <div class="survey-grid">
-      @for (survey of endingSoonSurveys; track survey.id) {
-        <a class="survey-card" [routerLink]="['/survey', survey.id]">
-          <h3>{{ survey.title }}</h3>
+    @if (endingSoonSurveys.length > 0) {
+      <div class="survey-grid">
+        @for (survey of endingSoonSurveys; track survey.id) {
+          <a class="survey-card" [routerLink]="['/survey', survey.id]">
+            <h3>{{ survey.title }}</h3>
 
-          <p>{{ survey.description }}</p>
+            <p>
+              {{ survey.description }}
+            </p>
 
-          <span> Deadline: {{ survey.deadline }} </span>
-        </a>
-      }
-    </div>
+            <span>
+              Deadline:
+              {{ survey.deadline }}
+            </span>
+          </a>
+        }
+      </div>
+    } @else {
+      <div class="empty-state">No ending soon surveys.</div>
+    }
   </section>
 
   <section class="survey-list">

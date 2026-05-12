@@ -28,10 +28,21 @@ export class SurveyDetail {
   }
 
   vote(index: number): void {
-    if (this.survey && this.currentQuestionIndex === this.survey.questions.length - 1) {
-      this.surveyCompleted = true;
+    if (this.currentQuestion?.allowMultipleAnswers) {
+      if (this.selectedIndexes.includes(index)) {
+        this.selectedIndexes = this.selectedIndexes.filter(
+          (selectedIndex) => selectedIndex !== index,
+        );
+      } else {
+        this.selectedIndexes.push(index);
+      }
+
+      return;
     }
+
+    this.selectedIndex = index;
   }
+
   nextQuestion(): void {
     if (!this.survey) {
       return;

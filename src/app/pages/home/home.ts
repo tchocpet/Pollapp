@@ -24,14 +24,26 @@ export class Home {
 
   get runningSurveys(): Survey[] {
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    return this.surveys.filter((survey) => new Date(survey.deadline) >= today);
+    return this.surveys.filter((survey) => {
+      const deadline = new Date(survey.deadline);
+      deadline.setHours(0, 0, 0, 0);
+
+      return deadline >= today;
+    });
   }
 
   get pastSurveys(): Survey[] {
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    return this.surveys.filter((survey) => new Date(survey.deadline) < today);
+    return this.surveys.filter((survey) => {
+      const deadline = new Date(survey.deadline);
+      deadline.setHours(0, 0, 0, 0);
+
+      return deadline < today;
+    });
   }
 
   get endingSoonSurveys(): Survey[] {
