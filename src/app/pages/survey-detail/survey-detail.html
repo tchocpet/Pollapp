@@ -41,17 +41,31 @@
       </p>
 
       @if (!surveyCompleted) {
-        <button
-          class="complete-btn"
-          [disabled]="
-            currentQuestion?.allowMultipleAnswers
-              ? selectedIndexes.length === 0
-              : selectedIndex === null
-          "
-          (click)="completeSurvey()"
-        >
-          Complete Survey
-        </button>
+        @if (currentQuestionIndex < survey.questions.length - 1) {
+          <button
+            class="complete-btn"
+            [disabled]="
+              currentQuestion?.allowMultipleAnswers
+                ? selectedIndexes.length === 0
+                : selectedIndex === null
+            "
+            (click)="nextQuestion()"
+          >
+            Next Question
+          </button>
+        } @else {
+          <button
+            class="complete-btn"
+            [disabled]="
+              currentQuestion?.allowMultipleAnswers
+                ? selectedIndexes.length === 0
+                : selectedIndex === null
+            "
+            (click)="completeSurvey()"
+          >
+            Complete Survey
+          </button>
+        }
       }
     </section>
 
