@@ -1,5 +1,4 @@
 .survey-detail-page {
-  min-height: 100vh;
   background: radial-gradient(circle at top left, #2d1b46, #1b1230 60%);
   color: white;
   padding: 48px;
@@ -53,12 +52,13 @@
   align-items: center;
   gap: 12px;
   background: #38204f;
-  padding: 18px;
-  border-radius: 18px;
+  padding: 18px 20px;
+  border-radius: 16px;
   margin-top: 14px;
   cursor: pointer;
   transition: 0.2s ease;
 }
+
 .answer-item input {
   accent-color: #ff9f43;
 }
@@ -100,8 +100,8 @@
 }
 
 .bar {
-  height: 12px;
-  background: #38204f;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 999px;
   overflow: hidden;
   margin: 10px 0;
@@ -136,6 +136,7 @@
     grid-template-columns: 1fr;
     padding: 20px;
     gap: 20px;
+    min-height: auto;
   }
 
   .back-link {
@@ -146,6 +147,7 @@
   .survey-box,
   .results-box {
     padding: 24px;
+    min-height: auto;
   }
 
   .survey-box h1 {
