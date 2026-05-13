@@ -55,42 +55,63 @@ export class SurveyDetail {
   }
 
   completeSurvey(): void {
-    if (!this.survey || !this.currentQuestion) {
+    if (!this.canSubmitAnswer()) {
       return;
     }
 
-    if (this.currentQuestion.allowMultipleAnswers) {
-      if (this.selectedIndexes.length === 0) {
-        return;
-      }
+    this.saveCurrentAnswer();
+    this.surveyService.saveSurveys();
+    this.resetSelectedAnswers();
+    this.goToNextStep();
+  }
 
-      const currentQuestion = this.currentQuestion;
-
-      if (!currentQuestion) {
-        return;
-      }
-
-      this.selectedIndexes.forEach((index) => {
-        currentQuestion.answers[index].votes++;
-      });
-    } else {
-      if (this.selectedIndex === null) {
-        return;
-      }
-
-      this.currentQuestion.answers[this.selectedIndex].votes++;
+  private canSubmitAnswer(): boolean {
+    if (!this.survey || !this.currentQuestion) {
+      return false;
     }
 
-    this.surveyService.saveSurveys();
+    return this.currentQuestion.allowMultipleAnswers
+      ? this.selectedIndexes.length > 0
+      : this.selectedIndex !== null;
+  }
 
+  private saveCurrentAnswer(): void {
+    if (this.currentQuestion?.allowMultipleAnswers) {
+      this.saveMultipleAnswers();
+      return;
+    }
+
+    this.saveSingleAnswer();
+  }
+
+  private saveMultipleAnswers(): void {
+    this.selectedIndexes.forEach((index) => {
+      this.currentQuestion!.answers[index].votes++;
+    });
+  }
+
+  private saveSingleAnswer(): void {
+    if (this.selectedIndex !== null) {
+      this.currentQuestion!.answers[this.selectedIndex].votes++;
+    }
+  }
+
+  private resetSelectedAnswers(): void {
     this.selectedIndex = null;
     this.selectedIndexes = [];
+  }
+
+  private goToNextStep(): void {
+    if (!this.survey) {
+      return;
+    }
 
     if (this.currentQuestionIndex < this.survey.questions.length - 1) {
       this.currentQuestionIndex++;
-    } else {
-      this.surveyCompleted = true;
+      return;
     }
+
+    this.surveyCompleted = true;
   }
 
   getTotalVotes(): number {

@@ -1,24 +1,46 @@
 <main class="home-page">
-  <header class="header">
-    <section class="hero">
-      <div>
-        <p class="eyebrow">Welcome to Poll App</p>
+  <header class="hero">
+    <div class="hero-top">
+      <div class="brand">
+        <img src="assets/image/Logo.svg" alt="Poll App" class="brand-logo" />
+      </div>
+    </div>
 
-        <h2>
+    <div class="hero-content">
+      <div class="hero-left">
+        <h1>
           Collect Feedback,
           <br />
           Unlock Ideas
-        </h2>
+        </h1>
 
-        <p class="hero-text">Create surveys, collect answers and view live results.</p>
+        <p class="hero-description">
+          Create and share surveys in minutes — from team events to workplace culture. Collect
+          opinions, engage your audience and turn feedback into action.
+        </p>
+
+        <button class="new-survey-btn" type="button" (click)="openCreateModal()">New survey</button>
       </div>
-    </section>
-    <div>
-      <p class="eyebrow">Poll App</p>
-      <h1>Your surveys</h1>
+
+      <div class="hero-right">
+        <div class="phone-card">
+          <div class="line large"></div>
+          <div class="line medium"></div>
+          <div class="line small"></div>
+
+          <div class="phone-footer">
+            <div class="dot"></div>
+            <div class="mini-line"></div>
+          </div>
+        </div>
+
+        <div class="bubble message">💬</div>
+        <div class="bubble question">?</div>
+        <div class="bubble star">★</div>
+      </div>
     </div>
 
-    <a routerLink="/create-survey" class="new-survey-btn"> New Survey </a>
+    <h2 class="page-title">Your surveys</h2>
   </header>
 
   <section class="ending-soon">
@@ -100,4 +122,106 @@
       }
     }
   </section>
+  @if (isCreateModalOpen) {
+    <div class="modal-backdrop" (click)="closeCreateModal()">
+      <section class="create-modal" (click)="$event.stopPropagation()">
+        <button class="modal-close" type="button" (click)="closeCreateModal()">×</button>
+
+        <h2>Create Survey</h2>
+
+        @if (errorMessage) {
+          <p class="error-message">{{ errorMessage }}</p>
+        }
+
+        <form class="survey-form" (ngSubmit)="publishSurvey()">
+          <label>
+            Survey Title <span class="required">*</span>
+            <input type="text" [(ngModel)]="title" name="title" />
+            @if (titleError) {
+              <small class="field-error">{{ titleError }}</small>
+            }
+          </label>
+
+          <label>
+            Description
+            <textarea [(ngModel)]="description" name="description"></textarea>
+          </label>
+
+          <label>
+            Deadline <span class="required">*</span>
+            <input type="date" [(ngModel)]="deadline" name="deadline" />
+            @if (deadlineError) {
+              <small class="field-error">{{ deadlineError }}</small>
+            }
+          </label>
+
+          <label>
+            Category <span class="required">*</span>
+            <input type="text" [(ngModel)]="category" name="category" />
+            @if (categoryError) {
+              <small class="field-error">{{ categoryError }}</small>
+            }
+          </label>
+
+          <div class="question-box">
+            <h3>Question <span class="required">*</span></h3>
+
+            <input type="text" [(ngModel)]="question" name="question" />
+            @if (questionError) {
+              <small class="field-error">{{ questionError }}</small>
+            }
+
+            <label class="checkbox-row">
+              <input
+                type="checkbox"
+                [(ngModel)]="allowMultipleAnswers"
+                name="allowMultipleAnswers"
+              />
+              <span>Allow multiple answers</span>
+            </label>
+
+            @for (answer of answers; track $index; let index = $index) {
+              <div class="answer-row">
+                <input
+                  type="text"
+                  [(ngModel)]="answers[index]"
+                  name="answer{{ index }}"
+                  placeholder="Answer option {{ index + 1 }}"
+                />
+
+                <button type="button" (click)="removeAnswer(index)">Delete</button>
+              </div>
+            }
+
+            @if (answersError) {
+              <small class="field-error">{{ answersError }}</small>
+            }
+
+            <button class="add-answer-btn" type="button" (click)="addAnswer()">+ Add Answer</button>
+          </div>
+
+          <button class="add-question-btn" type="button" (click)="addQuestion()">
+            + Add Question
+          </button>
+
+          @if (questions.length > 0) {
+            <div class="question-preview">
+              <h3>Added Questions</h3>
+
+              @for (question of questions; track question.text; let index = $index) {
+                <div class="preview-item">
+                  <span>{{ index + 1 }}. {{ question.text }}</span>
+                  <button type="button" (click)="removeQuestion(index)">Delete</button>
+                </div>
+              }
+            </div>
+          }
+
+          <p class="required-note"><span class="required">*</span> Required field</p>
+
+          <button class="publish-btn" type="submit">Publish Survey</button>
+        </form>
+      </section>
+    </div>
+  }
 </main>
