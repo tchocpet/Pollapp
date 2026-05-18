@@ -72,20 +72,16 @@
     <section class="results-box">
       <h2>Survey Results LIVE</h2>
 
-      @if (getTotalVotes() === 0) {
-        <div class="empty-results">No results yet.</div>
-      } @else {
-        @for (answer of currentQuestion?.answers ?? []; track answer.text) {
-          <div class="result-item">
-            <p>{{ answer.text }}</p>
+      @for (answer of currentQuestion?.answers ?? []; track answer.text) {
+        <div class="result-item">
+          <p>{{ answer.text }}</p>
 
-            <div class="bar">
-              <div class="fill" [style.width.%]="getPercentage(answer.votes)"></div>
-            </div>
-
-            <span> {{ getPercentage(answer.votes) }}% </span>
+          <div class="bar">
+            <div class="fill" [style.width.%]="getPercentage(answer.votes)"></div>
           </div>
-        }
+
+          <span>{{ getPercentage(answer.votes) }}%</span>
+        </div>
       }
     </section>
   </main>

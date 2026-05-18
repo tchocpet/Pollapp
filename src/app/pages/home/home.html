@@ -23,20 +23,15 @@
       </div>
 
       <div class="hero-right">
-        <div class="phone-card">
-          <div class="line large"></div>
-          <div class="line medium"></div>
-          <div class="line small"></div>
+        <img src="assets/image/position.svg" alt="" class="hero-phone" />
 
-          <div class="phone-footer">
-            <div class="dot"></div>
-            <div class="mini-line"></div>
-          </div>
-        </div>
+        <img src="assets/image/typing.svg" alt="" class="hero-icon typing-icon" />
 
-        <div class="bubble message">💬</div>
-        <div class="bubble question">?</div>
-        <div class="bubble star">★</div>
+        <img src="assets/image/question.svg" alt="" class="hero-icon question-icon" />
+
+        <img src="assets/image/star.svg" alt="" class="hero-icon star-icon" />
+
+        <img src="assets/image/check.svg" alt="" class="hero-icon check-icon" />
       </div>
     </div>
 
@@ -69,17 +64,26 @@
   </section>
 
   <section class="survey-list">
-    <div class="tabs">
-      <button [class.active]="activeTab === 'running'" (click)="setTab('running')">Running</button>
-
-      <button [class.active]="activeTab === 'past'" (click)="setTab('past')">Past Survey</button>
-    </div>
-    <div class="category-filter">
-      @for (category of categories; track category) {
-        <button [class.active]="selectedCategory === category" (click)="setCategory(category)">
-          {{ category }}
+    <div class="survey-controls">
+      <div class="tabs">
+        <button [class.active]="activeTab === 'running'" (click)="setTab('running')">
+          Active survey
         </button>
-      }
+
+        <button [class.active]="activeTab === 'past'" (click)="setTab('past')">Past survey</button>
+      </div>
+
+      <div class="sort-dropdown">
+        <select class="sort-select" [(ngModel)]="selectedCategory" name="categorySort">
+          @for (category of categories; track category) {
+            <option [value]="category">
+              {{ category === 'All' ? 'Sort by categories' : category }}
+            </option>
+          }
+        </select>
+
+        <img src="assets/image/dropdown.png" alt="" class="dropdown-icon" />
+      </div>
     </div>
 
     @if (activeTab === 'running') {
@@ -157,7 +161,15 @@
 
           <label>
             Category <span class="required">*</span>
-            <input type="text" [(ngModel)]="category" name="category" />
+
+            <select [(ngModel)]="category" name="category">
+              <option value="">Choose category</option>
+              <option value="Tech">Tech</option>
+              <option value="Work">Work</option>
+              <option value="Gaming">Gaming</option>
+              <option value="Health">Health</option>
+            </select>
+
             @if (categoryError) {
               <small class="field-error">{{ categoryError }}</small>
             }

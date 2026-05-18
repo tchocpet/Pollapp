@@ -29,14 +29,15 @@ export class SurveyDetail {
 
   vote(index: number): void {
     if (this.currentQuestion?.allowMultipleAnswers) {
-      if (this.selectedIndexes.includes(index)) {
-        this.selectedIndexes = this.selectedIndexes.filter(
-          (selectedIndex) => selectedIndex !== index,
-        );
-      } else {
-        this.selectedIndexes.push(index);
+      const exists = this.selectedIndexes.includes(index);
+
+      if (exists) {
+        this.selectedIndexes = this.selectedIndexes.filter((selected) => selected !== index);
+
+        return;
       }
 
+      this.selectedIndexes.push(index);
       return;
     }
 
