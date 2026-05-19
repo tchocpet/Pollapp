@@ -85,7 +85,7 @@ export class Home {
 
   private getEndingSoonLimit(today: Date): Date {
     const limit = new Date(today);
-    limit.setDate(today.getDate() + 7);
+    limit.setDate(today.getDate() + 30);
 
     return limit;
   }

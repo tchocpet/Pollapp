@@ -21,6 +21,7 @@
           <input
             [type]="currentQuestion?.allowMultipleAnswers ? 'checkbox' : 'radio'"
             name="answer"
+            [disabled]="hasVoted"
             [checked]="
               currentQuestion?.allowMultipleAnswers
                 ? selectedIndexes.includes(index)

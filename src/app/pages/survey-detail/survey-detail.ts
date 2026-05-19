@@ -15,32 +15,60 @@ export class SurveyDetail {
   selectedIndexes: number[] = [];
   currentQuestionIndex = 0;
   surveyCompleted = false;
+  hasVoted = false;
+  private surveyId = 0;
   get currentQuestion() {
     return this.survey?.questions[this.currentQuestionIndex];
   }
 
-  constructor(
-    private route: ActivatedRoute,
-    private surveyService: SurveyService,
-  ) {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.survey = this.surveyService.getSurveyById(id);
-  }
+constructor(
+  private route: ActivatedRoute,
+  private surveyService: SurveyService,
+) {
+  this.surveyId = Number(this.route.snapshot.paramMap.get('id'));
+  this.survey = this.surveyService.getSurveyById(this.surveyId);
+  this.hasVoted = localStorage.getItem(this.getVoteKey()) === 'true';
+}
+
+  private getVoteKey(): string {
+  return `survey-voted-${this.surveyId}`;
+}
 
   vote(index: number): void {
-    if (this.currentQuestion?.allowMultipleAnswers) {
-      const exists = this.selectedIndexes.includes(index);
-
-      if (exists) {
-        this.selectedIndexes = this.selectedIndexes.filter((selected) => selected !== index);
-
-        return;
-      }
-
-      this.selectedIndexes.push(index);
+    if (this.hasVoted || !this.currentQuestion) {
       return;
     }
 
+    if (this.currentQuestion.allowMultipleAnswers) {
+      this.toggleMultipleVote(index);
+      return;
+    }
+
+    this.setSingleVote(index);
+    this.surveyService.saveSurveys();
+  }
+
+  private toggleMultipleVote(index: number): void {
+    const exists = this.selectedIndexes.includes(index);
+
+    if (exists) {
+      this.currentQuestion!.answers[index].votes--;
+      this.selectedIndexes = this.selectedIndexes.filter((selected) => selected !== index);
+      this.surveyService.saveSurveys();
+      return;
+    }
+
+    this.currentQuestion!.answers[index].votes++;
+    this.selectedIndexes.push(index);
+    this.surveyService.saveSurveys();
+  }
+
+  private setSingleVote(index: number): void {
+    if (this.selectedIndex !== null) {
+      this.currentQuestion!.answers[this.selectedIndex].votes--;
+    }
+
+    this.currentQuestion!.answers[index].votes++;
     this.selectedIndex = index;
   }
 
@@ -56,14 +84,13 @@ export class SurveyDetail {
   }
 
   completeSurvey(): void {
-    if (!this.canSubmitAnswer()) {
+    if (!this.canSubmitAnswer() || this.hasVoted) {
       return;
     }
 
-    this.saveCurrentAnswer();
-    this.surveyService.saveSurveys();
-    this.resetSelectedAnswers();
-    this.goToNextStep();
+    this.hasVoted = true;
+    this.surveyCompleted = true;
+    localStorage.setItem(this.getVoteKey(), 'true');
   }
 
   private canSubmitAnswer(): boolean {
@@ -115,16 +142,18 @@ export class SurveyDetail {
     this.surveyCompleted = true;
   }
 
-  getTotalVotes(): number {
-    if (!this.survey) {
-      return 0;
-    }
+getTotalVotes(): number {
+  return this.currentQuestion?.answers.reduce(
+    (sum, answer) => sum + answer.votes,
+    0,
+  ) ?? 0;
+}
 
-    return this.survey.questions[0].answers.reduce((sum, answer) => sum + answer.votes, 0);
-  }
+getPercentage(votes: number): number {
+  const totalVotes = this.getTotalVotes();
 
-  getPercentage(votes: number): number {
-    const totalVotes = this.getTotalVotes();
-    return totalVotes === 0 ? 0 : Math.round((votes / totalVotes) * 100);
-  }
+  return totalVotes === 0
+    ? 0
+    : Math.round((votes / totalVotes) * 100);
+}
 }
