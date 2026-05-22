@@ -743,59 +743,122 @@ button {
   .add-question-btn {
     grid-column: 1;
     grid-row: auto;
+    margin-top: 10px;
   }
 }
 
-@media (max-width: 700px) {
-  .home-page {
-    padding: 20px;
-  }
-
-  .hero-content {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-bottom: 28px;
-  }
-
-  .hero-left h1 {
-    font-size: 42px;
-  }
-
-  .hero-right {
-    width: 190px;
-    height: 190px;
-    margin: 0 auto;
-  }
-
-  .hero-phone {
-    width: 240px;
-  }
-
-  .page-title {
-    font-size: 32px;
-  }
-
-  .survey-card {
-    width: 100%;
-  }
-
+@media (max-width: 480px) {
   .modal-backdrop {
-    padding: 12px;
+    padding: 20px;
+    overflow-y: auto;
+    background: #d9d9d9;
   }
 
   .create-modal {
     width: 100%;
-    max-width: 100%;
-    padding: 24px;
+    max-width: 340px;
+    height: auto;
+    min-height: auto;
+    padding: 18px 14px 26px;
+    border-radius: 0 55px 0 0;
+    overflow-y: auto;
   }
 
   .create-modal h2 {
-    font-size: 34px;
+    font-size: 30px;
+    line-height: 0.95;
+    max-width: none;
+    margin-bottom: 20px;
   }
 
   .modal-close {
-    top: 24px;
-    right: 24px;
+    width: 28px;
+    height: 28px;
+    margin-top: 0;
+    font-size: 0;
+    border-radius: 8px;
+  }
+
+  .modal-close::after {
+    content: '×';
+    font-size: 14px;
+    color: white;
+  }
+
+  .survey-form {
+    width: 100%;
+    height: auto;
+    padding: 18px 12px 24px;
+    border-radius: 0 40px 0 0;
+    overflow: visible;
+  }
+
+  .top-row,
+  .small-row,
+  .question-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .field,
+  .survey-name,
+  .description-field,
+  .deadline-field,
+  .category-field,
+  .question-left,
+  .question-card {
+    width: 100%;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  .description-field textarea {
+    height: 42px;
+  }
+
+  .answer-row {
+    display: grid;
+    grid-template-columns: 16px 1fr 16px;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .answer-row input {
+    width: 100%;
+  }
+
+  .answers-title {
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .multiple-check {
+    font-size: 7px;
+  }
+
+  .add-answer-btn {
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+
+  .add-question-btn {
+    position: static !important;
+    margin: 18px auto 0;
+    margin-top: 10px;
+  }
+
+  .publish-btn {
+    width: 74px;
+    height: 34px;
+    display: block;
+    margin: 22px auto 0;
+    position: static;
   }
 }
