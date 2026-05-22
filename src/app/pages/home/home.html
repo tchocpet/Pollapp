@@ -2,7 +2,7 @@
   <header class="hero">
     <div class="hero-top">
       <div class="brand">
-        <img src="assets/image/Logo.svg" alt="Poll App" class="brand-logo" />
+        <img src="assets/image/logo.png" alt="Poll App" class="brand-logo" />
       </div>
     </div>
 
@@ -23,21 +23,12 @@
       </div>
 
       <div class="hero-right">
-        <img src="assets/image/position.svg" alt="" class="hero-phone" />
-
-        <img src="assets/image/typing.svg" alt="" class="hero-icon typing-icon" />
-
-        <img src="assets/image/question.svg" alt="" class="hero-icon question-icon" />
-
-        <img src="assets/image/star.svg" alt="" class="hero-icon star-icon" />
-
-        <img src="assets/image/check.svg" alt="" class="hero-icon check-icon" />
+        <img src="assets/image/Visual.svg" alt="" class="hero-phone" />
       </div>
     </div>
-
-    <h2 class="page-title">Your surveys</h2>
   </header>
 
+  <h2 class="page-title">Your surveys</h2>
   <section class="ending-soon">
     <h2>Ending soon surveys</h2>
 
@@ -130,123 +121,196 @@
       }
     }
   </section>
+
   @if (isCreateModalOpen) {
     <div class="modal-backdrop" (click)="closeCreateModal()">
       <section class="create-modal" (click)="$event.stopPropagation()">
-        <button class="modal-close" type="button" (click)="closeCreateModal()">×</button>
+        <div class="modal-header">
+          <div>
+            <span class="draft-badge">Draft</span>
+            <h2>Create new survey</h2>
+          </div>
 
-        <h2>Create Survey</h2>
-
-        @if (errorMessage) {
-          <p class="error-message">{{ errorMessage }}</p>
-        }
+          <button class="modal-close" type="button" (click)="closeCreateModal()">
+            Cancel <span>X</span>
+          </button>
+        </div>
 
         <form class="survey-form" (ngSubmit)="publishSurvey()">
-          <label>
-            Survey Title <span class="required">*</span>
-            <input type="text" [(ngModel)]="title" name="title" />
-            @if (titleError) {
-              <small class="field-error">{{ titleError }}</small>
-            }
-          </label>
-
-          <label>
-            Description
-            <textarea [(ngModel)]="description" name="description"></textarea>
-          </label>
-
-          <label>
-            Deadline <span class="required">*</span>
-            <input type="date" [(ngModel)]="deadline" name="deadline" />
-            @if (deadlineError) {
-              <small class="field-error">{{ deadlineError }}</small>
-            }
-          </label>
-
-          <label>
-            Category <span class="required">*</span>
-
-            <select [(ngModel)]="category" name="category">
-              <option value="">Choose category</option>
-              <option value="Tech">Tech</option>
-              <option value="Work">Work</option>
-              <option value="Gaming">Gaming</option>
-              <option value="Health">Health</option>
-            </select>
-
-            @if (categoryError) {
-              <small class="field-error">{{ categoryError }}</small>
-            }
-          </label>
-
-          <div class="question-box">
-            <h3>Question <span class="required">*</span></h3>
-
-            <input type="text" [(ngModel)]="question" name="question" />
-            @if (questionError) {
-              <small class="field-error">{{ questionError }}</small>
-            }
-
-            <label class="checkbox-row">
-              <input
-                type="checkbox"
-                [(ngModel)]="allowMultipleAnswers"
-                name="allowMultipleAnswers"
-              />
-              <span>Allow multiple answers</span>
+          <div class="top-row">
+            <label class="field survey-name">
+              Survey name
+              <div class="input-line">
+                <input type="text" [(ngModel)]="title" name="title" />
+                <button type="button" class="trash-btn">🗑</button>
+              </div>
             </label>
 
-            @for (answer of answers; track $index; let index = $index) {
-              <div class="answer-row">
-                <input
-                  type="text"
-                  [(ngModel)]="answers[index]"
-                  name="answer{{ index }}"
-                  placeholder="Answer option {{ index + 1 }}"
-                />
+            <label class="field description-field">
+              Describing text <small>(optional)</small>
+              <div class="input-line">
+                <textarea [(ngModel)]="description" name="description"></textarea>
+                <button type="button" class="trash-btn">🗑</button>
+              </div>
+            </label>
+          </div>
 
-                @if (answers.length > 2) {
-                  <button
-                    class="delete-icon-btn"
-                    type="button"
-                    (click)="removeAnswer(index)"
-                    aria-label="Delete answer"
-                  >
-                    🗑
-                  </button>
+          <div class="small-row">
+            <label class="field deadline-field">
+              Set end date <small>(optional)</small>
+              <div class="input-line">
+                <input type="date" [(ngModel)]="deadline" name="deadline" />
+                <button type="button" class="trash-btn">🗑</button>
+              </div>
+            </label>
+
+            <label class="field category-field">
+              <div class="custom-select-wrapper">
+                <select [(ngModel)]="category" name="category" class="custom-select">
+                  <option value="">Choose category</option>
+                  <option value="Tech">Tech</option>
+                  <option value="Work">Work</option>
+                  <option value="Gaming">Gaming</option>
+                  <option value="Health">Health</option>
+                </select>
+
+                <span class="select-arrow"></span>
+              </div>
+            </label>
+          </div>
+
+          <div class="question-area">
+            <div class="question-card">
+              <label class="field">
+                1. Question
+
+                <div class="input-line">
+                  <input
+                    type="text"
+                    [(ngModel)]="question"
+                    name="question"
+                    placeholder="Which date would work best for you?"
+                  />
+                  <button type="button" class="trash-btn" (click)="clearQuestionOne()">🗑</button>
+                </div>
+              </label>
+
+              <div class="answers-title">
+                <span>Answers</span>
+
+                <label class="multiple-check">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="allowMultipleAnswers"
+                    name="allowMultipleAnswers"
+                  />
+                  Allow multiple answers.
+                </label>
+              </div>
+
+              @for (answer of answers; track $index; let index = $index) {
+                <div class="answer-row">
+                  <span>{{ index === 0 ? 'A.' : 'B.' }}</span>
+
+                  <input type="text" [(ngModel)]="answers[index]" name="answer{{ index }}" />
+
+                  <button type="button" class="trash-btn">🗑</button>
+                </div>
+              }
+
+              <button class="add-answer-btn" type="button" (click)="addAnswer()">
+                Add answer <span class="plus-circle">+</span>
+              </button>
+            </div>
+
+            @if (showSecondQuestion) {
+              <div class="question-card second-question">
+                <label class="field">
+                  2. Question
+
+                  <div class="input-line">
+                    <input type="text" placeholder="Choose the activities you prefer?" />
+                    <button type="button" class="trash-btn" (click)="removeSecondQuestion()">
+                      🗑
+                    </button>
+                  </div>
+                </label>
+
+                <div class="answers-title">
+                  <span>Answers</span>
+
+                  <label class="multiple-check">
+                    <input type="checkbox" />
+                    Allow multiple answers.
+                  </label>
+                </div>
+
+                @for (answer of secondAnswers; track $index; let index = $index) {
+                  <div class="answer-row">
+                    <span>
+                      {{
+                        index === 0
+                          ? 'A.'
+                          : index === 1
+                            ? 'B.'
+                            : index === 2
+                              ? 'C.'
+                              : index === 3
+                                ? 'D.'
+                                : 'E.'
+                      }}
+                    </span>
+
+                    <input
+                      type="text"
+                      [(ngModel)]="secondAnswers[index]"
+                      name="secondAnswer{{ index }}"
+                    />
+
+                    <button type="button" class="trash-btn">🗑</button>
+                  </div>
                 }
+
+                <button class="add-answer-btn" type="button" (click)="addSecondAnswer()">
+                  Add answer <span class="plus-circle">+</span>
+                </button>
               </div>
             }
 
-            @if (answersError) {
-              <small class="field-error">{{ answersError }}</small>
+            @if (!showSecondQuestion) {
+              <button
+                class="add-question-btn add-question-top"
+                type="button"
+                (click)="showQuestionTwo()"
+              >
+                Add next question <span class="plus-circle">+</span>
+              </button>
             }
 
-            <button class="add-answer-btn" type="button" (click)="addAnswer()">+ Add Answer</button>
+            @if (showSecondQuestion) {
+              <button
+                class="add-question-btn add-question-bottom"
+                type="button"
+                (click)="showQuestionTwo()"
+              >
+                Add next question <span class="plus-circle">+</span>
+              </button>
+            }
           </div>
 
-          <button class="add-question-btn" type="button" (click)="addQuestion()">
-            + Add Question
-          </button>
-
-          @if (questions.length > 0) {
-            <div class="question-preview">
-              <h3>Added Questions</h3>
-
-              @for (question of questions; track question.text; let index = $index) {
-                <div class="preview-item">
-                  <span>{{ index + 1 }}. {{ question.text }}</span>
-                  <button type="button" (click)="removeQuestion(index)">Delete</button>
-                </div>
-              }
-            </div>
-          }
-
-          <p class="required-note"><span class="required">*</span> Required field</p>
-
-          <button class="publish-btn" type="submit">Publish Survey</button>
+          <button class="publish-btn" type="submit">Publish</button>
         </form>
       </section>
+    </div>
+  }
+  @if (showPublishOverlay) {
+    <div class="publish-overlay">
+      <div class="overlay-box">
+        <h3>Survey published!</h3>
+        <p>Your survey was created successfully.</p>
+
+        <button type="button" (click)="resetSurveyForm()">Close</button>
+      </div>
     </div>
   }
 </main>

@@ -22,7 +22,10 @@ export class Home {
   category = '';
   question = '';
   allowMultipleAnswers = false;
+  showSecondQuestion = false;
+  showPublishOverlay = false;
   answers = ['', ''];
+  secondAnswers = ['', ''];
   questions: Question[] = [];
   errorMessage = '';
   answersError = '';
@@ -136,6 +139,10 @@ export class Home {
     this.answers.push('');
   }
 
+  addSecondAnswer(): void {
+    this.secondAnswers.push('');
+  }
+
   removeAnswer(index: number): void {
     if (this.answers.length > 2) {
       this.answers.splice(index, 1);
@@ -153,6 +160,20 @@ export class Home {
     this.answers = ['', ''];
     this.allowMultipleAnswers = false;
     this.errorMessage = '';
+  }
+
+  showQuestionTwo(): void {
+    this.showSecondQuestion = true;
+  }
+
+  clearQuestionOne(): void {
+    this.question = '';
+    this.answers = ['', ''];
+    this.allowMultipleAnswers = false;
+  }
+
+  removeSecondQuestion(): void {
+    this.showSecondQuestion = false;
   }
 
   private hasValidQuestion(): boolean {
@@ -189,7 +210,7 @@ export class Home {
     }
 
     this.saveSurvey();
-    this.closeCreateModal();
+    this.showPublishOverlay = true;
   }
 
   private prepareSurveySubmit(): void {
@@ -202,7 +223,7 @@ export class Home {
   }
 
   private isSurveyFormValid(): boolean {
-    return this.validateRequiredFields() && this.hasValidDeadline();
+    return this.validateRequiredFields();
   }
 
   private saveSurvey(): void {
@@ -242,6 +263,22 @@ export class Home {
     this.answersError = '';
   }
 
+  resetSurveyForm(): void {
+    this.title = '';
+    this.description = '';
+    this.deadline = '';
+    this.category = '';
+
+    this.question = '';
+    this.answers = ['', ''];
+    this.allowMultipleAnswers = false;
+
+    this.questions = [];
+
+    this.showSecondQuestion = false;
+    this.showPublishOverlay = false;
+  }
+
   private getToday(): Date {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -264,8 +301,6 @@ export class Home {
 
   private validateRequiredFields(): boolean {
     this.validateTitle();
-    this.validateDeadline();
-    this.validateCategory();
     this.validateQuestions();
 
     return !this.hasFieldErrors();
