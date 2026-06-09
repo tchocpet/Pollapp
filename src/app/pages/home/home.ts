@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Question, Survey } from '../../models/survey';
 import { SurveyService } from '../../services/survey';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +22,8 @@ export class Home {
   category = '';
   question = '';
   allowMultipleAnswers = false;
+  secondQuestion = '';
+  secondAllowMultipleAnswers = false;
   showSecondQuestion = false;
   showPublishOverlay = false;
   answers = ['', ''];
@@ -35,7 +37,17 @@ export class Home {
   categoryError = '';
   questionError = '';
 
-  constructor(private surveyService: SurveyService) {}
+  constructor(
+    private surveyService: SurveyService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.route.queryParamMap.subscribe((params) => {
+      if (params.get('create') === 'true') {
+        this.openCreateModal();
+      }
+    });
+  }
 
   get surveys(): Survey[] {
     return this.surveyService.getSurveys();
@@ -137,10 +149,28 @@ export class Home {
 
   addAnswer(): void {
     this.answers.push('');
+    this.answersError = '';
   }
 
   addSecondAnswer(): void {
     this.secondAnswers.push('');
+  }
+
+  private addSecondQuestionToSurvey(): void {
+    if (!this.showSecondQuestion || this.secondQuestion.trim() === '') {
+      return;
+    }
+
+    this.questions.push({
+      text: this.secondQuestion,
+      allowMultipleAnswers: this.secondAllowMultipleAnswers,
+      answers: this.secondAnswers
+        .filter((answer) => answer.trim() !== '')
+        .map((answer) => ({
+          text: answer,
+          votes: 0,
+        })),
+    });
   }
 
   removeAnswer(index: number): void {
@@ -150,15 +180,14 @@ export class Home {
   }
 
   addQuestion(): void {
+    this.clearQuestionErrors();
+
     if (!this.hasValidQuestion()) {
       return;
     }
 
     this.questions.push(this.createQuestion());
-
-    this.question = '';
-    this.answers = ['', ''];
-    this.allowMultipleAnswers = false;
+    this.resetCurrentQuestion();
     this.errorMessage = '';
   }
 
@@ -177,10 +206,15 @@ export class Home {
   }
 
   private hasValidQuestion(): boolean {
-    const hasEmptyAnswer = this.answers.some((answer) => answer.trim() === '');
+    const filledAnswers = this.answers.filter((answer) => answer.trim() !== '');
 
-    if (this.question.trim() === '' || hasEmptyAnswer) {
-      this.answersError = 'All answer options are required.';
+    if (this.question.trim() === '') {
+      this.questionError = 'Please add a question.';
+      return false;
+    }
+
+    if (filledAnswers.length < 2) {
+      this.answersError = 'Please add at least two answers.';
       return false;
     }
 
@@ -189,12 +223,14 @@ export class Home {
 
   private createQuestion(): Question {
     return {
-      text: this.question,
+      text: this.question.trim(),
       allowMultipleAnswers: this.allowMultipleAnswers,
-      answers: this.answers.map((answer) => ({
-        text: answer,
-        votes: 0,
-      })),
+      answers: this.answers
+        .filter((answer) => answer.trim() !== '')
+        .map((answer) => ({
+          text: answer.trim(),
+          votes: 0,
+        })),
     };
   }
 
@@ -217,13 +253,24 @@ export class Home {
     this.clearFieldErrors();
     this.errorMessage = '';
 
-    if (this.question.trim() !== '') {
-      this.addQuestion();
+    if (this.question.trim() !== '' || this.answers.some((answer) => answer.trim() !== '')) {
+      if (!this.hasValidQuestion()) {
+        return;
+      }
+
+      this.questions.push(this.createQuestion());
+      this.resetCurrentQuestion();
     }
   }
 
   private isSurveyFormValid(): boolean {
-    return this.validateRequiredFields();
+    const isValid = this.validateRequiredFields();
+
+    if (!isValid) {
+      this.errorMessage = 'Please fill in the missing fields before publishing.';
+    }
+
+    return isValid;
   }
 
   private saveSurvey(): void {
@@ -250,9 +297,11 @@ export class Home {
     this.description = '';
     this.deadline = '';
     this.category = '';
-    this.question = '';
-    this.allowMultipleAnswers = false;
-    this.answers = ['', ''];
+    this.resetCurrentQuestion();
+    this.secondQuestion = '';
+    this.secondAnswers = ['', ''];
+    this.secondAllowMultipleAnswers = false;
+    this.showSecondQuestion = false;
   }
 
   private clearFieldErrors(): void {
@@ -301,7 +350,13 @@ export class Home {
 
   private validateRequiredFields(): boolean {
     this.validateTitle();
+    this.validateDeadline();
+    this.validateCategory();
     this.validateQuestions();
+
+    if (!this.deadlineError && this.deadline.trim() !== '') {
+      this.hasValidDeadline();
+    }
 
     return !this.hasFieldErrors();
   }
@@ -332,7 +387,7 @@ export class Home {
 
   private hasFieldErrors(): boolean {
     return Boolean(
-      this.titleError || this.deadlineError || this.categoryError || this.questionError,
+      this.titleError || this.deadlineError || this.categoryError || this.questionError || this.answersError,
     );
   }
 
@@ -346,5 +401,50 @@ export class Home {
     }
 
     return true;
+  }
+  getAnswerLetter(index: number): string {
+    return String.fromCharCode(65 + index);
+  }
+
+  private clearQuestionErrors(): void {
+    this.questionError = '';
+    this.answersError = '';
+  }
+
+  private resetCurrentQuestion(): void {
+    this.question = '';
+    this.answers = ['', ''];
+    this.allowMultipleAnswers = false;
+    this.clearQuestionErrors();
+  }
+  getEndsInText(deadline: string): string {
+    const today = new Date();
+    const endDate = new Date(deadline);
+
+    today.setHours(0, 0, 0, 0);
+    endDate.setHours(0, 0, 0, 0);
+
+    const diffTime = endDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 0) {
+      return `Ended on ${this.formatDate(deadline)}`;
+    }
+
+    if (diffDays === 0) {
+      return 'Ends today';
+    }
+
+    if (diffDays === 1) {
+      return 'Ends in 1 Day';
+    }
+
+    return `Ends in ${diffDays} Days`;
+  }
+
+  private formatDate(date: string): string {
+    const [year, month, day] = date.split('-');
+
+    return `${day}.${month}.${year}`;
   }
 }

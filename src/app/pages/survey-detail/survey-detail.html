@@ -1,89 +1,95 @@
 @if (survey) {
   <main class="survey-detail-page">
-    <a routerLink="/" class="back-link"> ← Back to Home </a>
-    <section class="survey-box">
-      <h1>{{ survey.title }}</h1>
+    <header class="survey-header">
+      <a routerLink="/" aria-label="Back to home">
+        <img src="assets/image/logo.png" alt="Poll App" class="poll-logo" />
+      </a>
 
-      <p class="survey-description">
-        {{ survey.description }}
-      </p>
+      <button class="create-survey-btn" routerLink="/" [queryParams]="{ create: true }">Create survey</button>
+    </header>
 
-      <div class="survey-meta">
-        <span> Category: {{ survey.category }} </span>
+    <div class="survey-layout">
+      <section class="survey-box">
+        <span class="survey-status">Published</span>
 
-        <span> Deadline: {{ survey.deadline }} </span>
-      </div>
+        <div class="survey-top-info">
+          <p class="survey-end-date">Ends on {{ survey.deadline }}</p>
+          <span class="survey-category">Category: {{ survey.category }}</span>
+        </div>
 
-      <h3>{{ currentQuestion?.text }}</h3>
+        <h1>Let's Plan the Next Team Event Together</h1>
 
-      @for (answer of currentQuestion?.answers ?? []; track answer.text; let index = $index) {
-        <label class="answer-item">
-          <input
-            [type]="currentQuestion?.allowMultipleAnswers ? 'checkbox' : 'radio'"
-            name="answer"
-            [disabled]="hasVoted"
-            [checked]="
-              currentQuestion?.allowMultipleAnswers
-                ? selectedIndexes.includes(index)
-                : selectedIndex === index
-            "
-            (click)="vote(index)"
-          />
+        <p class="survey-description">
+          We want to create team activities that everyone will enjoy - share your preferences and
+          ideas in our survey to help us plan better experiences together.
+        </p>
 
-          {{ answer.text }}
-        </label>
-      }
+        <div class="question-grid">
+          @for (question of survey.questions; track question.text; let qIndex = $index) {
+            <div class="question-card">
+              <h3>{{ qIndex + 1 }}. {{ question.text }}</h3>
 
-      <p class="question-counter">
-        Question
-        {{ currentQuestionIndex + 1 }}
-        of
-        {{ survey.questions.length }}
-      </p>
+              <p class="multi-answer-note">More than one answers are possible.</p>
 
-      @if (!surveyCompleted) {
-        @if (currentQuestionIndex < survey.questions.length - 1) {
+              @for (answer of question.answers; track answer.text; let index = $index) {
+                <label class="answer-item">
+                  <input
+                    type="checkbox"
+                    name="question{{ qIndex }}"
+                    (change)="voteForQuestion(qIndex, index, $event)"
+                  />
+
+                  <span class="answer-letter">{{ ['A', 'B', 'C', 'D', 'E'][index] }}.</span>
+                  <span class="answer-text">{{ answer.text }}</span>
+                </label>
+              }
+            </div>
+          }
+        </div>
+
+        @if (!surveyCompleted) {
           <button
             class="complete-btn"
-            [disabled]="
-              currentQuestion?.allowMultipleAnswers
-                ? selectedIndexes.length === 0
-                : selectedIndex === null
-            "
-            (click)="nextQuestion()"
-          >
-            Next Question
-          </button>
-        } @else {
-          <button
-            class="complete-btn"
-            [disabled]="
+            [class.disabled-look]="
               currentQuestion?.allowMultipleAnswers
                 ? selectedIndexes.length === 0
                 : selectedIndex === null
             "
             (click)="completeSurvey()"
           >
-            Complete Survey
+            Complete survey
           </button>
         }
-      }
-    </section>
+      </section>
 
-    <section class="results-box">
-      <h2>Survey Results LIVE</h2>
+      <section class="results-box">
+        <h2>Survey results <span>LIVE</span></h2>
 
-      @for (answer of currentQuestion?.answers ?? []; track answer.text) {
-        <div class="result-item">
-          <p>{{ answer.text }}</p>
+        @for (question of survey.questions; track question.text; let qIndex = $index) {
+          <div class="result-question">
+            <h3>{{ qIndex + 1 }}. {{ question.text }}</h3>
 
-          <div class="bar">
-            <div class="fill" [style.width.%]="getPercentage(answer.votes)"></div>
+            @for (answer of question.answers; track answer.text; let index = $index) {
+              <div class="result-item">
+                <span class="result-letter">{{ ['A', 'B', 'C', 'D', 'E'][index] }}</span>
+
+                <div class="result-row">
+                  <div class="bar">
+                    <div
+                      class="fill"
+                      [style.width.%]="getQuestionPercentage(question, answer.votes)"
+                    ></div>
+                  </div>
+
+                  <span class="result-percent">
+                    {{ getQuestionPercentage(question, answer.votes) }}%
+                  </span>
+                </div>
+              </div>
+            }
           </div>
-
-          <span>{{ getPercentage(answer.votes) }}%</span>
-        </div>
-      }
-    </section>
+        }
+      </section>
+    </div>
   </main>
 }

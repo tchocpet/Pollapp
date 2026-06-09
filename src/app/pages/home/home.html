@@ -1,4 +1,4 @@
-<main class="home-page">
+﻿<main class="home-page">
   <header class="hero">
     <div class="hero-top">
       <div class="brand">
@@ -15,7 +15,7 @@
         </h1>
 
         <p class="hero-description">
-          Create and share surveys in minutes — from team events to workplace culture. Collect
+          Create and share surveys in minutes - from team events to workplace culture. Collect
           opinions, engage your audience and turn feedback into action.
         </p>
 
@@ -30,21 +30,20 @@
 
   <h2 class="page-title">Your surveys</h2>
   <section class="ending-soon">
-    <h2>Ending soon surveys</h2>
+    <h2 class="ending-soon-title">Ending soon surveys</h2>
 
     @if (endingSoonSurveys.length > 0) {
       <div class="survey-grid">
         @for (survey of endingSoonSurveys; track survey.id) {
           <a class="survey-card" [routerLink]="['/survey', survey.id]">
+            <small class="survey-category">
+              {{ survey.category }}
+            </small>
+
             <h3>{{ survey.title }}</h3>
 
-            <p>
-              {{ survey.description }}
-            </p>
-
-            <span>
-              Deadline:
-              {{ survey.deadline }}
+            <span class="survey-deadline">
+              {{ getEndsInText(survey.deadline) }}
             </span>
           </a>
         }
@@ -86,17 +85,12 @@
         <div class="survey-grid">
           @for (survey of filteredRunningSurveys; track survey.id) {
             <a class="survey-card" [routerLink]="['/survey', survey.id]">
+              <small class="survey-category">{{ survey.category }}</small>
               <h3>{{ survey.title }}</h3>
               <p>{{ survey.description }}</p>
-              <span>Deadline: {{ survey.deadline }}</span>
-
-              <button
-                class="delete-btn"
-                type="button"
-                (click)="deleteSurvey(survey.id); $event.preventDefault(); $event.stopPropagation()"
-              >
-                Delete
-              </button>
+              <span class="survey-deadline">
+                {{ getEndsInText(survey.deadline) }}
+              </span>
             </a>
           }
         </div>
@@ -110,9 +104,10 @@
         <div class="survey-grid">
           @for (survey of filteredPastSurveys; track survey.id) {
             <div class="survey-card past-card">
+              <small class="survey-category">{{ survey.category }}</small>
               <h3>{{ survey.title }}</h3>
               <p>{{ survey.description }}</p>
-              <span>Deadline: {{ survey.deadline }}</span>
+              <span class="survey-deadline">{{ getEndsInText(survey.deadline) }}</span>
             </div>
           }
         </div>
@@ -137,20 +132,27 @@
         </div>
 
         <form class="survey-form" (ngSubmit)="publishSurvey()">
+          @if (errorMessage) {
+            <p class="error-message">{{ errorMessage }}</p>
+          }
+
           <div class="top-row">
             <label class="field survey-name">
               Survey name
               <div class="input-line">
                 <input type="text" [(ngModel)]="title" name="title" />
-                <button type="button" class="trash-btn">🗑</button>
+                <button type="button" class="trash-btn" (click)="title = ''">&#128465;</button>
               </div>
+              @if (titleError) {
+                <small class="field-error">{{ titleError }}</small>
+              }
             </label>
 
             <label class="field description-field">
               Describing text <small>(optional)</small>
               <div class="input-line">
                 <textarea [(ngModel)]="description" name="description"></textarea>
-                <button type="button" class="trash-btn">🗑</button>
+                <button type="button" class="trash-btn" (click)="description = ''">&#128465;</button>
               </div>
             </label>
           </div>
@@ -160,29 +162,71 @@
               Set end date <small>(optional)</small>
               <div class="input-line">
                 <input type="date" [(ngModel)]="deadline" name="deadline" />
-                <button type="button" class="trash-btn">🗑</button>
+                <button type="button" class="trash-btn" (click)="deadline = ''">&#128465;</button>
               </div>
+              @if (deadlineError) {
+                <small class="field-error">{{ deadlineError }}</small>
+              }
             </label>
 
             <label class="field category-field">
               <div class="custom-select-wrapper">
                 <select [(ngModel)]="category" name="category" class="custom-select">
                   <option value="">Choose category</option>
-                  <option value="Tech">Tech</option>
-                  <option value="Work">Work</option>
+                  <option value="Team activities">Team activities</option>
+                  <option value="Health & Wellness">Health & Wellness</option>
                   <option value="Gaming">Gaming</option>
-                  <option value="Health">Health</option>
+                  <option value="Healthy Lifestyle">Healthy Lifestyle</option>
+                  <option value="Work">Work</option>
                 </select>
 
                 <span class="select-arrow"></span>
               </div>
+              @if (categoryError) {
+                <small class="field-error">{{ categoryError }}</small>
+              }
             </label>
           </div>
 
-          <div class="question-area">
-            <div class="question-card">
+          <div class="question-area mockup-question-area">
+            @for (savedQuestion of questions; track savedQuestion.text; let savedIndex = $index) {
+              <div class="question-card mockup-question-card saved-question-card">
+                <div class="question-title-row">
+                  <span>{{ savedIndex + 1 }}. Question</span>
+                  <button type="button" class="trash-btn" (click)="removeQuestion(savedIndex)">&#128465;</button>
+                </div>
+
+                <div class="readonly-input">{{ savedQuestion.text }}</div>
+
+                <div class="answers-title">
+                  <span>Answers</span>
+
+                  <label class="multiple-check">
+                    <input type="checkbox" [checked]="savedQuestion.allowMultipleAnswers" disabled />
+                    Allow multiple answers.
+                  </label>
+                </div>
+
+                @for (answer of savedQuestion.answers; track answer.text; let answerIndex = $index) {
+                  <div class="answer-row saved-answer-row">
+                    <span>{{ getAnswerLetter(answerIndex) }}.</span>
+                    <div class="readonly-input">{{ answer.text }}</div>
+                    <button type="button" class="trash-btn">&#128465;</button>
+                  </div>
+                }
+
+                <button class="add-answer-btn" type="button">
+                  Add answer <span class="plus-circle">+</span>
+                </button>
+              </div>
+            }
+
+            <div class="question-card mockup-question-card">
               <label class="field">
-                1. Question
+                <span class="question-title-row">
+                  <span>{{ questions.length + 1 }}. Question</span>
+                  <button type="button" class="trash-btn" (click)="clearQuestionOne()">&#128465;</button>
+                </span>
 
                 <div class="input-line">
                   <input
@@ -191,9 +235,12 @@
                     name="question"
                     placeholder="Which date would work best for you?"
                   />
-                  <button type="button" class="trash-btn" (click)="clearQuestionOne()">🗑</button>
                 </div>
               </label>
+
+              @if (questionError) {
+                <small class="field-error">{{ questionError }}</small>
+              }
 
               <div class="answers-title">
                 <span>Answers</span>
@@ -210,12 +257,16 @@
 
               @for (answer of answers; track $index; let index = $index) {
                 <div class="answer-row">
-                  <span>{{ index === 0 ? 'A.' : 'B.' }}</span>
+                  <span>{{ getAnswerLetter(index) }}.</span>
 
                   <input type="text" [(ngModel)]="answers[index]" name="answer{{ index }}" />
 
-                  <button type="button" class="trash-btn">🗑</button>
+                  <button type="button" class="trash-btn" (click)="removeAnswer(index)">&#128465;</button>
                 </div>
+              }
+
+              @if (answersError) {
+                <small class="field-error">{{ answersError }}</small>
               }
 
               <button class="add-answer-btn" type="button" (click)="addAnswer()">
@@ -223,82 +274,14 @@
               </button>
             </div>
 
-            @if (showSecondQuestion) {
-              <div class="question-card second-question">
-                <label class="field">
-                  2. Question
-
-                  <div class="input-line">
-                    <input type="text" placeholder="Choose the activities you prefer?" />
-                    <button type="button" class="trash-btn" (click)="removeSecondQuestion()">
-                      🗑
-                    </button>
-                  </div>
-                </label>
-
-                <div class="answers-title">
-                  <span>Answers</span>
-
-                  <label class="multiple-check">
-                    <input type="checkbox" />
-                    Allow multiple answers.
-                  </label>
-                </div>
-
-                @for (answer of secondAnswers; track $index; let index = $index) {
-                  <div class="answer-row">
-                    <span>
-                      {{
-                        index === 0
-                          ? 'A.'
-                          : index === 1
-                            ? 'B.'
-                            : index === 2
-                              ? 'C.'
-                              : index === 3
-                                ? 'D.'
-                                : 'E.'
-                      }}
-                    </span>
-
-                    <input
-                      type="text"
-                      [(ngModel)]="secondAnswers[index]"
-                      name="secondAnswer{{ index }}"
-                    />
-
-                    <button type="button" class="trash-btn">🗑</button>
-                  </div>
-                }
-
-                <button class="add-answer-btn" type="button" (click)="addSecondAnswer()">
-                  Add answer <span class="plus-circle">+</span>
-                </button>
-              </div>
-            }
-
-            @if (!showSecondQuestion) {
-              <button
-                class="add-question-btn add-question-top"
-                type="button"
-                (click)="showQuestionTwo()"
-              >
-                Add next question <span class="plus-circle">+</span>
-              </button>
-            }
-
-            @if (showSecondQuestion) {
-              <button
-                class="add-question-btn add-question-bottom"
-                type="button"
-                (click)="showQuestionTwo()"
-              >
-                Add next question <span class="plus-circle">+</span>
-              </button>
-            }
+            <button class="add-question-btn mockup-add-question-btn" type="button" (click)="addQuestion()">
+              Add next question <span class="plus-circle">+</span>
+            </button>
           </div>
 
-          <button class="publish-btn" type="submit">Publish</button>
+          <button class="publish-btn" type="submit">
+            Publish <span class="publish-check">&#10003;</span>
+          </button>
         </form>
       </section>
     </div>
@@ -314,3 +297,5 @@
     </div>
   }
 </main>
+
+

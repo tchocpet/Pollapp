@@ -21,18 +21,18 @@ export class SurveyDetail {
     return this.survey?.questions[this.currentQuestionIndex];
   }
 
-constructor(
-  private route: ActivatedRoute,
-  private surveyService: SurveyService,
-) {
-  this.surveyId = Number(this.route.snapshot.paramMap.get('id'));
-  this.survey = this.surveyService.getSurveyById(this.surveyId);
-  this.hasVoted = localStorage.getItem(this.getVoteKey()) === 'true';
-}
+  constructor(
+    private route: ActivatedRoute,
+    private surveyService: SurveyService,
+  ) {
+    this.surveyId = Number(this.route.snapshot.paramMap.get('id'));
+    this.survey = this.surveyService.getSurveyById(this.surveyId);
+    this.hasVoted = localStorage.getItem(this.getVoteKey()) === 'true';
+  }
 
   private getVoteKey(): string {
-  return `survey-voted-${this.surveyId}`;
-}
+    return `survey-voted-${this.surveyId}`;
+  }
 
   vote(index: number): void {
     if (this.hasVoted || !this.currentQuestion) {
@@ -84,10 +84,6 @@ constructor(
   }
 
   completeSurvey(): void {
-    if (!this.canSubmitAnswer() || this.hasVoted) {
-      return;
-    }
-
     this.hasVoted = true;
     this.surveyCompleted = true;
     localStorage.setItem(this.getVoteKey(), 'true');
@@ -142,18 +138,44 @@ constructor(
     this.surveyCompleted = true;
   }
 
-getTotalVotes(): number {
-  return this.currentQuestion?.answers.reduce(
-    (sum, answer) => sum + answer.votes,
-    0,
-  ) ?? 0;
-}
+  getTotalVotes(): number {
+    return this.currentQuestion?.answers.reduce((sum, answer) => sum + answer.votes, 0) ?? 0;
+  }
 
-getPercentage(votes: number): number {
-  const totalVotes = this.getTotalVotes();
+  getPercentage(votes: number): number {
+    const totalVotes = this.getTotalVotes();
 
-  return totalVotes === 0
-    ? 0
-    : Math.round((votes / totalVotes) * 100);
-}
+    return totalVotes === 0 ? 0 : Math.round((votes / totalVotes) * 100);
+  }
+
+  getQuestionPercentage(question: any, votes: number): number {
+    const totalVotes = question.answers.reduce((sum: number, answer: any) => sum + answer.votes, 0);
+
+    return totalVotes === 0 ? 0 : Math.round((votes / totalVotes) * 100);
+  }
+
+  voteForQuestion(questionIndex: number, answerIndex: number, event: Event): void {
+    if (!this.survey) {
+      return;
+    }
+
+    const input = event.target as HTMLInputElement;
+    const question = this.survey.questions[questionIndex];
+
+    if (!question) {
+      return;
+    }
+
+    if (input.checked) {
+      question.answers[answerIndex].votes++;
+    } else {
+      question.answers[answerIndex].votes--;
+    }
+
+    if (question.answers[answerIndex].votes < 0) {
+      question.answers[answerIndex].votes = 0;
+    }
+
+    this.surveyService.saveSurveys();
+  }
 }
