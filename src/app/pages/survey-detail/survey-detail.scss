@@ -690,3 +690,147 @@
     font-size: 8px;
   }
 }
+
+/* Feedback fix: readable font sizes */
+.survey-detail-page,
+.survey-detail-page button,
+.survey-detail-page input,
+.survey-status,
+.survey-end-date,
+.survey-category,
+.survey-description,
+.question-card h3,
+.multi-answer-note,
+.answer-letter,
+.answer-text,
+.complete-btn,
+.results-box h2,
+.result-question h3,
+.result-letter,
+.result-percent,
+.results-box::before {
+  font-size: 16px !important;
+  line-height: 1.2 !important;
+}
+
+.survey-box h1 {
+  line-height: 0.95 !important;
+}
+
+@media (max-width: 600px) {
+  .survey-status,
+  .survey-end-date,
+  .survey-category,
+  .survey-description,
+  .question-card h3,
+  .multi-answer-note,
+  .answer-letter,
+  .answer-text,
+  .complete-btn,
+  .results-box::before,
+  .results-box h2,
+  .result-question h3,
+  .result-letter,
+  .result-percent {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  .survey-box h1 {
+    font-size: 32px !important;
+    line-height: 0.95 !important;
+  }
+}
+
+/* Desktop survey detail readability fix */
+@media (min-width: 901px) {
+  .survey-detail-page {
+    font-size: 16px !important;
+  }
+
+  .survey-description,
+  .multi-answer-note,
+  .answer-item,
+  .answer-letter,
+  .answer-text,
+  .survey-end-date,
+  .survey-category {
+    font-size: 16px !important;
+    line-height: 1.25 !important;
+  }
+
+  .question-card h3,
+  .result-question h3 {
+    font-size: 18px !important;
+    line-height: 1.2 !important;
+  }
+
+  .results-box {
+    min-width: 360px !important;
+  }
+
+  .results-box h2 {
+    font-size: 24px !important;
+    line-height: 1.1 !important;
+    margin-bottom: 22px !important;
+  }
+
+  .result-letter,
+  .result-percent {
+    font-size: 16px !important;
+    line-height: 1 !important;
+  }
+
+  .result-item {
+    grid-template-columns: 24px minmax(0, 1fr) !important;
+    gap: 10px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .result-row {
+    grid-template-columns: minmax(0, 1fr) 44px !important;
+    gap: 10px !important;
+  }
+
+  .bar {
+    height: 10px !important;
+  }
+
+  .complete-btn,
+  .create-survey-btn,
+  .survey-status {
+    font-size: 16px !important;
+  }
+}
+
+/* Desktop survey answers readability fix */
+@media (min-width: 901px) {
+  .survey-box .multi-answer-note {
+    font-size: 17px !important;
+    line-height: 1.3 !important;
+  }
+
+  .survey-box .answer-item {
+    grid-template-columns: 18px 24px minmax(0, 1fr) !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+    align-items: center !important;
+  }
+
+  .survey-box .answer-item input {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .survey-box .answer-letter,
+  .survey-box .answer-text {
+    font-size: 18px !important;
+    line-height: 1.25 !important;
+  }
+
+  .survey-box .complete-btn {
+    min-width: 150px !important;
+    height: 44px !important;
+    font-size: 16px !important;
+  }
+}

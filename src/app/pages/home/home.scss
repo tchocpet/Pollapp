@@ -2403,3 +2403,931 @@ select,
     margin-top: 0 !important;
   }
 }
+
+/* Desktop readability and modal size feedback fix */
+@media (min-width: 901px) {
+  .create-modal {
+    width: 1040px !important;
+    max-width: calc(100vw - 96px) !important;
+    height: 690px !important;
+    padding: 38px 96px 76px !important;
+  }
+
+  .create-modal .survey-form {
+    height: 455px !important;
+    max-height: 455px !important;
+    padding: 28px 32px 42px !important;
+  }
+
+  .create-modal .field,
+  .create-modal .question-title-row,
+  .create-modal .answers-title,
+  .create-modal .answer-row span,
+  .create-modal .custom-select,
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal .readonly-input {
+    font-size: 16px !important;
+  }
+
+  .create-modal .multiple-check {
+    font-size: 12px !important;
+  }
+
+  .create-modal .draft-badge,
+  .create-modal .modal-close,
+  .create-modal .add-question-btn,
+  .create-modal .add-answer-btn,
+  .create-modal .publish-btn {
+    font-size: 16px !important;
+  }
+
+  .create-modal .survey-name input,
+  .create-modal .deadline-field input,
+  .create-modal .question-card input[type='text'],
+  .create-modal .mockup-question-card input[type='text'],
+  .create-modal .readonly-input,
+  .create-modal .answer-row input,
+  .create-modal .answer-row .readonly-input {
+    height: 34px !important;
+  }
+
+  .create-modal .description-field textarea {
+    height: 96px !important;
+  }
+
+  .create-modal .publish-btn {
+    width: 92px !important;
+    height: 40px !important;
+  }
+}
+
+/* Logo visibility repair */
+.brand-logo {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 600px) {
+  .modal-backdrop::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 35px !important;
+    left: 50% !important;
+    z-index: 1 !important;
+    display: block !important;
+    width: 72px !important;
+    height: 32px !important;
+    transform: translateX(-102px) !important;
+    background-image: url('/assets/image/logo.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: left top !important;
+    background-size: contain !important;
+  }
+}
+
+
+/* Final stable create modal layout */
+@media (min-width: 901px) {
+  .create-modal {
+    position: relative !important;
+    width: 1040px !important;
+    max-width: calc(100vw - 96px) !important;
+    height: 690px !important;
+    padding: 38px 96px 76px !important;
+  }
+
+  .create-modal .survey-form {
+    position: static !important;
+    display: block !important;
+    height: 455px !important;
+    max-height: 455px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 28px 32px 42px !important;
+  }
+
+  .create-modal .mockup-question-area,
+  .create-modal .question-area {
+    display: grid !important;
+    grid-template-columns: minmax(0, 360px) minmax(0, 360px) !important;
+    grid-auto-flow: row !important;
+    grid-auto-rows: auto !important;
+    gap: 34px 56px !important;
+    align-items: start !important;
+    width: 100% !important;
+    margin-top: 32px !important;
+  }
+
+  .create-modal .mockup-question-card,
+  .create-modal .question-card,
+  .create-modal .saved-question-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: 360px !important;
+    min-width: 0 !important;
+  }
+
+  .create-modal .mockup-question-area:not(:has(.saved-question-card)) .mockup-question-card:not(.saved-question-card),
+  .create-modal .question-area:not(:has(.saved-question-card)) .question-card:not(.saved-question-card) {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  .create-modal .mockup-question-area:not(:has(.saved-question-card)) .mockup-add-question-btn,
+  .create-modal .question-area:not(:has(.saved-question-card)) .mockup-add-question-btn {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: start !important;
+    margin: 0 !important;
+  }
+
+  .create-modal .mockup-question-area:has(.saved-question-card) .mockup-add-question-btn,
+  .create-modal .question-area:has(.saved-question-card) .mockup-add-question-btn {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    justify-self: start !important;
+    align-self: start !important;
+    margin: 0 !important;
+  }
+
+  .create-modal .mockup-add-question-btn,
+  .create-modal .add-question-btn {
+    width: 210px !important;
+    min-width: 210px !important;
+    height: 34px !important;
+    padding: 0 14px !important;
+    white-space: nowrap !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+  }
+
+  .create-modal .question-card input[type='text'],
+  .create-modal .mockup-question-card input[type='text'],
+  .create-modal .question-card > .readonly-input,
+  .create-modal .mockup-question-card > .readonly-input {
+    width: 330px !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    grid-template-columns: 24px minmax(0, 1fr) 18px !important;
+    gap: 6px !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .answer-row .readonly-input,
+  .create-modal .saved-answer-row .readonly-input {
+    width: 300px !important;
+  }
+
+  .create-modal .publish-btn {
+    position: absolute !important;
+    right: 84px !important;
+    bottom: 38px !important;
+    width: 92px !important;
+    height: 40px !important;
+    margin: 0 !important;
+    transform: none !important;
+    z-index: 20 !important;
+  }
+
+  .create-modal .publish-check {
+    display: none !important;
+  }
+}
+
+/* Final compact Figma create modal */
+@media (min-width: 901px) {
+  .create-modal {
+    width: 902px !important;
+    max-width: 902px !important;
+    height: 567px !important;
+    padding: 28px 46px 66px !important;
+    border-radius: 0 76px 0 0 !important;
+  }
+
+  .create-modal .modal-header {
+    margin: 0 0 26px !important;
+  }
+
+  .create-modal .survey-form {
+    width: 100% !important;
+    height: 350px !important;
+    max-height: 350px !important;
+    padding: 22px 24px 28px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    border-radius: 0 48px 0 0 !important;
+  }
+
+  .create-modal .top-row {
+    display: grid !important;
+    grid-template-columns: 300px 300px !important;
+    gap: 56px !important;
+    margin: 0 !important;
+  }
+
+  .create-modal .small-row {
+    display: grid !important;
+    grid-template-columns: 170px 150px !important;
+    gap: 36px !important;
+    margin: 8px 0 34px !important;
+  }
+
+  .create-modal .mockup-question-area,
+  .create-modal .question-area {
+    display: grid !important;
+    grid-template-columns: 300px 300px !important;
+    grid-auto-flow: row !important;
+    gap: 30px 44px !important;
+    align-items: start !important;
+    width: auto !important;
+    margin-top: 0 !important;
+  }
+
+  .create-modal .mockup-question-card,
+  .create-modal .question-card,
+  .create-modal .saved-question-card {
+    width: 300px !important;
+  }
+
+  .create-modal .mockup-question-area:not(:has(.saved-question-card)) .mockup-question-card:not(.saved-question-card),
+  .create-modal .question-area:not(:has(.saved-question-card)) .question-card:not(.saved-question-card) {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+
+  .create-modal .mockup-question-area:not(:has(.saved-question-card)) .mockup-add-question-btn,
+  .create-modal .question-area:not(:has(.saved-question-card)) .mockup-add-question-btn {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: start !important;
+    margin: 0 !important;
+  }
+
+  .create-modal .mockup-question-area:has(.saved-question-card) .mockup-add-question-btn,
+  .create-modal .question-area:has(.saved-question-card) .mockup-add-question-btn {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    justify-self: start !important;
+    margin: 0 !important;
+  }
+
+  .create-modal .field,
+  .create-modal .question-title-row,
+  .create-modal .answers-title,
+  .create-modal .answer-row span,
+  .create-modal .custom-select,
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal .readonly-input {
+    font-size: 13px !important;
+  }
+
+  .create-modal .multiple-check {
+    font-size: 9px !important;
+  }
+
+  .create-modal .add-question-btn,
+  .create-modal .mockup-add-question-btn {
+    width: 148px !important;
+    min-width: 148px !important;
+    height: 31px !important;
+    padding: 0 10px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+
+  .create-modal .add-answer-btn {
+    font-size: 11px !important;
+  }
+
+  .create-modal .survey-name input,
+  .create-modal .question-card input[type='text'],
+  .create-modal .mockup-question-card input[type='text'],
+  .create-modal .question-card > .readonly-input,
+  .create-modal .mockup-question-card > .readonly-input {
+    width: 300px !important;
+    height: 24px !important;
+  }
+
+  .create-modal .deadline-field input {
+    width: 150px !important;
+    height: 24px !important;
+  }
+
+  .create-modal .description-field textarea {
+    width: 300px !important;
+    height: 74px !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    grid-template-columns: 18px 1fr 16px !important;
+    gap: 4px !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .answer-row .readonly-input,
+  .create-modal .saved-answer-row .readonly-input {
+    width: 258px !important;
+    height: 24px !important;
+  }
+
+  .create-modal .publish-btn {
+    right: 44px !important;
+    bottom: 28px !important;
+    width: 74px !important;
+    height: 34px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* Desktop cancel button stable layout */
+@media (min-width: 901px) {
+  .create-modal .modal-close {
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 78px !important;
+    min-width: 78px !important;
+    height: 27px !important;
+    padding: 0 10px !important;
+    border-radius: 8px !important;
+    font-family: 'Nokora', 'Mulish', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  .create-modal .modal-close span {
+    display: inline-block !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    line-height: 1 !important;
+  }
+
+  .create-modal .modal-close::after {
+    content: none !important;
+  }
+}
+
+/* Feedback fix: larger readable desktop create modal */
+@media (min-width: 901px) {
+  .create-modal {
+    width: 1040px !important;
+    max-width: calc(100vw - 96px) !important;
+    height: 690px !important;
+    padding: 38px 96px 76px !important;
+    border-radius: 0 86px 0 0 !important;
+  }
+
+  .create-modal .modal-header {
+    margin: 0 0 28px !important;
+  }
+
+  .create-modal .survey-form {
+    width: 100% !important;
+    height: 455px !important;
+    max-height: 455px !important;
+    padding: 28px 32px 42px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    border-radius: 0 56px 0 0 !important;
+  }
+
+  .create-modal .top-row {
+    grid-template-columns: 360px 360px !important;
+    gap: 56px !important;
+  }
+
+  .create-modal .small-row {
+    grid-template-columns: 210px 190px !important;
+    gap: 48px !important;
+    margin: 14px 0 38px !important;
+  }
+
+  .create-modal .question-area,
+  .create-modal .mockup-question-area {
+    grid-template-columns: 360px 360px !important;
+    gap: 34px 56px !important;
+    align-items: start !important;
+    margin-top: 0 !important;
+  }
+
+  .create-modal .question-card,
+  .create-modal .mockup-question-card,
+  .create-modal .saved-question-card {
+    width: 360px !important;
+  }
+
+  .create-modal .field,
+  .create-modal .question-title-row,
+  .create-modal .answers-title,
+  .create-modal .answer-row span,
+  .create-modal .custom-select,
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal .readonly-input {
+    font-size: 16px !important;
+    line-height: 1.1 !important;
+  }
+
+  .create-modal .multiple-check {
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+  }
+
+  .create-modal .survey-name input,
+  .create-modal .question-card input[type='text'],
+  .create-modal .mockup-question-card input[type='text'],
+  .create-modal .question-card > .readonly-input,
+  .create-modal .mockup-question-card > .readonly-input {
+    width: 330px !important;
+    height: 34px !important;
+  }
+
+  .create-modal .deadline-field input {
+    width: 170px !important;
+    height: 34px !important;
+  }
+
+  .create-modal .description-field textarea {
+    width: 360px !important;
+    height: 96px !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    grid-template-columns: 24px minmax(0, 1fr) 18px !important;
+    gap: 6px !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .answer-row .readonly-input,
+  .create-modal .saved-answer-row .readonly-input {
+    width: 300px !important;
+    height: 34px !important;
+  }
+
+  .create-modal .add-question-btn,
+  .create-modal .mockup-add-question-btn {
+    width: 210px !important;
+    min-width: 210px !important;
+    height: 34px !important;
+    padding: 0 14px !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  .create-modal .add-answer-btn,
+  .create-modal .publish-btn,
+  .create-modal .modal-close,
+  .create-modal .draft-badge {
+    font-size: 16px !important;
+  }
+
+  .create-modal .publish-btn {
+    right: 84px !important;
+    bottom: 38px !important;
+    width: 92px !important;
+    height: 40px !important;
+  }
+}
+
+/* Feedback fix: stable mobile create modal */
+@media (max-width: 600px) {
+  .modal-backdrop {
+    align-items: flex-start !important;
+    justify-content: center !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 88px 0 28px !important;
+    background: #ffffff !important;
+  }
+
+  .create-modal {
+    position: relative !important;
+    width: 294px !important;
+    max-width: 294px !important;
+    min-height: auto !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    padding: 22px 10px 36px !important;
+    border-radius: 0 56px 0 0 !important;
+    overflow: visible !important;
+  }
+
+  .create-modal .modal-header {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    margin: 0 0 20px !important;
+  }
+
+  .create-modal .modal-header h2 {
+    width: 230px !important;
+    margin-top: 10px !important;
+    font-size: 28px !important;
+    line-height: 0.95 !important;
+  }
+
+  .create-modal .modal-close {
+    position: absolute !important;
+    top: 50px !important;
+    right: 13px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 24px !important;
+    min-width: 24px !important;
+    height: 24px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+  }
+
+  .create-modal .modal-close span {
+    display: block !important;
+    margin: 0 !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+  }
+
+  .create-modal .survey-form {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 274px !important;
+    max-width: 274px !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 18px 10px 22px !important;
+    border-radius: 0 42px 0 0 !important;
+  }
+
+  .create-modal .top-row,
+  .create-modal .small-row,
+  .create-modal .question-area,
+  .create-modal .mockup-question-area {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 13px !important;
+    margin: 0 !important;
+  }
+
+  .create-modal .question-area,
+  .create-modal .mockup-question-area {
+    margin-top: 22px !important;
+  }
+
+  .create-modal .field,
+  .create-modal .question-title-row,
+  .create-modal .answers-title,
+  .create-modal .answer-row span,
+  .create-modal .custom-select,
+  .create-modal input,
+  .create-modal textarea {
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+  }
+
+  .create-modal .survey-name input,
+  .create-modal .deadline-field input,
+  .create-modal .question-card input[type='text'],
+  .create-modal .mockup-question-card input[type='text'] {
+    width: 240px !important;
+    height: 28px !important;
+  }
+
+  .create-modal .description-field textarea {
+    width: 240px !important;
+    height: 82px !important;
+  }
+
+  .create-modal .question-card,
+  .create-modal .mockup-question-card,
+  .create-modal .saved-question-card {
+    width: 240px !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    display: grid !important;
+    grid-template-columns: 18px minmax(0, 1fr) 14px !important;
+    gap: 4px !important;
+    width: 100% !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    width: 205px !important;
+    height: 28px !important;
+  }
+
+  .create-modal .mockup-add-question-btn,
+  .create-modal .add-question-btn {
+    align-self: center !important;
+    width: 154px !important;
+    min-width: 154px !important;
+    height: 31px !important;
+    margin: 28px 0 0 !important;
+    font-size: 11px !important;
+  }
+
+  .create-modal .publish-btn {
+    position: static !important;
+    align-self: center !important;
+    display: inline-flex !important;
+    width: 92px !important;
+    height: 40px !important;
+    margin: 26px auto 0 !important;
+    padding: 0 !important;
+    font-size: 13px !important;
+    transform: none !important;
+  }
+
+  .create-modal .publish-check {
+    display: inline !important;
+    margin-left: 5px !important;
+  }
+}
+
+/* Mobile create modal: keep publish after all questions */
+@media (max-width: 600px) {
+  .create-modal .top-row {
+    order: 1 !important;
+  }
+
+  .create-modal .small-row {
+    order: 2 !important;
+  }
+
+  .create-modal .question-area,
+  .create-modal .mockup-question-area {
+    order: 3 !important;
+  }
+
+  .create-modal .publish-btn {
+    order: 4 !important;
+    position: static !important;
+    align-self: center !important;
+    margin: 26px auto 0 !important;
+  }
+}
+
+/* Mobile create modal: publish belongs to dark outer area */
+@media (max-width: 600px) {
+  .create-modal {
+    position: relative !important;
+    padding-bottom: 96px !important;
+  }
+
+  .create-modal .survey-form {
+    margin-bottom: 0 !important;
+    padding-bottom: 24px !important;
+  }
+
+  .create-modal .publish-btn {
+    position: absolute !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: 28px !important;
+    transform: translateX(-50%) !important;
+    z-index: 30 !important;
+    margin: 0 !important;
+  }
+}
+
+/* Feedback fix: readable font sizes */
+.home-page,
+.home-page button,
+.home-page input,
+.home-page textarea,
+.home-page select {
+  font-size: 16px !important;
+}
+
+.hero-description,
+.ending-soon-title,
+.survey-card h3,
+.survey-card p,
+.survey-category,
+.survey-deadline,
+.tabs button,
+.sort-select,
+.empty-state,
+.create-modal .field,
+.create-modal .field small,
+.create-modal .question-title-row,
+.create-modal .answers-title,
+.create-modal .multiple-check,
+.create-modal .answer-row span,
+.create-modal .add-answer-btn,
+.create-modal .add-question-btn,
+.create-modal .mockup-add-question-btn,
+.create-modal .publish-btn,
+.create-modal .modal-close,
+.create-modal .draft-badge,
+.create-modal input,
+.create-modal textarea,
+.create-modal select {
+  font-size: 16px !important;
+  line-height: 1.15 !important;
+}
+
+@media (max-width: 600px) {
+  .create-modal .modal-header h2 {
+    font-size: 32px !important;
+    line-height: 0.95 !important;
+  }
+
+  .create-modal .modal-close span {
+    font-size: 18px !important;
+  }
+
+  .create-modal .survey-name input,
+  .create-modal .deadline-field input,
+  .create-modal .question-card input[type='text'],
+  .create-modal .mockup-question-card input[type='text'] {
+    height: 34px !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    height: 34px !important;
+  }
+
+  .create-modal .description-field textarea {
+    height: 92px !important;
+  }
+}
+
+/* Mobile readable font repair after 16px feedback */
+@media (max-width: 600px) {
+  .modal-backdrop {
+    padding-top: 86px !important;
+  }
+
+  .create-modal {
+    width: 320px !important;
+    max-width: calc(100vw - 42px) !important;
+    padding: 22px 10px 96px !important;
+  }
+
+  .create-modal .survey-form {
+    width: 300px !important;
+    max-width: 100% !important;
+    padding: 18px 10px 24px !important;
+  }
+
+  .create-modal .modal-close {
+    top: 52px !important;
+    right: 14px !important;
+    width: 28px !important;
+    min-width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    font-size: 0 !important;
+    color: transparent !important;
+    overflow: hidden !important;
+  }
+
+  .create-modal .modal-close span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 28px !important;
+    height: 28px !important;
+    color: #ffffff !important;
+    font-size: 18px !important;
+    line-height: 1 !important;
+  }
+
+  .create-modal .draft-badge {
+    display: inline-flex !important;
+    width: auto !important;
+    min-width: 46px !important;
+    height: 24px !important;
+    padding: 0 8px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    font-size: 16px !important;
+  }
+
+  .create-modal .field,
+  .create-modal .field small,
+  .create-modal .question-title-row,
+  .create-modal .answers-title,
+  .create-modal .multiple-check,
+  .create-modal .answer-row span,
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal select {
+    font-size: 16px !important;
+    line-height: 1.15 !important;
+  }
+
+  .create-modal .survey-name input,
+  .create-modal .deadline-field input,
+  .create-modal .question-card input[type='text'],
+  .create-modal .mockup-question-card input[type='text'] {
+    width: 260px !important;
+    max-width: 260px !important;
+    height: 34px !important;
+  }
+
+  .create-modal .description-field textarea {
+    width: 260px !important;
+    max-width: 260px !important;
+    height: 92px !important;
+  }
+
+  .create-modal .question-card,
+  .create-modal .mockup-question-card,
+  .create-modal .saved-question-card {
+    width: 260px !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    grid-template-columns: 22px minmax(0, 1fr) 14px !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    width: 218px !important;
+    max-width: 218px !important;
+    height: 34px !important;
+  }
+
+  .create-modal .add-answer-btn {
+    font-size: 16px !important;
+  }
+
+  .create-modal .mockup-add-question-btn,
+  .create-modal .add-question-btn {
+    width: 196px !important;
+    min-width: 196px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+  }
+
+  .create-modal .publish-btn {
+    width: 104px !important;
+    height: 42px !important;
+    font-size: 16px !important;
+    bottom: 28px !important;
+  }
+}
+
+/* Desktop home readability fix */
+@media (min-width: 901px) {
+  .hero-description {
+    max-width: 520px !important;
+    font-size: 18px !important;
+    line-height: 1.25 !important;
+  }
+
+  .new-survey-btn,
+  .tabs button,
+  .sort-select {
+    font-size: 16px !important;
+    line-height: 1 !important;
+  }
+
+  .ending-soon-title {
+    font-size: 24px !important;
+    line-height: 1.15 !important;
+  }
+
+  .survey-card .survey-category,
+  .survey-card p {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  .survey-card h3 {
+    font-size: 20px !important;
+    line-height: 1.15 !important;
+  }
+
+  .survey-card .survey-deadline {
+    min-height: 30px !important;
+    padding: 7px 14px !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+  }
+}

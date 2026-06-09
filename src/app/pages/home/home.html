@@ -196,13 +196,13 @@
                   <button type="button" class="trash-btn" (click)="removeQuestion(savedIndex)">&#128465;</button>
                 </div>
 
-                <div class="readonly-input">{{ savedQuestion.text }}</div>
+                <input type="text" [(ngModel)]="savedQuestion.text" name="savedQuestion{{ savedIndex }}" />
 
                 <div class="answers-title">
                   <span>Answers</span>
 
                   <label class="multiple-check">
-                    <input type="checkbox" [checked]="savedQuestion.allowMultipleAnswers" disabled />
+                    <input type="checkbox" [(ngModel)]="savedQuestion.allowMultipleAnswers" name="savedMultiple{{ savedIndex }}" />
                     Allow multiple answers.
                   </label>
                 </div>
@@ -210,12 +210,12 @@
                 @for (answer of savedQuestion.answers; track answer.text; let answerIndex = $index) {
                   <div class="answer-row saved-answer-row">
                     <span>{{ getAnswerLetter(answerIndex) }}.</span>
-                    <div class="readonly-input">{{ answer.text }}</div>
-                    <button type="button" class="trash-btn">&#128465;</button>
+                    <input type="text" [(ngModel)]="answer.text" name="savedAnswer{{ savedIndex }}-{{ answerIndex }}" />
+                    <button type="button" class="trash-btn" (click)="removeAnswerFromQuestion(savedIndex, answerIndex)">&#128465;</button>
                   </div>
                 }
 
-                <button class="add-answer-btn" type="button">
+                <button class="add-answer-btn" type="button" (click)="addAnswerToQuestion(savedIndex)">
                   Add answer <span class="plus-circle">+</span>
                 </button>
               </div>
@@ -297,5 +297,6 @@
     </div>
   }
 </main>
+
 
 

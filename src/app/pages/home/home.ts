@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Question, Survey } from '../../models/survey';
 import { SurveyService } from '../../services/survey';
@@ -238,6 +238,18 @@ export class Home {
     this.questions.splice(index, 1);
   }
 
+  addAnswerToQuestion(questionIndex: number): void {
+    this.questions[questionIndex].answers.push({ text: '', votes: 0 });
+  }
+
+  removeAnswerFromQuestion(questionIndex: number, answerIndex: number): void {
+    const answers = this.questions[questionIndex].answers;
+
+    if (answers.length > 2) {
+      answers.splice(answerIndex, 1);
+    }
+  }
+
   publishSurvey(): void {
     this.prepareSurveySubmit();
 
@@ -448,3 +460,4 @@ export class Home {
     return `${day}.${month}.${year}`;
   }
 }
+
