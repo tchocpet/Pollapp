@@ -1,5 +1,5 @@
-﻿import { Component } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { Question, Survey } from '../../models/survey';
 import { SurveyService } from '../../services/survey';
 import { FormsModule } from '@angular/forms';
@@ -19,15 +19,12 @@ export class Home {
   title = '';
   description = '';
   deadline = '';
+  minDeadline = this.getDateInputValue(new Date());
   category = '';
   question = '';
   allowMultipleAnswers = false;
-  secondQuestion = '';
-  secondAllowMultipleAnswers = false;
-  showSecondQuestion = false;
   showPublishOverlay = false;
   answers = ['', ''];
-  secondAnswers = ['', ''];
   questions: Question[] = [];
   errorMessage = '';
   answersError = '';
@@ -36,28 +33,54 @@ export class Home {
   deadlineError = '';
   categoryError = '';
   questionError = '';
+  private modalHistoryEntryActive = false;
 
   constructor(
     private surveyService: SurveyService,
-    private route: ActivatedRoute,
     private router: Router,
   ) {
-    this.route.queryParamMap.subscribe((params) => {
-      if (params.get('create') === 'true') {
-        this.openCreateModal();
-      }
-    });
+    const navigationState =
+      this.router.getCurrentNavigation()?.extras.state ?? window.history.state;
+
+    if (navigationState?.['openCreate']) {
+      this.openCreateModal(false);
+    }
   }
 
   get surveys(): Survey[] {
     return this.surveyService.getSurveys();
   }
 
-  openCreateModal(): void {
-    this.isCreateModalOpen = true;
+  @HostListener('window:popstate')
+  onBrowserBack(): void {
+    if (!this.isCreateModalOpen) {
+      return;
+    }
+
+    this.modalHistoryEntryActive = false;
+    this.closeCreateModal(false);
   }
 
-  closeCreateModal(): void {
+  openCreateModal(addHistoryEntry = true): void {
+    if (this.isCreateModalOpen) {
+      return;
+    }
+
+    this.isCreateModalOpen = true;
+
+    if (addHistoryEntry) {
+      window.history.pushState({ ...window.history.state, createModalOpen: true }, '', window.location.href);
+      this.modalHistoryEntryActive = true;
+    }
+  }
+
+  closeCreateModal(updateHistory = true): void {
+    if (updateHistory && this.modalHistoryEntryActive) {
+      this.modalHistoryEntryActive = false;
+      window.history.back();
+      return;
+    }
+
     this.isCreateModalOpen = false;
     this.resetForm();
   }
@@ -152,27 +175,6 @@ export class Home {
     this.answersError = '';
   }
 
-  addSecondAnswer(): void {
-    this.secondAnswers.push('');
-  }
-
-  private addSecondQuestionToSurvey(): void {
-    if (!this.showSecondQuestion || this.secondQuestion.trim() === '') {
-      return;
-    }
-
-    this.questions.push({
-      text: this.secondQuestion,
-      allowMultipleAnswers: this.secondAllowMultipleAnswers,
-      answers: this.secondAnswers
-        .filter((answer) => answer.trim() !== '')
-        .map((answer) => ({
-          text: answer,
-          votes: 0,
-        })),
-    });
-  }
-
   removeAnswer(index: number): void {
     if (this.answers.length > 2) {
       this.answers.splice(index, 1);
@@ -191,18 +193,9 @@ export class Home {
     this.errorMessage = '';
   }
 
-  showQuestionTwo(): void {
-    this.showSecondQuestion = true;
-  }
-
   clearQuestionOne(): void {
-    this.question = '';
-    this.answers = ['', ''];
-    this.allowMultipleAnswers = false;
-  }
-
-  removeSecondQuestion(): void {
-    this.showSecondQuestion = false;
+    this.resetCurrentQuestion();
+    this.errorMessage = '';
   }
 
   private hasValidQuestion(): boolean {
@@ -235,7 +228,13 @@ export class Home {
   }
 
   removeQuestion(index: number): void {
+    if (index < 0 || index >= this.questions.length) {
+      return;
+    }
+
     this.questions.splice(index, 1);
+    this.errorMessage = '';
+    this.clearQuestionErrors();
   }
 
   addAnswerToQuestion(questionIndex: number): void {
@@ -251,7 +250,9 @@ export class Home {
   }
 
   publishSurvey(): void {
-    this.prepareSurveySubmit();
+    if (!this.prepareSurveySubmit()) {
+      return;
+    }
 
     if (!this.isSurveyFormValid()) {
       return;
@@ -261,18 +262,21 @@ export class Home {
     this.showPublishOverlay = true;
   }
 
-  private prepareSurveySubmit(): void {
+  private prepareSurveySubmit(): boolean {
     this.clearFieldErrors();
     this.errorMessage = '';
 
     if (this.question.trim() !== '' || this.answers.some((answer) => answer.trim() !== '')) {
       if (!this.hasValidQuestion()) {
-        return;
+        this.errorMessage = 'Please complete the current question before publishing.';
+        return false;
       }
 
       this.questions.push(this.createQuestion());
       this.resetCurrentQuestion();
     }
+
+    return true;
   }
 
   private isSurveyFormValid(): boolean {
@@ -310,10 +314,6 @@ export class Home {
     this.deadline = '';
     this.category = '';
     this.resetCurrentQuestion();
-    this.secondQuestion = '';
-    this.secondAnswers = ['', ''];
-    this.secondAllowMultipleAnswers = false;
-    this.showSecondQuestion = false;
   }
 
   private clearFieldErrors(): void {
@@ -336,8 +336,15 @@ export class Home {
 
     this.questions = [];
 
-    this.showSecondQuestion = false;
     this.showPublishOverlay = false;
+  }
+
+  private getDateInputValue(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 
   private getToday(): Date {
@@ -399,7 +406,11 @@ export class Home {
 
   private hasFieldErrors(): boolean {
     return Boolean(
-      this.titleError || this.deadlineError || this.categoryError || this.questionError || this.answersError,
+      this.titleError ||
+      this.deadlineError ||
+      this.categoryError ||
+      this.questionError ||
+      this.answersError,
     );
   }
 
@@ -460,4 +471,3 @@ export class Home {
     return `${day}.${month}.${year}`;
   }
 }
-

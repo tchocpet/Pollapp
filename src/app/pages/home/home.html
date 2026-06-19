@@ -1,8 +1,8 @@
-﻿<main class="home-page">
+<main class="home-page">
   <header class="hero">
     <div class="hero-top">
       <div class="brand">
-        <img src="assets/image/logo.png" alt="Poll App" class="brand-logo" />
+        <img src="assets/image/Logo.svg" alt="Poll App" class="brand-logo" />
       </div>
     </div>
 
@@ -64,7 +64,7 @@
       </div>
 
       <div class="sort-dropdown">
-        <select class="sort-select" [(ngModel)]="selectedCategory" name="categorySort">
+        <select class="sort-select" [(ngModel)]="selectedCategory" name="categorySort" aria-label="Sort surveys by category">
           @for (category of categories; track category) {
             <option [value]="category">
               {{ category === 'All' ? 'Sort by categories' : category }}
@@ -137,41 +137,41 @@
           }
 
           <div class="top-row">
-            <label class="field survey-name">
+            <label class="field survey-name" for="survey-title">
               Survey name
               <div class="input-line">
-                <input type="text" [(ngModel)]="title" name="title" />
-                <button type="button" class="trash-btn" (click)="title = ''">&#128465;</button>
+                <input id="survey-title" type="text" [(ngModel)]="title" name="title" />
+                <button type="button" class="trash-btn" (click)="title = ''" aria-label="Delete"></button>
               </div>
               @if (titleError) {
                 <small class="field-error">{{ titleError }}</small>
               }
             </label>
 
-            <label class="field description-field">
+            <label class="field description-field" for="survey-description">
               Describing text <small>(optional)</small>
               <div class="input-line">
-                <textarea [(ngModel)]="description" name="description"></textarea>
-                <button type="button" class="trash-btn" (click)="description = ''">&#128465;</button>
+                <textarea id="survey-description" [(ngModel)]="description" name="description"></textarea>
+                <button type="button" class="trash-btn" (click)="description = ''" aria-label="Delete"></button>
               </div>
             </label>
           </div>
 
           <div class="small-row">
-            <label class="field deadline-field">
+            <label class="field deadline-field" for="survey-deadline">
               Set end date <small>(optional)</small>
               <div class="input-line">
-                <input type="date" [(ngModel)]="deadline" name="deadline" />
-                <button type="button" class="trash-btn" (click)="deadline = ''">&#128465;</button>
+                <input id="survey-deadline" type="date" [(ngModel)]="deadline" name="deadline" [min]="minDeadline" />
+                <button type="button" class="trash-btn" (click)="deadline = ''" aria-label="Delete"></button>
               </div>
               @if (deadlineError) {
                 <small class="field-error">{{ deadlineError }}</small>
               }
             </label>
 
-            <label class="field category-field">
+            <label class="field category-field" for="survey-category">
               <div class="custom-select-wrapper">
-                <select [(ngModel)]="category" name="category" class="custom-select">
+                <select id="survey-category" [(ngModel)]="category" name="category" class="custom-select">
                   <option value="">Choose category</option>
                   <option value="Team activities">Team activities</option>
                   <option value="Health & Wellness">Health & Wellness</option>
@@ -182,6 +182,9 @@
 
                 <span class="select-arrow"></span>
               </div>
+              @if (category) {
+                <small class="selected-category-preview">{{ category }}</small>
+              }
               @if (categoryError) {
                 <small class="field-error">{{ categoryError }}</small>
               }
@@ -193,16 +196,17 @@
               <div class="question-card mockup-question-card saved-question-card">
                 <div class="question-title-row">
                   <span>{{ savedIndex + 1 }}. Question</span>
-                  <button type="button" class="trash-btn" (click)="removeQuestion(savedIndex)">&#128465;</button>
+                  <button type="button" class="trash-btn" (click)="removeQuestion(savedIndex)" aria-label="Delete"></button>
                 </div>
 
-                <input type="text" [(ngModel)]="savedQuestion.text" name="savedQuestion{{ savedIndex }}" />
+                <label class="sr-only" for="saved-question-{{ savedIndex }}">Question {{ savedIndex + 1 }}</label>
+                <input id="saved-question-{{ savedIndex }}" type="text" [(ngModel)]="savedQuestion.text" name="savedQuestion{{ savedIndex }}" />
 
                 <div class="answers-title">
                   <span>Answers</span>
 
                   <label class="multiple-check">
-                    <input type="checkbox" [(ngModel)]="savedQuestion.allowMultipleAnswers" name="savedMultiple{{ savedIndex }}" />
+                    <input id="saved-multiple-{{ savedIndex }}" type="checkbox" [(ngModel)]="savedQuestion.allowMultipleAnswers" name="savedMultiple{{ savedIndex }}" />
                     Allow multiple answers.
                   </label>
                 </div>
@@ -210,26 +214,28 @@
                 @for (answer of savedQuestion.answers; track answer.text; let answerIndex = $index) {
                   <div class="answer-row saved-answer-row">
                     <span>{{ getAnswerLetter(answerIndex) }}.</span>
-                    <input type="text" [(ngModel)]="answer.text" name="savedAnswer{{ savedIndex }}-{{ answerIndex }}" />
-                    <button type="button" class="trash-btn" (click)="removeAnswerFromQuestion(savedIndex, answerIndex)">&#128465;</button>
+                    <label class="sr-only" for="saved-answer-{{ savedIndex }}-{{ answerIndex }}">Answer {{ getAnswerLetter(answerIndex) }} for question {{ savedIndex + 1 }}</label>
+                    <input id="saved-answer-{{ savedIndex }}-{{ answerIndex }}" type="text" [(ngModel)]="answer.text" name="savedAnswer{{ savedIndex }}-{{ answerIndex }}" />
+                    <button type="button" class="trash-btn" (click)="removeAnswerFromQuestion(savedIndex, answerIndex)" aria-label="Delete"></button>
                   </div>
                 }
 
                 <button class="add-answer-btn" type="button" (click)="addAnswerToQuestion(savedIndex)">
-                  Add answer <span class="plus-circle">+</span>
+                  Add answer <span class="plus-circle" aria-hidden="true"></span>
                 </button>
               </div>
             }
 
             <div class="question-card mockup-question-card">
-              <label class="field">
+              <label class="field" for="current-question">
                 <span class="question-title-row">
                   <span>{{ questions.length + 1 }}. Question</span>
-                  <button type="button" class="trash-btn" (click)="clearQuestionOne()">&#128465;</button>
+                  <button type="button" class="trash-btn" (click)="clearQuestionOne()" aria-label="Delete"></button>
                 </span>
 
                 <div class="input-line">
                   <input
+                    id="current-question"
                     type="text"
                     [(ngModel)]="question"
                     name="question"
@@ -247,6 +253,7 @@
 
                 <label class="multiple-check">
                   <input
+                    id="current-multiple"
                     type="checkbox"
                     [(ngModel)]="allowMultipleAnswers"
                     name="allowMultipleAnswers"
@@ -259,9 +266,10 @@
                 <div class="answer-row">
                   <span>{{ getAnswerLetter(index) }}.</span>
 
-                  <input type="text" [(ngModel)]="answers[index]" name="answer{{ index }}" />
+                  <label class="sr-only" for="current-answer-{{ index }}">Answer {{ getAnswerLetter(index) }} for current question</label>
+                  <input id="current-answer-{{ index }}" type="text" [(ngModel)]="answers[index]" name="answer{{ index }}" />
 
-                  <button type="button" class="trash-btn" (click)="removeAnswer(index)">&#128465;</button>
+                  <button type="button" class="trash-btn" (click)="removeAnswer(index)" aria-label="Delete"></button>
                 </div>
               }
 
@@ -270,33 +278,26 @@
               }
 
               <button class="add-answer-btn" type="button" (click)="addAnswer()">
-                Add answer <span class="plus-circle">+</span>
+                Add answer <span class="plus-circle" aria-hidden="true"></span>
               </button>
             </div>
 
             <button class="add-question-btn mockup-add-question-btn" type="button" (click)="addQuestion()">
-              Add next question <span class="plus-circle">+</span>
+              Add next question <span class="plus-circle" aria-hidden="true"></span>
             </button>
           </div>
 
           <button class="publish-btn" type="submit">
-            Publish <span class="publish-check">&#10003;</span>
+            Publish <span class="publish-check" aria-hidden="true"></span>
           </button>
         </form>
       </section>
     </div>
   }
   @if (showPublishOverlay) {
-    <div class="publish-overlay">
-      <div class="overlay-box">
-        <h3>Survey published!</h3>
-        <p>Your survey was created successfully.</p>
-
-        <button type="button" (click)="resetSurveyForm()">Close</button>
-      </div>
+    <div class="publish-toast" role="status" aria-live="polite">
+      <strong>Your survey is now published!</strong>
+      <button type="button" aria-label="Close message" (click)="resetSurveyForm()">X</button>
     </div>
   }
 </main>
-
-
-

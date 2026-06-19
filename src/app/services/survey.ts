@@ -8,48 +8,79 @@ export class SurveyService {
   private surveys: Survey[] = [
     {
       id: 1,
-      title: 'Team Lunch',
-      description: 'Vote for the next team lunch location.',
+      title: "Let's Plan the Next Team Event Together",
+      description:
+        'We want to create team activities that everyone will enjoy - share your preferences and ideas in our survey to help us plan better experiences together.',
       deadline: '2026-06-20',
-      category: 'Work',
+      category: 'Team activities',
       questions: [
         {
-          text: 'Where should we eat?',
+          text: 'Which date would work best for you?',
           allowMultipleAnswers: false,
           answers: [
-            { text: 'Italian', votes: 3 },
-            { text: 'Asian', votes: 5 },
-            { text: 'Burger', votes: 2 },
+            { text: '19.09.2025, Friday', votes: 3 },
+            { text: '10.10.2025, Friday', votes: 5 },
+            { text: '11.10.2025, Saturday', votes: 1 },
+            { text: '31.10.2025, Friday', votes: 3 },
           ],
         },
-      ],
-      isPast: false,
-    },
-
-    {
-      id: 2,
-      title: 'Office Event',
-      description: 'Choose activities for the next event.',
-      deadline: '2026-06-14',
-      category: 'Event',
-      questions: [
         {
-          text: 'Best activity?',
+          text: 'Choose the activities you prefer?',
           allowMultipleAnswers: true,
           answers: [
-            { text: 'Bowling', votes: 4 },
-            { text: 'Escape Room', votes: 6 },
+            { text: 'Outdoor adventure like kayaking', votes: 6 },
+            { text: 'Office Costume Party', votes: 0 },
+            { text: 'Bowling, mini-golf, volleyball', votes: 2 },
+            { text: 'Beach party, music & cocktails', votes: 3 },
+            { text: 'Escape room', votes: 0 },
           ],
         },
       ],
       isPast: false,
     },
-
+    {
+      id: 2,
+      title: 'Gaming habits and favorite games!',
+      description: 'Tell us which games and play styles your group enjoys most.',
+      deadline: '2026-06-22',
+      category: 'Gaming',
+      questions: [
+        {
+          text: 'Which game night style do you prefer?',
+          allowMultipleAnswers: true,
+          answers: [
+            { text: 'Co-op games', votes: 4 },
+            { text: 'Party games', votes: 6 },
+            { text: 'Strategy games', votes: 3 },
+          ],
+        },
+      ],
+      isPast: false,
+    },
     {
       id: 3,
+      title: 'Healthier future: Fit & wellness survey!',
+      description: 'Share your wellness interests and help plan healthy activities.',
+      deadline: '2026-06-21',
+      category: 'Healthy Lifestyle',
+      questions: [
+        {
+          text: 'What wellness activity sounds best?',
+          allowMultipleAnswers: true,
+          answers: [
+            { text: 'Team yoga', votes: 2 },
+            { text: 'Healthy cooking', votes: 5 },
+            { text: 'Walking challenge', votes: 4 },
+          ],
+        },
+      ],
+      isPast: false,
+    },
+    {
+      id: 4,
       title: 'Retro Feedback',
       description: 'Sprint feedback survey.',
-      deadline: '2025-01-12',
+      deadline: '2026-06-14',
       category: 'Feedback',
       questions: [
         {

@@ -1,4 +1,4 @@
-﻿# Poll App
+# Poll App
 
 Eine responsive Survey- und Voting-App mit Angular.
 
@@ -70,3 +70,12 @@ Folgende Ordner sollten nicht mit abgegeben oder hochgeladen werden:
 - `.angular/`
 - `.vscode/`
 - `dist/`, falls nur der Quellcode abgegeben werden soll
+
+## Commit-Konvention
+
+Fuer die Abgabe sind klare Commit-Namen hilfreich. Empfohlene Beispiele:
+
+- `docs: update project setup instructions`
+- `fix: improve create survey form behavior`
+- `style: adjust poll app responsive layout`
+- `feat: add survey voting flow`

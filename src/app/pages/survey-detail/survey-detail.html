@@ -2,10 +2,10 @@
   <main class="survey-detail-page">
     <header class="survey-header">
       <a routerLink="/" aria-label="Back to home">
-        <img src="assets/image/logo.png" alt="Poll App" class="poll-logo" />
+        <img src="assets/image/Logo.svg" alt="Poll App" class="poll-logo" />
       </a>
 
-      <button class="create-survey-btn" routerLink="/" [queryParams]="{ create: true }">Create survey</button>
+      <button class="create-survey-btn" routerLink="/" [state]="{ openCreate: true }">Create survey</button>
     </header>
 
     <div class="survey-layout">
@@ -32,10 +32,13 @@
               <p class="multi-answer-note">More than one answers are possible.</p>
 
               @for (answer of question.answers; track answer.text; let index = $index) {
-                <label class="answer-item">
+                <label class="answer-item" [attr.for]="'answer-' + qIndex + '-' + index">
                   <input
-                    type="checkbox"
+                    [id]="'answer-' + qIndex + '-' + index"
+                    [type]="question.allowMultipleAnswers ? 'checkbox' : 'radio'"
                     name="question{{ qIndex }}"
+                    [checked]="isAnswerSelected(qIndex, index)"
+                    [disabled]="hasVoted"
                     (change)="voteForQuestion(qIndex, index, $event)"
                   />
 
@@ -47,19 +50,16 @@
           }
         </div>
 
-        @if (!surveyCompleted) {
-          <button
-            class="complete-btn"
-            [class.disabled-look]="
-              currentQuestion?.allowMultipleAnswers
-                ? selectedIndexes.length === 0
-                : selectedIndex === null
-            "
-            (click)="completeSurvey()"
-          >
-            Complete survey
-          </button>
-        }
+        <button
+          class="complete-btn"
+          type="button"
+          [disabled]="surveyCompleted || !hasSelectedAnswers()"
+          [class.disabled-look]="surveyCompleted || !hasSelectedAnswers()"
+          [class.completed-look]="surveyCompleted"
+          (click)="completeSurvey()"
+        >
+          {{ surveyCompleted ? 'Survey completed' : 'Complete survey' }}
+        </button>
       </section>
 
       <section class="results-box">
@@ -91,5 +91,12 @@
         }
       </section>
     </div>
+
+    @if (showVoteToast) {
+      <div class="vote-toast" role="status" aria-live="polite">
+        <strong>Your answers were submitted!</strong>
+        <button type="button" aria-label="Close message" (click)="closeVoteToast()">X</button>
+      </div>
+    }
   </main>
 }
