@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Question, Survey } from '../../models/survey';
 import { SurveyService } from '../../services/survey';
@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './home.scss',
 })
 export class Home {
+  @ViewChild('surveyFormElement') private surveyFormElement?: ElementRef<HTMLFormElement>;
+
   activeTab: 'running' | 'past' = 'running';
   selectedCategory = 'All';
 
@@ -23,7 +25,9 @@ export class Home {
   category = '';
   question = '';
   allowMultipleAnswers = false;
+  showCurrentQuestion = true;
   showPublishOverlay = false;
+  publishedSurveyId: number | null = null;
   answers = ['', ''];
   questions: Question[] = [];
   errorMessage = '';
@@ -184,18 +188,30 @@ export class Home {
   addQuestion(): void {
     this.clearQuestionErrors();
 
+    if (!this.showCurrentQuestion) {
+      this.showCurrentQuestion = true;
+      this.errorMessage = '';
+      return;
+    }
+
     if (!this.hasValidQuestion()) {
       return;
     }
 
     this.questions.push(this.createQuestion());
     this.resetCurrentQuestion();
+    this.showCurrentQuestion = true;
     this.errorMessage = '';
+    this.scrollCreateFormToTop();
   }
 
   clearQuestionOne(): void {
     this.resetCurrentQuestion();
     this.errorMessage = '';
+
+    if (this.questions.length > 0) {
+      this.showCurrentQuestion = false;
+    }
   }
 
   private hasValidQuestion(): boolean {
@@ -258,7 +274,8 @@ export class Home {
       return;
     }
 
-    this.saveSurvey();
+    const createdSurvey = this.saveSurvey();
+    this.publishedSurveyId = createdSurvey.id;
     this.showPublishOverlay = true;
   }
 
@@ -266,7 +283,7 @@ export class Home {
     this.clearFieldErrors();
     this.errorMessage = '';
 
-    if (this.question.trim() !== '' || this.answers.some((answer) => answer.trim() !== '')) {
+    if (this.showCurrentQuestion && (this.question.trim() !== '' || this.answers.some((answer) => answer.trim() !== ''))) {
       if (!this.hasValidQuestion()) {
         this.errorMessage = 'Please complete the current question before publishing.';
         return false;
@@ -289,8 +306,8 @@ export class Home {
     return isValid;
   }
 
-  private saveSurvey(): void {
-    this.surveyService.addSurvey({
+  private saveSurvey(): Survey {
+    const survey: Survey = {
       id: Date.now(),
       title: this.title,
       description: this.description,
@@ -298,7 +315,11 @@ export class Home {
       category: this.category,
       questions: this.questions,
       isPast: false,
-    });
+    };
+
+    this.surveyService.addSurvey(survey);
+
+    return survey;
   }
 
   private resetForm(): void {
@@ -314,6 +335,7 @@ export class Home {
     this.deadline = '';
     this.category = '';
     this.resetCurrentQuestion();
+    this.showCurrentQuestion = true;
   }
 
   private clearFieldErrors(): void {
@@ -337,6 +359,20 @@ export class Home {
     this.questions = [];
 
     this.showPublishOverlay = false;
+    this.publishedSurveyId = null;
+    this.showCurrentQuestion = true;
+  }
+
+  finishPublishedSurvey(): void {
+    const surveyId = this.publishedSurveyId;
+
+    this.showPublishOverlay = false;
+    this.closeCreateModal(false);
+    this.publishedSurveyId = null;
+
+    if (surveyId !== null) {
+      this.router.navigate(['/survey', surveyId]);
+    }
   }
 
   private getDateInputValue(date: Date): string {
@@ -440,6 +476,13 @@ export class Home {
     this.allowMultipleAnswers = false;
     this.clearQuestionErrors();
   }
+
+  private scrollCreateFormToTop(): void {
+    setTimeout(() => {
+      this.surveyFormElement?.nativeElement.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   getEndsInText(deadline: string): string {
     const today = new Date();
     const endDate = new Date(deadline);

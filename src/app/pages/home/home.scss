@@ -1130,7 +1130,7 @@ select,
 
   .hero-left h1 {
     margin: 0 0 18px;
-    font-family: 'Nerko One', cursive;
+    font-family: 'Nerko One';
     font-size: 32px;
     line-height: 0.9;
     color: #ffb770;
@@ -1152,7 +1152,7 @@ select,
     height: 32px;
     padding: 0;
     border-radius: 8px;
-    font-family: 'Nokora', 'Mulish', sans-serif;
+    font-family: 'Nokora', 'Mulish';
     font-size: 14px;
     font-weight: 700;
     color: #221227;
@@ -1172,7 +1172,7 @@ select,
     max-width: 335px;
     margin: 0 auto 22px;
     text-align: center;
-    font-family: 'Nerko One', cursive;
+    font-family: 'Nerko One';
     font-size: 31px;
     line-height: 1;
     color: #ffb770;
@@ -1251,7 +1251,7 @@ select,
 
   .tabs button {
     padding: 6px 11px;
-    font-family: 'Nokora', 'Mulish', sans-serif;
+    font-family: 'Nokora', 'Mulish';
     font-size: 11px;
   }
 
@@ -1510,7 +1510,7 @@ select,
   .create-modal h2 {
     max-width: 220px;
     margin: 9px 0 0;
-    font-family: 'Nerko One', cursive;
+    font-family: 'Nerko One';
     font-size: 31px;
     font-weight: 800;
     line-height: 0.9;
@@ -1701,7 +1701,7 @@ select,
     margin: 28px auto 0;
     background: #8b6857;
     border-radius: 8px;
-    font-family: 'Nokora', 'Mulish', sans-serif;
+    font-family: 'Nokora', 'Mulish';
     font-size: 11px;
     font-weight: 700;
   }
@@ -1758,14 +1758,14 @@ select,
     width: 42px;
     height: 21px;
     margin-bottom: 8px;
-    font-family: 'Nokora', 'Mulish', sans-serif;
+    font-family: 'Nokora', 'Mulish';
     font-size: 11px;
     font-weight: 700;
   }
 
   .create-modal h2 {
     max-width: 190px;
-    font-family: 'Nokora', 'Nerko One', cursive;
+    font-family: 'Nokora', 'Nerko One';
     font-size: 30px;
     font-weight: 700;
     line-height: 0.9;
@@ -1998,7 +1998,7 @@ select,
     margin: 28px auto 0;
     background: #8b6857;
     border-radius: 8px;
-    font-family: 'Nokora', 'Mulish', sans-serif;
+    font-family: 'Nokora', 'Mulish';
     font-size: 11px;
     font-weight: 700;
   }
@@ -2220,7 +2220,7 @@ select,
 @media (min-width: 601px) {
   .create-modal .publish-btn {
     right: 84px !important;
-    font-family: 'Nokora', 'Mulish', sans-serif !important;
+    font-family: 'Nokora', 'Mulish' !important;
     font-weight: 700 !important;
   }
 }
@@ -2632,7 +2632,7 @@ select,
     height: 27px !important;
     padding: 0 10px !important;
     border-radius: 8px !important;
-    font-family: 'Nokora', 'Mulish', sans-serif !important;
+    font-family: 'Nokora', 'Mulish' !important;
     font-size: 13px !important;
     font-weight: 700 !important;
     line-height: 1 !important;
@@ -3221,7 +3221,7 @@ select,
 
 .publish-toast strong {
   max-width: 190px;
-  font-family: 'Nokora', 'Mulish', sans-serif;
+  font-family: 'Nokora', 'Mulish';
   font-size: 16px;
   font-weight: 700;
   line-height: 1.15;
@@ -4418,7 +4418,7 @@ select,
 .create-modal h2,
 .hero h1,
 .page-title {
-  font-family: 'Nerko One', cursive !important;
+  font-family: 'Nerko One' !important;
 }
 
 .create-modal .draft-badge,
@@ -4926,7 +4926,7 @@ select,
   align-items: center !important;
   justify-content: center !important;
   color: #ffffff !important;
-  font-family: 'Mulish', sans-serif !important;
+  font-family: 'Mulish' !important;
   font-size: 18px !important;
   line-height: 18px !important;
   font-weight: 800 !important;
@@ -4973,7 +4973,7 @@ select,
 .sort-dropdown,
 .sort-select,
 .sort-select option {
-  font-family: 'Mulish', sans-serif !important;
+  font-family: 'Mulish' !important;
 }
 
 .survey-list .survey-card h3,
@@ -4988,4 +4988,836 @@ select,
 .survey-list .survey-category,
 .ending-soon .survey-category {
   font-weight: 500 !important;
+}
+
+/* Feedback polish: consistent button padding and hover states */
+.create-modal .modal-close,
+.create-modal .publish-btn,
+.create-modal .add-question-btn {
+  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease !important;
+}
+
+.create-modal .modal-close {
+  min-width: 86px !important;
+  height: 32px !important;
+  padding: 0 14px !important;
+  gap: 6px !important;
+}
+
+.create-modal .modal-close:hover,
+.create-modal .publish-btn:hover,
+.create-modal .add-question-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 0 rgba(34, 18, 39, 0.14) !important;
+}
+
+.create-modal .modal-close:hover,
+.create-modal .add-question-btn:hover {
+  background-color: #b37f65 !important;
+}
+
+.create-modal .publish-btn:hover {
+  background-color: #ffb56f !important;
+}
+
+.create-modal .add-answer-btn {
+  transition: color 160ms ease, text-decoration-color 160ms ease !important;
+}
+
+.create-modal .add-answer-btn:hover {
+  color: #ffcfa1 !important;
+  text-decoration-color: #ffcfa1 !important;
+}
+
+.create-modal .plus-circle {
+  vertical-align: -2px !important;
+}
+
+@media (max-width: 700px) {
+  .create-modal .modal-close {
+    min-width: 32px !important;
+    width: 32px !important;
+    padding: 0 !important;
+  }
+}
+
+/* Feedback polish: consistent create-form input heights */
+@media (min-width: 701px) {
+  .create-modal input[type='text'],
+  .create-modal input[type='date'],
+  .create-modal .question-card input[type='text'],
+  .create-modal .mockup-question-card input[type='text'],
+  .create-modal .saved-question-card input[type='text'],
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    height: 34px !important;
+    min-height: 34px !important;
+    padding: 6px 10px !important;
+    line-height: 20px !important;
+  }
+
+  .create-modal .survey-name input,
+  .create-modal .question-card > input[type='text'],
+  .create-modal .question-card .input-line input[type='text'] {
+    height: 34px !important;
+    min-height: 34px !important;
+  }
+
+  .create-modal textarea {
+    min-height: 86px !important;
+    padding: 8px 10px !important;
+    line-height: 20px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .create-modal input[type='text'],
+  .create-modal input[type='date'],
+  .create-modal textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Final create-modal alignment polish from screenshot */
+@media (min-width: 701px) {
+  .create-modal .small-row {
+    grid-template-columns: 190px 230px !important;
+    column-gap: 62px !important;
+  }
+
+  .create-modal .deadline-field {
+    width: 190px !important;
+    max-width: 190px !important;
+  }
+
+  .create-modal .deadline-field,
+  .create-modal .deadline-field small {
+    white-space: nowrap !important;
+  }
+
+  .create-modal .add-question-btn,
+  .create-modal .publish-btn,
+  .create-modal .modal-close {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+  }
+
+  .create-modal .plus-circle,
+  .create-modal .publish-check {
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* Final cancel button text polish */
+@media (min-width: 701px) {
+  .create-modal .modal-close {
+    gap: 4px !important;
+    font-family: 'Mulish' !important;
+    font-size: 16px !important;
+    line-height: 18px !important;
+    font-weight: 800 !important;
+  }
+
+  .create-modal .modal-close span {
+    display: inline !important;
+    margin-left: 0 !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    font-weight: inherit !important;
+  }
+}
+
+/* Final desktop card spacing: keep titles away from deadline badges */
+@media (min-width: 701px) {
+  .ending-soon .survey-card,
+  .survey-list .survey-card,
+  .survey-list .past-card {
+    position: relative !important;
+    min-height: 126px !important;
+    padding: 24px 28px 58px !important;
+    box-sizing: border-box !important;
+  }
+
+  .ending-soon .survey-card h3,
+  .survey-list .survey-card h3,
+  .survey-list .past-card h3 {
+    max-width: calc(100% - 18px) !important;
+    margin-bottom: 10px !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .ending-soon .survey-deadline,
+  .survey-list .survey-deadline,
+  .survey-list .past-card .survey-deadline {
+    position: absolute !important;
+    right: 24px !important;
+    bottom: 20px !important;
+    z-index: 2 !important;
+  }
+}
+
+/* Final create-modal small-row alignment: date and category sit on one clean line */
+@media (min-width: 701px) {
+  .create-modal .small-row {
+    align-items: start !important;
+  }
+
+  .create-modal .category-field {
+    justify-self: start !important;
+    align-self: start !important;
+    margin-top: 0 !important;
+  }
+
+  .create-modal .custom-select-wrapper {
+    justify-content: flex-start !important;
+  }
+
+  .create-modal .custom-select {
+    text-align: left !important;
+    padding-left: 0 !important;
+  }
+
+  .create-modal .select-arrow {
+    margin-left: 8px !important;
+  }
+}
+
+/* Final plus icon centering */
+.create-modal .plus-circle {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 16px !important;
+  height: 16px !important;
+  min-width: 16px !important;
+  min-height: 16px !important;
+  position: relative !important;
+}
+
+.create-modal .plus-circle::before,
+.create-modal .plus-circle::after {
+  left: 50% !important;
+  top: 50% !important;
+  width: 7px !important;
+  height: 1.6px !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.create-modal .plus-circle::after {
+  transform: translate(-50%, -50%) rotate(90deg) !important;
+}
+
+/* Final cancel spacing fix: keep visible gap between Cancel and X */
+@media (min-width: 701px) {
+  .create-modal .modal-close span {
+    margin-left: 6px !important;
+  }
+}
+
+/* Figma polish: keep survey card text away from deadline badges */
+@media (min-width: 701px) {
+  .ending-soon .survey-card {
+    min-height: 132px !important;
+    padding-bottom: 62px !important;
+  }
+
+  .survey-list .survey-card,
+  .survey-list .past-card {
+    min-height: 126px !important;
+    padding-bottom: 62px !important;
+  }
+
+  .ending-soon .survey-card h3,
+  .survey-list .survey-card h3,
+  .survey-list .past-card h3 {
+    max-width: calc(100% - 34px) !important;
+    line-height: 19px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .ending-soon .survey-deadline,
+  .survey-list .survey-deadline,
+  .survey-list .past-card .survey-deadline {
+    bottom: 18px !important;
+    right: 20px !important;
+  }
+}
+
+/* Figma 98% polish: tighten desktop proportions without changing behavior */
+@media (min-width: 701px) {
+  .hero {
+    max-width: 980px !important;
+    margin: 0 auto !important;
+    padding-top: 18px !important;
+  }
+
+  .hero-content {
+    min-height: 360px !important;
+    align-items: center !important;
+  }
+
+  .hero-left h1 {
+    font-size: 58px !important;
+    line-height: 54px !important;
+    letter-spacing: 0 !important;
+  }
+
+  .hero-description {
+    max-width: 475px !important;
+    margin-top: 22px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .hero-phone {
+    width: 330px !important;
+    max-width: 330px !important;
+  }
+
+  .page-title {
+    margin-top: 4px !important;
+    margin-bottom: 22px !important;
+    font-size: 36px !important;
+    line-height: 38px !important;
+  }
+
+  .ending-soon,
+  .survey-list {
+    max-width: 760px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .ending-soon .survey-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 22px !important;
+  }
+
+  .survey-list .survey-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 22px 28px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .ending-soon .survey-card {
+    min-height: 126px !important;
+    border-radius: 0 38px 0 0 !important;
+    padding: 24px 24px 54px !important;
+  }
+
+  .survey-list .survey-card,
+  .survey-list .past-card {
+    min-height: 118px !important;
+    border-radius: 0 52px 0 0 !important;
+    padding: 24px 28px 54px !important;
+  }
+
+  .survey-controls {
+    margin-top: 18px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .create-modal {
+    width: 760px !important;
+    max-width: 760px !important;
+    min-height: 520px !important;
+    padding: 28px 40px 58px !important;
+    border-radius: 0 64px 0 0 !important;
+  }
+
+  .create-modal .modal-header {
+    margin-bottom: 24px !important;
+  }
+
+  .create-modal .modal-header h2 {
+    font-size: 34px !important;
+    line-height: 36px !important;
+    margin-top: 10px !important;
+  }
+
+  .create-modal .survey-form {
+    width: 100% !important;
+    min-height: 332px !important;
+    max-height: 368px !important;
+    padding: 26px 30px 28px !important;
+    border-radius: 0 42px 0 0 !important;
+    overflow-y: auto !important;
+  }
+
+  .create-modal .top-row {
+    grid-template-columns: 270px 270px !important;
+    column-gap: 54px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .create-modal .small-row {
+    grid-template-columns: 180px 190px !important;
+    column-gap: 54px !important;
+    margin-bottom: 28px !important;
+  }
+
+  .create-modal .survey-name input,
+  .create-modal .description-field textarea {
+    width: 100% !important;
+  }
+
+  .create-modal .deadline-field input {
+    width: 145px !important;
+  }
+
+  .create-modal .custom-select-wrapper,
+  .create-modal .custom-select {
+    width: 190px !important;
+  }
+
+  .create-modal .question-area,
+  .create-modal .mockup-question-area {
+    grid-template-columns: 270px 270px !important;
+    column-gap: 54px !important;
+    row-gap: 24px !important;
+  }
+
+  .create-modal .question-card,
+  .create-modal .mockup-question-card,
+  .create-modal .saved-question-card {
+    width: 270px !important;
+    max-width: 270px !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    grid-template-columns: 22px 1fr 18px !important;
+    gap: 8px !important;
+  }
+
+  .create-modal .add-question-btn {
+    width: 176px !important;
+    height: 28px !important;
+    padding: 0 12px !important;
+    justify-self: start !important;
+    margin-left: -2px !important;
+  }
+
+  .create-modal .publish-btn {
+    right: 42px !important;
+    bottom: 26px !important;
+    width: 84px !important;
+    height: 34px !important;
+    padding: 0 12px !important;
+  }
+
+  .create-modal .modal-close {
+    right: 28px !important;
+    top: 28px !important;
+    height: 28px !important;
+    min-width: 78px !important;
+    padding: 0 12px !important;
+  }
+}
+
+/* Create modal desktop: show the top fields with one or two questions, scroll only later */
+@media (min-width: 701px) {
+  .create-modal {
+    min-height: 610px !important;
+    padding-bottom: 72px !important;
+  }
+
+  .create-modal .survey-form {
+    min-height: 430px !important;
+    max-height: 450px !important;
+    overflow-y: auto !important;
+  }
+
+  .create-modal .top-row {
+    margin-bottom: 20px !important;
+  }
+
+  .create-modal .small-row {
+    margin-bottom: 24px !important;
+  }
+
+  .create-modal .question-area,
+  .create-modal .mockup-question-area {
+    row-gap: 22px !important;
+  }
+
+  .create-modal .publish-btn {
+    bottom: 28px !important;
+  }
+}
+
+/* Create survey buttons: final Figma mockup match */
+@media (min-width: 701px) {
+  .create-modal .modal-close,
+  .create-modal .add-question-btn,
+  .create-modal .publish-btn {
+    font-family: 'Nokora' !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .create-modal .modal-close {
+    min-width: 70px !important;
+    width: auto !important;
+    height: 28px !important;
+    padding: 0 11px !important;
+    border-radius: 8px !important;
+    background: #9b735f !important;
+    color: #ffffff !important;
+    font-size: 12px !important;
+    gap: 6px !important;
+  }
+
+  .create-modal .modal-close span {
+    margin-left: 0 !important;
+    color: #ffffff !important;
+    font-family: inherit !important;
+    font-size: 14px !important;
+    line-height: 14px !important;
+    font-weight: 700 !important;
+  }
+
+  .create-modal .add-question-btn {
+    width: auto !important;
+    min-width: 126px !important;
+    height: 28px !important;
+    padding: 0 12px !important;
+    border-radius: 7px !important;
+    background: #9b735f !important;
+    color: #ffffff !important;
+    font-size: 12px !important;
+    gap: 8px !important;
+  }
+
+  .create-modal .publish-btn {
+    width: auto !important;
+    min-width: 72px !important;
+    height: 34px !important;
+    padding: 0 14px !important;
+    border-radius: 8px !important;
+    background: #ffc58d !important;
+    color: #221227 !important;
+    font-size: 13px !important;
+    gap: 7px !important;
+  }
+
+  .create-modal .modal-close:hover,
+  .create-modal .add-question-btn:hover {
+    background: #a77a63 !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .create-modal .publish-btn:hover {
+    background: #ffcf9f !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .create-modal .plus-circle {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px !important;
+    min-height: 14px !important;
+  }
+
+  .create-modal .publish-check {
+    width: 13px !important;
+    height: 13px !important;
+  }
+}
+
+/* Create survey: place Add next question in the free right column after an odd question count */
+@media (min-width: 701px) {
+  .create-modal .question-area:has(.question-card:nth-of-type(odd):last-of-type) .add-question-btn,
+  .create-modal .mockup-question-area:has(.mockup-question-card:nth-of-type(odd):last-of-type) .add-question-btn {
+    grid-column: 2 !important;
+    justify-self: start !important;
+    align-self: start !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .create-modal .question-area:has(.question-card:nth-of-type(even):last-of-type) .add-question-btn,
+  .create-modal .mockup-question-area:has(.mockup-question-card:nth-of-type(even):last-of-type) .add-question-btn {
+    grid-column: 1 !important;
+    justify-self: start !important;
+  }
+}
+
+/* Create survey: final desktop mockup density */
+@media (min-width: 701px) {
+  .create-modal {
+    width: 760px !important;
+    max-width: 760px !important;
+    min-height: 500px !important;
+    padding: 28px 40px 58px !important;
+  }
+
+  .create-modal .modal-header {
+    margin-bottom: 22px !important;
+  }
+
+  .create-modal .survey-form {
+    min-height: 318px !important;
+    max-height: 420px !important;
+    padding: 24px 30px 24px !important;
+    overflow-y: auto !important;
+  }
+
+  .create-modal .survey-form:has(.saved-question-card) {
+    min-height: 388px !important;
+    max-height: 420px !important;
+  }
+
+  .create-modal .top-row {
+    margin-bottom: 18px !important;
+  }
+
+  .create-modal .small-row {
+    margin-bottom: 24px !important;
+  }
+
+  .create-modal .question-area,
+  .create-modal .mockup-question-area {
+    row-gap: 20px !important;
+  }
+
+  .create-modal .question-card,
+  .create-modal .mockup-question-card,
+  .create-modal .saved-question-card {
+    gap: 6px !important;
+  }
+
+  .create-modal .answers-title {
+    margin-top: 8px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    margin-bottom: 6px !important;
+  }
+
+  .create-modal .add-answer-btn {
+    margin-top: 4px !important;
+  }
+
+  .create-modal .add-question-btn {
+    margin-top: 18px !important;
+  }
+
+  .create-modal .publish-btn {
+    right: 40px !important;
+    bottom: 28px !important;
+  }
+}
+
+/* Create survey: keep the initial one-question form stable and Publish below it */
+@media (min-width: 701px) {
+  .create-modal {
+    min-height: 595px !important;
+    padding-bottom: 78px !important;
+  }
+
+  .create-modal .survey-form:not(:has(.saved-question-card)) {
+    min-height: 430px !important;
+    max-height: 430px !important;
+    overflow-y: hidden !important;
+  }
+
+  .create-modal .survey-form.has-extra-current-answers:not(:has(.saved-question-card)) {
+    min-height: 430px !important;
+    max-height: 430px !important;
+    overflow-y: auto !important;
+  }
+
+  .create-modal:has(.survey-form.has-extra-current-answers) {
+    min-height: 595px !important;
+  }
+
+  .create-modal .survey-form.has-many-current-answers:not(:has(.saved-question-card)) {
+    min-height: 430px !important;
+    max-height: 430px !important;
+    overflow-y: auto !important;
+  }
+
+  .create-modal:has(.survey-form.has-many-current-answers) {
+    min-height: 595px !important;
+  }
+
+  .create-modal .survey-form.has-max-current-answers:not(:has(.saved-question-card)) {
+    min-height: 430px !important;
+    max-height: 430px !important;
+    overflow-y: auto !important;
+  }
+
+  .create-modal:has(.survey-form.has-max-current-answers) {
+    min-height: 595px !important;
+  }
+
+  .create-modal .publish-btn {
+    right: 40px !important;
+    bottom: 24px !important;
+  }
+}
+
+/* Mobile home: keep deadline badges readable and inside cards */
+@media (max-width: 700px) {
+  .home-page .survey-deadline,
+  .home-page .past-card .survey-deadline {
+    min-width: 64px !important;
+    max-width: 82px !important;
+    min-height: 18px !important;
+    padding: 2px 5px !important;
+    border-radius: 2px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+    font-size: 9px !important;
+    line-height: 9px !important;
+    background: #ffc58d !important;
+    color: #221227 !important;
+  }
+
+  .ending-soon .survey-card,
+  .survey-list .survey-card {
+    min-height: 116px !important;
+    padding-bottom: 34px !important;
+  }
+
+  .ending-soon {
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .ending-soon .survey-grid {
+    display: grid !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: 156px !important;
+    grid-template-columns: none !important;
+    gap: 10px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    width: 100% !important;
+    padding-bottom: 4px !important;
+    scroll-snap-type: x proximity !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    margin-top: 18px !important;
+  }
+
+  .ending-soon .survey-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .ending-soon .survey-card {
+    width: 156px !important;
+    min-width: 156px !important;
+    max-width: 156px !important;
+    min-height: 158px !important;
+    padding: 18px 14px 42px !important;
+    border-radius: 0 46px 0 0 !important;
+    scroll-snap-align: start !important;
+  }
+
+  .ending-soon .survey-card h3 {
+    max-width: 126px !important;
+    font-size: 13px !important;
+    line-height: 14px !important;
+  }
+
+  .ending-soon .survey-deadline {
+    left: 14px !important;
+    right: auto !important;
+    bottom: 18px !important;
+  }
+
+  .survey-list .survey-deadline,
+  .survey-list .past-card .survey-deadline {
+    right: 12px !important;
+    bottom: 12px !important;
+  }
+
+  .survey-list .survey-card h3 {
+    max-width: calc(100% - 78px) !important;
+  }
+}
+
+/* Very small mobile: add the visible Figma gap above ending-soon cards */
+@media (max-width: 430px) {
+  .page-title {
+    margin-bottom: 26px !important;
+  }
+
+  .ending-soon {
+    margin-top: 0 !important;
+  }
+
+  .ending-soon-title {
+    margin-bottom: 12px !important;
+  }
+
+  .ending-soon .survey-grid {
+    margin-top: 0 !important;
+  }
+
+  .ending-soon .survey-card {
+    margin-top: 0 !important;
+  }
+}
+
+/* Small desktop/tablet home: avoid oversized desktop cards on narrow screens */
+@media (min-width: 701px) and (max-width: 900px) {
+  .home-page {
+    overflow-x: hidden !important;
+  }
+
+  .ending-soon,
+  .survey-list {
+    max-width: 640px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .ending-soon .survey-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .ending-soon .survey-card {
+    min-height: 122px !important;
+    padding: 20px 18px 48px !important;
+  }
+
+  .ending-soon .survey-card h3 {
+    font-size: 15px !important;
+    line-height: 16px !important;
+  }
+
+  .survey-list .survey-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px 22px !important;
+  }
+
+  .survey-list .survey-card {
+    min-height: 120px !important;
+    padding: 22px 22px 48px !important;
+  }
+
+  .home-page .survey-deadline,
+  .home-page .past-card .survey-deadline {
+    min-width: 96px !important;
+    min-height: 28px !important;
+    padding: 5px 12px !important;
+    font-size: 13px !important;
+    line-height: 13px !important;
+  }
 }

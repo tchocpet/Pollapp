@@ -131,7 +131,14 @@
           </button>
         </div>
 
-        <form class="survey-form" (ngSubmit)="publishSurvey()">
+        <form
+          #surveyFormElement
+          class="survey-form"
+          [class.has-extra-current-answers]="showCurrentQuestion && answers.length > 2"
+          [class.has-many-current-answers]="showCurrentQuestion && answers.length > 3"
+          [class.has-max-current-answers]="showCurrentQuestion && answers.length > 4"
+          (ngSubmit)="publishSurvey()"
+        >
           @if (errorMessage) {
             <p class="error-message">{{ errorMessage }}</p>
           }
@@ -140,7 +147,7 @@
             <label class="field survey-name" for="survey-title">
               Survey name
               <div class="input-line">
-                <input id="survey-title" type="text" [(ngModel)]="title" name="title" />
+                <input id="survey-title" type="text" [(ngModel)]="title" name="title" placeholder="Survey name" />
                 <button type="button" class="trash-btn" (click)="title = ''" aria-label="Delete"></button>
               </div>
               @if (titleError) {
@@ -151,7 +158,7 @@
             <label class="field description-field" for="survey-description">
               Describing text <small>(optional)</small>
               <div class="input-line">
-                <textarea id="survey-description" [(ngModel)]="description" name="description"></textarea>
+                <textarea id="survey-description" [(ngModel)]="description" name="description" placeholder="Describing text"></textarea>
                 <button type="button" class="trash-btn" (click)="description = ''" aria-label="Delete"></button>
               </div>
             </label>
@@ -200,7 +207,7 @@
                 </div>
 
                 <label class="sr-only" for="saved-question-{{ savedIndex }}">Question {{ savedIndex + 1 }}</label>
-                <input id="saved-question-{{ savedIndex }}" type="text" [(ngModel)]="savedQuestion.text" name="savedQuestion{{ savedIndex }}" />
+                <input id="saved-question-{{ savedIndex }}" type="text" [(ngModel)]="savedQuestion.text" name="savedQuestion{{ savedIndex }}" placeholder="Question" />
 
                 <div class="answers-title">
                   <span>Answers</span>
@@ -215,7 +222,7 @@
                   <div class="answer-row saved-answer-row">
                     <span>{{ getAnswerLetter(answerIndex) }}.</span>
                     <label class="sr-only" for="saved-answer-{{ savedIndex }}-{{ answerIndex }}">Answer {{ getAnswerLetter(answerIndex) }} for question {{ savedIndex + 1 }}</label>
-                    <input id="saved-answer-{{ savedIndex }}-{{ answerIndex }}" type="text" [(ngModel)]="answer.text" name="savedAnswer{{ savedIndex }}-{{ answerIndex }}" />
+                    <input id="saved-answer-{{ savedIndex }}-{{ answerIndex }}" type="text" [(ngModel)]="answer.text" name="savedAnswer{{ savedIndex }}-{{ answerIndex }}" placeholder="Answer" />
                     <button type="button" class="trash-btn" (click)="removeAnswerFromQuestion(savedIndex, answerIndex)" aria-label="Delete"></button>
                   </div>
                 }
@@ -226,7 +233,8 @@
               </div>
             }
 
-            <div class="question-card mockup-question-card">
+            @if (showCurrentQuestion) {
+              <div class="question-card mockup-question-card">
               <label class="field" for="current-question">
                 <span class="question-title-row">
                   <span>{{ questions.length + 1 }}. Question</span>
@@ -267,7 +275,7 @@
                   <span>{{ getAnswerLetter(index) }}.</span>
 
                   <label class="sr-only" for="current-answer-{{ index }}">Answer {{ getAnswerLetter(index) }} for current question</label>
-                  <input id="current-answer-{{ index }}" type="text" [(ngModel)]="answers[index]" name="answer{{ index }}" />
+                  <input id="current-answer-{{ index }}" type="text" [(ngModel)]="answers[index]" name="answer{{ index }}" placeholder="Answer" />
 
                   <button type="button" class="trash-btn" (click)="removeAnswer(index)" aria-label="Delete"></button>
                 </div>
@@ -281,6 +289,8 @@
                 Add answer <span class="plus-circle" aria-hidden="true"></span>
               </button>
             </div>
+
+            }
 
             <button class="add-question-btn mockup-add-question-btn" type="button" (click)="addQuestion()">
               Add next question <span class="plus-circle" aria-hidden="true"></span>
@@ -297,7 +307,7 @@
   @if (showPublishOverlay) {
     <div class="publish-toast" role="status" aria-live="polite">
       <strong>Your survey is now published!</strong>
-      <button type="button" aria-label="Close message" (click)="resetSurveyForm()">X</button>
+      <button type="button" aria-label="Close message" (click)="finishPublishedSurvey()">X</button>
     </div>
   }
 </main>

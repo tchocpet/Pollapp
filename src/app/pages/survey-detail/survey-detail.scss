@@ -68,7 +68,7 @@
   border-radius: 0 12px 0 0;
   background: #ffb770;
   color: #35273a;
-  font-family: 'Mulish', sans-serif;
+  font-family: 'Mulish';
   font-size: 12px;
   font-weight: 800;
 }
@@ -87,7 +87,7 @@
 .survey-end-date,
 .survey-category {
   margin: 0;
-  font-family: 'Mulish', sans-serif;
+  font-family: 'Mulish';
   font-size: 10px;
   font-weight: 600;
   line-height: 1;
@@ -99,7 +99,7 @@
   z-index: 1;
   max-width: 548px;
   margin: 0 0 12px;
-  font-family: 'Nerko One', cursive;
+  font-family: 'Nerko One';
   font-size: 43px;
   font-weight: 400;
   line-height: 0.95;
@@ -131,7 +131,7 @@
 .question-card h3 {
   min-height: 34px;
   margin: 0 0 5px;
-  font-family: 'Mulish', sans-serif;
+  font-family: 'Mulish';
   font-size: 14px;
   font-weight: 800;
   line-height: 1.15;
@@ -152,7 +152,7 @@
   align-items: start;
   gap: 8px;
   margin-bottom: 11px;
-  font-family: 'Mulish', sans-serif;
+  font-family: 'Mulish';
   color: #35273a;
   cursor: pointer;
 }
@@ -218,7 +218,7 @@
 .result-question h3 {
   max-width: 280px;
   margin: 0 0 10px;
-  font-family: 'Mulish', sans-serif;
+  font-family: 'Mulish';
   font-size: 15px;
   font-weight: 900;
   line-height: 1.2;
@@ -234,7 +234,7 @@
 }
 
 .result-letter {
-  font-family: 'Mulish', sans-serif;
+  font-family: 'Mulish';
   font-size: 10px;
   font-weight: 700;
   color: #35273a;
@@ -262,7 +262,7 @@
 }
 
 .result-percent {
-  font-family: 'Mulish', sans-serif;
+  font-family: 'Mulish';
   font-size: 9px;
   font-weight: 800;
   color: #ee9236;
@@ -310,7 +310,7 @@
 
   .survey-detail-page,
   .survey-detail-page button {
-    font-family: 'Nerko One', cursive;
+    font-family: 'Nerko One';
   }
 
   .survey-end-date,
@@ -327,7 +327,7 @@
   }
 
   .survey-box h1 {
-    font-family: 'Nerko One', cursive;
+    font-family: 'Nerko One';
     font-size: 60px;
     line-height: 0.92;
   }
@@ -337,7 +337,7 @@
   }
 
   .results-box h2 {
-    font-family: 'Nerko One', cursive;
+    font-family: 'Nerko One';
     font-size: 34px;
   }
 
@@ -409,7 +409,7 @@
   .survey-box h1 {
     max-width: 275px;
     margin-bottom: 12px;
-    font-family: 'Nerko One', cursive;
+    font-family: 'Nerko One';
     font-size: 33px;
     line-height: 0.95;
   }
@@ -456,7 +456,7 @@
 
   .results-box h2 {
     margin-bottom: 18px;
-    font-family: 'Nerko One', cursive;
+    font-family: 'Nerko One';
     font-size: 22px;
   }
 
@@ -527,7 +527,7 @@
     min-height: 19px;
     padding: 3px 8px;
     border-radius: 0 8px 0 0;
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish';
     font-size: 10px;
     font-weight: 800;
   }
@@ -543,7 +543,7 @@
 
   .survey-end-date,
   .survey-category {
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish';
     font-size: 8px;
     font-weight: 600;
     line-height: 1.1;
@@ -552,7 +552,7 @@
   .survey-box h1 {
     max-width: 236px;
     margin: 0 0 9px;
-    font-family: 'Nerko One', cursive;
+    font-family: 'Nerko One';
     font-size: 28px;
     font-weight: 800;
     line-height: 0.9;
@@ -562,7 +562,7 @@
   .survey-description {
     max-width: 236px;
     margin: 0 0 18px;
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish';
     font-size: 8px;
     font-weight: 600;
     line-height: 1.25;
@@ -585,7 +585,7 @@
     width: 100%;
     min-height: auto;
     margin: 0 0 5px;
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish';
     font-size: 11px;
     font-weight: 900;
     line-height: 1.15;
@@ -593,7 +593,7 @@
 
   .multi-answer-note {
     margin: 0 0 10px;
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish';
     font-size: 15px;
     line-height: 1.15;
   }
@@ -613,7 +613,7 @@
 
   .answer-letter,
   .answer-text {
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish';
     font-size: 15px;
     line-height: 1.15;
   }
@@ -624,7 +624,7 @@
     height: 28px;
     margin: 18px 0 0 auto;
     border-radius: 7px;
-    font-family: 'Nokora', 'Mulish', sans-serif;
+    font-family: 'Nokora', 'Mulish';
     font-size: 10px;
     font-weight: 700;
   }
@@ -638,7 +638,7 @@
     content: 'Close results  +';
     display: block;
     margin: 0 0 18px;
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish';
     font-size: 15px;
     font-weight: 700;
     color: #35273a;
@@ -646,7 +646,7 @@
 
   .results-box h2 {
     margin: 0 0 16px;
-    font-family: 'Nerko One', cursive;
+    font-family: 'Nerko One';
     font-size: 20px;
     font-weight: 800;
     line-height: 1;
@@ -659,7 +659,7 @@
   .result-question h3 {
     max-width: none;
     margin: 0 0 8px;
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish';
     font-size: 10px;
     font-weight: 900;
     line-height: 1.15;
@@ -672,7 +672,7 @@
   }
 
   .result-letter {
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish';
     font-size: 9px;
   }
 
@@ -686,7 +686,7 @@
   }
 
   .result-percent {
-    font-family: 'Mulish', sans-serif;
+    font-family: 'Mulish';
     font-size: 8px;
   }
 }
@@ -879,18 +879,18 @@
 .survey-detail-page button,
 .survey-detail-page .question-block,
 .survey-detail-page .results-panel {
-  font-family: 'Mulish', sans-serif !important;
+  font-family: 'Mulish' !important;
 }
 
 .survey-detail-page h1,
 .survey-detail-page .survey-title {
-  font-family: 'Nerko One', cursive !important;
+  font-family: 'Nerko One' !important;
 }
 
 .survey-detail-page .status-badge,
 .survey-detail-page .create-survey-btn,
 .survey-detail-page .complete-btn {
-  font-family: 'Nokora', 'Mulish', sans-serif !important;
+  font-family: 'Nokora', 'Mulish' !important;
   font-weight: 700 !important;
 }
 
@@ -913,7 +913,7 @@
 
 .vote-toast strong {
   max-width: 180px;
-  font-family: 'Nokora', 'Mulish', sans-serif !important;
+  font-family: 'Nokora', 'Mulish' !important;
   font-size: 16px;
   line-height: 18px;
   font-weight: 700;
@@ -929,7 +929,7 @@
   border: 0;
   background: transparent;
   color: #221227;
-  font-family: 'Mulish', sans-serif !important;
+  font-family: 'Mulish' !important;
   font-size: 18px;
   line-height: 20px;
   cursor: pointer;
@@ -1183,4 +1183,403 @@
 .survey-detail-page .answer-item,
 .survey-detail-page .result-question h3 {
   line-height: 20px !important;
+}
+
+/* Figma polish: detail page typography */
+.survey-detail-page,
+.survey-detail-page p,
+.survey-detail-page span,
+.survey-detail-page small,
+.survey-detail-page label,
+.survey-detail-page button,
+.survey-detail-page .question-card h3,
+.survey-detail-page .results-box h2,
+.survey-detail-page .result-question h3,
+.survey-detail-page .answer-letter,
+.survey-detail-page .answer-text,
+.survey-detail-page .result-letter,
+.survey-detail-page .result-percent {
+  font-family: 'Mulish' !important;
+}
+
+.survey-detail-page .survey-box h1 {
+  font-family: 'Nerko One' !important;
+  font-weight: 400 !important;
+}
+
+.survey-detail-page .survey-status,
+.survey-detail-page .create-survey-btn,
+.survey-detail-page .complete-btn {
+  font-family: 'Nokora' !important;
+  font-weight: 700 !important;
+}
+
+.survey-detail-page .question-card h3,
+.survey-detail-page .result-question h3,
+.survey-detail-page .results-box h2 {
+  font-weight: 800 !important;
+}
+
+.survey-detail-page .survey-description,
+.survey-detail-page .multi-answer-note,
+.survey-detail-page .answer-text {
+  font-weight: 400 !important;
+}
+
+/* Figma 98% polish: desktop detail view proportions */
+@media (min-width: 701px) {
+  .survey-detail-page {
+    width: 100vw !important;
+    max-width: none !important;
+    min-height: 100vh !important;
+    margin: 0 auto !important;
+    padding-top: 34px !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+  }
+
+  .survey-header {
+    max-width: 980px !important;
+    margin: 0 auto 30px !important;
+  }
+
+  .survey-layout {
+    max-width: 980px !important;
+    margin: 0 auto !important;
+    display: grid !important;
+    grid-template-columns: 520px 360px !important;
+    column-gap: 46px !important;
+    align-items: start !important;
+  }
+
+  .survey-box {
+    width: 520px !important;
+    min-height: 520px !important;
+    padding: 36px 36px 34px !important;
+    border-radius: 0 72px 0 0 !important;
+  }
+
+  .survey-box h1 {
+    max-width: 440px !important;
+    margin-top: 16px !important;
+    margin-bottom: 16px !important;
+    font-size: 42px !important;
+    line-height: 40px !important;
+  }
+
+  .survey-description {
+    max-width: 440px !important;
+    margin-bottom: 34px !important;
+  }
+
+  .question-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 38px 44px !important;
+  }
+
+  .question-card {
+    min-width: 0 !important;
+  }
+
+  .complete-btn {
+    right: 34px !important;
+    bottom: 28px !important;
+    min-width: 138px !important;
+    height: 36px !important;
+  }
+
+  .results-box {
+    width: 360px !important;
+    padding-top: 108px !important;
+  }
+
+  .result-question {
+    margin-bottom: 28px !important;
+  }
+
+  .result-row {
+    grid-template-columns: 24px 1fr 48px !important;
+    column-gap: 10px !important;
+  }
+}
+
+/* Final desktop match to the Figma single-survey mockup */
+@media (min-width: 701px) {
+  .survey-detail-page {
+    padding: 42px 0 56px !important;
+    background: #ffffff !important;
+  }
+
+  .survey-header {
+    max-width: 960px !important;
+    margin: 0 auto 34px !important;
+  }
+
+  .poll-logo {
+    width: 82px !important;
+  }
+
+  .create-survey-btn {
+    min-width: 116px !important;
+    height: 34px !important;
+    padding: 0 14px !important;
+    border-radius: 8px !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+  }
+
+  .survey-layout {
+    max-width: 960px !important;
+    grid-template-columns: 540px 330px !important;
+    column-gap: 64px !important;
+  }
+
+  .survey-box {
+    width: 540px !important;
+    min-height: 620px !important;
+    padding: 34px 38px 76px !important;
+    border-radius: 0 84px 0 0 !important;
+  }
+
+  .survey-status {
+    min-height: 22px !important;
+    padding: 3px 10px !important;
+    border-radius: 0 9px 0 0 !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+  }
+
+  .survey-top-info {
+    max-width: 464px !important;
+    margin: 8px 0 12px !important;
+  }
+
+  .survey-end-date,
+  .survey-category {
+    font-size: 12px !important;
+    line-height: 14px !important;
+    font-weight: 500 !important;
+  }
+
+  .survey-box h1 {
+    max-width: 430px !important;
+    margin: 0 0 14px !important;
+    font-size: 40px !important;
+    line-height: 36px !important;
+  }
+
+  .survey-description {
+    max-width: 464px !important;
+    margin-bottom: 32px !important;
+    font-size: 13px !important;
+    line-height: 16px !important;
+    font-weight: 500 !important;
+  }
+
+  .question-grid {
+    max-width: 464px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    column-gap: 38px !important;
+    row-gap: 38px !important;
+  }
+
+  .question-card h3,
+  .result-question h3 {
+    min-height: 0 !important;
+    margin-bottom: 7px !important;
+    font-size: 13px !important;
+    line-height: 15px !important;
+    font-weight: 800 !important;
+  }
+
+  .multi-answer-note {
+    margin-bottom: 16px !important;
+    font-size: 11px !important;
+    line-height: 13px !important;
+  }
+
+  .answer-item {
+    grid-template-columns: 13px 18px 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .answer-item input {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  .answer-letter,
+  .answer-text {
+    font-size: 12px !important;
+    line-height: 14px !important;
+  }
+
+  .complete-btn {
+    right: 34px !important;
+    bottom: 30px !important;
+    min-width: 134px !important;
+    height: 34px !important;
+    border-radius: 8px !important;
+    font-size: 12px !important;
+    line-height: 14px !important;
+  }
+
+  .results-box {
+    width: 330px !important;
+    margin-top: 0 !important;
+    padding-top: 112px !important;
+  }
+
+  .results-box h2 {
+    margin-bottom: 22px !important;
+    font-family: 'Nerko One' !important;
+    font-size: 24px !important;
+    line-height: 24px !important;
+    font-weight: 400 !important;
+  }
+
+  .result-question {
+    margin-bottom: 25px !important;
+  }
+
+  .result-item {
+    margin-bottom: 8px !important;
+  }
+
+  .result-letter,
+  .result-percent {
+    font-size: 12px !important;
+    line-height: 14px !important;
+  }
+
+  .result-row {
+    grid-template-columns: 20px 1fr 40px !important;
+    column-gap: 8px !important;
+  }
+
+  .bar {
+    height: 8px !important;
+  }
+}
+
+/* Final result bars: Figma-style gray track with orange progress */
+.survey-detail-page .result-item {
+  display: grid !important;
+  grid-template-columns: 20px minmax(190px, 1fr) 42px !important;
+  align-items: center !important;
+  column-gap: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.survey-detail-page .result-row {
+  display: contents !important;
+}
+
+.survey-detail-page .bar {
+  width: 100% !important;
+  height: 8px !important;
+  min-width: 190px !important;
+  overflow: hidden !important;
+  border-radius: 999px !important;
+  background: #e8e5e5 !important;
+}
+
+.survey-detail-page .bar .fill {
+  height: 100% !important;
+  min-width: 4px !important;
+  border-radius: 999px !important;
+  background: #ffb36b !important;
+}
+
+.survey-detail-page .bar .fill[style*='width: 0%'] {
+  min-width: 0 !important;
+}
+
+.survey-detail-page .result-percent {
+  justify-self: start !important;
+  color: #ee9236 !important;
+  font-weight: 800 !important;
+}
+
+@media (min-width: 701px) and (max-width: 980px) {
+  .survey-detail-page {
+    padding: 34px 18px 48px !important;
+    overflow-x: hidden !important;
+  }
+
+  .survey-header {
+    max-width: 720px !important;
+    margin-bottom: 28px !important;
+  }
+
+  .survey-layout {
+    max-width: 720px !important;
+    grid-template-columns: 410px 250px !important;
+    column-gap: 28px !important;
+    align-items: start !important;
+    transform: translateX(-16px) !important;
+  }
+
+  .survey-box {
+    width: 410px !important;
+    min-height: 620px !important;
+    padding: 30px 30px 74px !important;
+    border-radius: 0 72px 0 0 !important;
+  }
+
+  .survey-box h1 {
+    max-width: 350px !important;
+    font-size: 34px !important;
+    line-height: 32px !important;
+  }
+
+  .survey-description {
+    max-width: 360px !important;
+  }
+
+  .survey-top-info,
+  .question-grid {
+    max-width: 360px !important;
+  }
+
+  .question-grid {
+    column-gap: 28px !important;
+    row-gap: 34px !important;
+  }
+
+  .results-box {
+    width: 250px !important;
+    padding-top: 108px !important;
+  }
+
+  .survey-detail-page .result-item {
+    grid-template-columns: 16px minmax(116px, 1fr) 46px !important;
+    column-gap: 6px !important;
+  }
+
+  .survey-detail-page .bar {
+    min-width: 116px !important;
+    height: 7px !important;
+  }
+
+  .survey-detail-page .result-percent {
+    min-width: 42px !important;
+  }
+
+  .complete-btn {
+    right: 30px !important;
+    bottom: 28px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .survey-detail-page .result-item {
+    grid-template-columns: 16px minmax(110px, 1fr) 42px !important;
+    column-gap: 6px !important;
+  }
+
+  .survey-detail-page .bar {
+    min-width: 110px !important;
+  }
 }
