@@ -7002,3 +7002,417 @@ select,
     min-width: 326px !important;
   }
 }
+
+@media (max-width: 700px) {
+  .home-page .ending-soon-title,
+  .home-page .survey-card,
+  .home-page .survey-card small,
+  .home-page .survey-card h3,
+  .home-page .survey-card p,
+  .home-page .survey-card span,
+  .home-page .survey-category,
+  .home-page .survey-deadline,
+  .home-page .tabs button,
+  .home-page .sort-select,
+  .home-page .empty-state,
+  .create-modal label,
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal select,
+  .create-modal button,
+  .create-modal .answers-title,
+  .create-modal .multiple-check,
+  .create-modal .answer-row,
+  .create-modal .answer-row span,
+  .create-modal .field-error,
+  .create-modal .question-title-row,
+  .create-modal .current-question-title-row {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .modal-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    padding: 28px 0 56px !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .create-modal {
+    width: 360px !important;
+    max-width: calc(100vw - 32px) !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    margin: 0 auto 56px !important;
+    padding: 22px 18px 34px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    border-radius: 0 58px 0 0 !important;
+  }
+
+  .create-modal .survey-form {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    padding: 20px 14px 32px !important;
+    overflow: visible !important;
+    border-radius: 0 42px 0 0 !important;
+  }
+
+  .create-modal .top-row,
+  .create-modal .small-row,
+  .create-modal .question-area,
+  .create-modal .mockup-question-area {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .create-modal .field,
+  .create-modal .question-card,
+  .create-modal .mockup-question-card,
+  .create-modal .saved-question-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal select,
+  .create-modal .custom-select-wrapper,
+  .create-modal .custom-select {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    display: grid !important;
+    grid-template-columns: 18px minmax(0, 1fr) 16px !important;
+    gap: 6px !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    width: 100% !important;
+    border-radius: 7px !important;
+  }
+
+  .create-modal .add-question-btn,
+  .create-modal .mockup-add-question-btn,
+  .create-modal .publish-btn {
+    position: static !important;
+    margin-top: 14px !important;
+  }
+
+  .create-modal .publish-btn {
+    margin-left: auto !important;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .modal-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    min-height: 100dvh !important;
+    padding: 28px 0 72px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    background: #d9d9d9 !important;
+  }
+
+  .create-modal {
+    width: clamp(560px, 62vw, 680px) !important;
+    max-width: calc(100vw - 56px) !important;
+    height: auto !important;
+    min-height: 620px !important;
+    max-height: none !important;
+    margin: 0 auto 72px !important;
+    padding: 28px 24px 42px !important;
+    overflow: visible !important;
+    border-radius: 0 64px 0 0 !important;
+  }
+
+  .create-modal .survey-form,
+  .create-modal .survey-form:has(.saved-question-card),
+  .create-modal .survey-form:not(:has(.saved-question-card)),
+  .create-modal .survey-form.has-extra-current-answers:not(:has(.saved-question-card)),
+  .create-modal .survey-form.has-many-current-answers:not(:has(.saved-question-card)),
+  .create-modal .survey-form.has-max-current-answers:not(:has(.saved-question-card)) {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 420px !important;
+    max-height: none !important;
+    padding: 24px 18px 38px !important;
+    overflow: visible !important;
+    border-radius: 0 48px 0 0 !important;
+  }
+
+  .create-modal .top-row,
+  .create-modal .small-row,
+  .create-modal .question-area,
+  .create-modal .mockup-question-area,
+  .create-modal .question-area:has(.saved-question-card),
+  .create-modal .mockup-question-area:has(.saved-question-card) {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+
+  .create-modal .field,
+  .create-modal .question-card,
+  .create-modal .mockup-question-card,
+  .create-modal .saved-question-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .create-modal label,
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal select,
+  .create-modal button,
+  .create-modal .answers-title,
+  .create-modal .multiple-check,
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal select,
+  .create-modal .custom-select-wrapper,
+  .create-modal .custom-select {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    display: grid !important;
+    grid-template-columns: 24px minmax(0, 1fr) 20px !important;
+    gap: 8px !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    border-radius: 7px !important;
+  }
+
+  .create-modal .add-question-btn,
+  .create-modal .mockup-add-question-btn,
+  .create-modal .publish-btn {
+    position: static !important;
+    align-self: flex-start !important;
+    margin-top: 16px !important;
+  }
+
+  .create-modal .publish-btn {
+    margin-left: auto !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .home-page,
+  .home-page *,
+  .create-modal,
+  .create-modal * {
+    font-size: max(16px, 1em) !important;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .modal-backdrop {
+    padding: 28px 0 64px !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    background: #d9d9d9 !important;
+  }
+
+  .create-modal {
+    width: clamp(560px, 62vw, 680px) !important;
+    max-width: calc(100vw - 56px) !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    margin: 0 auto 64px !important;
+    padding: 28px 24px 38px !important;
+    overflow: visible !important;
+    border-radius: 0 64px 0 0 !important;
+  }
+
+  .create-modal .survey-form,
+  .create-modal .survey-form:has(.saved-question-card),
+  .create-modal .survey-form:not(:has(.saved-question-card)) {
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    padding: 24px 18px 36px !important;
+    overflow: visible !important;
+    border-radius: 0 48px 0 0 !important;
+  }
+
+  .create-modal .top-row,
+  .create-modal .small-row,
+  .create-modal .question-area,
+  .create-modal .mockup-question-area,
+  .create-modal .question-area:has(.saved-question-card),
+  .create-modal .mockup-question-area:has(.saved-question-card) {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+
+  .create-modal .field,
+  .create-modal .question-card,
+  .create-modal .mockup-question-card,
+  .create-modal .saved-question-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .create-modal label,
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal select,
+  .create-modal button,
+  .create-modal .answers-title,
+  .create-modal .multiple-check,
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal select,
+  .create-modal .custom-select-wrapper,
+  .create-modal .custom-select {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    display: grid !important;
+    grid-template-columns: 24px minmax(0, 1fr) 20px !important;
+    gap: 8px !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    border-radius: 7px !important;
+  }
+
+  .create-modal .add-question-btn,
+  .create-modal .mockup-add-question-btn,
+  .create-modal .publish-btn {
+    position: static !important;
+    align-self: flex-start !important;
+    margin-top: 16px !important;
+  }
+
+  .create-modal .publish-btn {
+    margin-left: auto !important;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1100px) {
+  .modal-backdrop {
+    height: 100dvh !important;
+    padding: 24px 0 !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  .create-modal {
+    width: clamp(560px, 62vw, 680px) !important;
+    max-width: calc(100vw - 56px) !important;
+    min-height: min(620px, calc(100dvh - 48px)) !important;
+    max-height: calc(100dvh - 48px) !important;
+    padding: 28px 24px 42px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    border-radius: 0 64px 0 0 !important;
+  }
+
+  .create-modal .survey-form,
+  .create-modal .survey-form:has(.saved-question-card),
+  .create-modal .survey-form:not(:has(.saved-question-card)) {
+    min-height: min(420px, calc(100dvh - 220px)) !important;
+    padding: 24px 18px 38px !important;
+    border-radius: 0 48px 0 0 !important;
+  }
+
+  .create-modal label,
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal select,
+  .create-modal button,
+  .create-modal .answers-title,
+  .create-modal .multiple-check,
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .home-page,
+  .home-page *,
+  .create-modal,
+  .create-modal * {
+    font-size: max(16px, 1em) !important;
+  }
+}
+
+@media (max-width: 360px) {
+  body,
+  .home-page,
+  .modal-backdrop {
+    min-width: 320px !important;
+    overflow-x: auto !important;
+  }
+
+  .create-modal {
+    width: 300px !important;
+    min-width: 300px !important;
+    max-width: 300px !important;
+  }
+
+  .create-modal .survey-form {
+    min-width: 260px !important;
+  }
+
+  .home-page,
+  .home-page *,
+  .create-modal,
+  .create-modal * {
+    font-size: max(16px, 1em) !important;
+  }
+}
