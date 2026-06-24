@@ -1583,3 +1583,125 @@
     min-width: 110px !important;
   }
 }
+
+/* Feedback: responsive layout guardrails, no overlaps at intermediate widths. */
+.survey-detail-page {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.survey-header,
+.survey-layout {
+  width: min(100%, 960px) !important;
+}
+
+.survey-box,
+.results-box,
+.question-card,
+.result-question,
+.answer-text {
+  min-width: 0 !important;
+}
+
+.survey-description,
+.question-card h3,
+.multi-answer-note,
+.answer-text,
+.result-question h3 {
+  overflow-wrap: anywhere !important;
+}
+
+.survey-detail-page .result-item {
+  grid-template-columns: max-content minmax(0, 1fr) max-content !important;
+}
+
+.survey-detail-page .bar {
+  min-width: 0 !important;
+}
+
+@media (min-width: 701px) and (max-width: 1040px) {
+  .survey-detail-page {
+    padding: 34px clamp(18px, 3vw, 32px) 48px !important;
+  }
+
+  .survey-layout {
+    max-width: 100% !important;
+    grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.9fr) !important;
+    column-gap: clamp(22px, 4vw, 44px) !important;
+    transform: none !important;
+  }
+
+  .survey-box {
+    width: auto !important;
+    max-width: 100% !important;
+    padding: 30px clamp(24px, 4vw, 38px) 74px !important;
+  }
+
+  .survey-top-info,
+  .survey-description,
+  .question-grid {
+    max-width: none !important;
+  }
+
+  .question-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: clamp(20px, 3vw, 32px) !important;
+  }
+
+  .results-box {
+    width: auto !important;
+    min-width: 0 !important;
+    padding-top: clamp(72px, 11vw, 112px) !important;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 840px) {
+  .survey-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 32px !important;
+  }
+
+  .survey-box {
+    min-height: auto !important;
+  }
+
+  .results-box {
+    width: 100% !important;
+    padding-top: 0 !important;
+  }
+
+  .survey-detail-page .result-item {
+    grid-template-columns: 20px minmax(0, 1fr) 44px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .survey-detail-page {
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: clamp(12px, 4vw, 20px) !important;
+    padding-right: clamp(12px, 4vw, 20px) !important;
+  }
+
+  .survey-header,
+  .survey-layout,
+  .survey-box,
+  .results-box {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .survey-box {
+    padding-left: clamp(16px, 5vw, 22px) !important;
+    padding-right: clamp(16px, 5vw, 22px) !important;
+  }
+
+  .survey-top-info {
+    flex-wrap: wrap !important;
+  }
+
+  .survey-detail-page .result-item {
+    grid-template-columns: 16px minmax(0, 1fr) 42px !important;
+  }
+}

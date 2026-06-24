@@ -1,4 +1,4 @@
-*,
+﻿*,
 *::before,
 *::after {
   box-sizing: border-box;
@@ -447,7 +447,7 @@ select {
 .select-arrow {
   position: absolute;
   top: 50%;
-  right: 2px; // näher
+  right: 2px; // n�her
   transform: translateY(-50%);
 
   width: 0;
@@ -717,7 +717,7 @@ button {
   }
 
   .modal-close::after {
-    content: '×';
+    content: '�';
     font-size: 14px;
     color: white;
   }
@@ -3341,17 +3341,6 @@ select,
   transform: rotate(-45deg);
 }
 
-/* Feedback fix: show selected category under create select */
-.create-modal .selected-category-preview {
-  display: block;
-  margin-top: 7px;
-  color: #ffb770;
-  font-family: 'Mulish';
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.1;
-}
-
 /* Feedback fix: desktop create form scroll only when needed */
 @media (min-width: 901px) {
   .create-modal {
@@ -4994,7 +4983,10 @@ select,
 .create-modal .modal-close,
 .create-modal .publish-btn,
 .create-modal .add-question-btn {
-  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease !important;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease !important;
 }
 
 .create-modal .modal-close {
@@ -5021,7 +5013,9 @@ select,
 }
 
 .create-modal .add-answer-btn {
-  transition: color 160ms ease, text-decoration-color 160ms ease !important;
+  transition:
+    color 160ms ease,
+    text-decoration-color 160ms ease !important;
 }
 
 .create-modal .add-answer-btn:hover {
@@ -5535,7 +5529,9 @@ select,
 /* Create survey: place Add next question in the free right column after an odd question count */
 @media (min-width: 701px) {
   .create-modal .question-area:has(.question-card:nth-of-type(odd):last-of-type) .add-question-btn,
-  .create-modal .mockup-question-area:has(.mockup-question-card:nth-of-type(odd):last-of-type) .add-question-btn {
+  .create-modal
+    .mockup-question-area:has(.mockup-question-card:nth-of-type(odd):last-of-type)
+    .add-question-btn {
     grid-column: 2 !important;
     justify-self: start !important;
     align-self: start !important;
@@ -5544,7 +5540,9 @@ select,
   }
 
   .create-modal .question-area:has(.question-card:nth-of-type(even):last-of-type) .add-question-btn,
-  .create-modal .mockup-question-area:has(.mockup-question-card:nth-of-type(even):last-of-type) .add-question-btn {
+  .create-modal
+    .mockup-question-area:has(.mockup-question-card:nth-of-type(even):last-of-type)
+    .add-question-btn {
     grid-column: 1 !important;
     justify-self: start !important;
   }
@@ -5751,7 +5749,6 @@ select,
   }
 }
 
-/* Very small mobile: add the visible Figma gap above ending-soon cards */
 @media (max-width: 430px) {
   .page-title {
     margin-bottom: 26px !important;
@@ -5819,5 +5816,1189 @@ select,
     padding: 5px 12px !important;
     font-size: 13px !important;
     line-height: 13px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  :host {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .home-page {
+    width: min(390px, 100vw) !important;
+    max-width: 390px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    overflow-x: hidden !important;
+  }
+
+  .hero,
+  .hero-top,
+  .hero-content,
+  .page-title,
+  .ending-soon,
+  .survey-list,
+  .survey-controls {
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .ending-soon .survey-grid,
+  .survey-list .survey-grid {
+    max-width: 100% !important;
+  }
+
+  .modal-backdrop {
+    justify-content: center !important;
+    overflow-x: hidden !important;
+  }
+
+  .create-modal {
+    width: min(360px, calc(100vw - 36px)) !important;
+    max-width: min(360px, calc(100vw - 36px)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 980px) {
+  .modal-backdrop {
+    justify-content: center !important;
+    align-items: flex-start !important;
+    overflow-x: hidden !important;
+    padding: 28px !important;
+  }
+
+  .create-modal {
+    width: min(760px, calc(100vw - 56px)) !important;
+    max-width: calc(100vw - 56px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .create-modal .survey-form {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+}
+
+@media (min-width: 701px) {
+  .create-modal .category-field {
+    width: 218px !important;
+    min-width: 218px !important;
+    max-width: 218px !important;
+  }
+
+  .create-modal .custom-select-wrapper {
+    position: relative !important;
+    width: 218px !important;
+    min-width: 218px !important;
+    max-width: 218px !important;
+    display: block !important;
+  }
+
+  .create-modal .custom-select {
+    width: 218px !important;
+    min-width: 218px !important;
+    max-width: 218px !important;
+    padding-right: 28px !important;
+    color: #ffffff !important;
+    text-align: left !important;
+  }
+
+  .create-modal .select-arrow {
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    margin: 0 !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+  }
+
+  .create-modal,
+  .create-modal * {
+    box-sizing: border-box !important;
+  }
+
+  .modal-backdrop {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .create-modal {
+    width: min(300px, calc(100vw - 40px)) !important;
+    max-width: min(300px, calc(100vw - 40px)) !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    overflow: visible !important;
+  }
+
+  .create-modal .survey-form {
+    width: min(272px, 100%) !important;
+    max-width: min(272px, 100%) !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    overflow-x: hidden !important;
+  }
+
+  .create-modal .top-row,
+  .create-modal .small-row,
+  .create-modal .question-area,
+  .create-modal .question-card,
+  .create-modal .mockup-question-card,
+  .create-modal .saved-question-card,
+  .create-modal .field {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .create-modal .input-line {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 16px !important;
+    column-gap: 6px !important;
+    align-items: center !important;
+  }
+
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal .custom-select-wrapper,
+  .create-modal .custom-select {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .create-modal .description-field textarea {
+    max-width: 100% !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 20px minmax(0, 1fr) 16px !important;
+    column-gap: 6px !important;
+    align-items: center !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .create-modal .question-card .input-line,
+  .create-modal .mockup-question-card .input-line,
+  .create-modal .saved-question-card .input-line {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .modal-backdrop::before {
+    left: 28px !important;
+    top: 26px !important;
+    transform: none !important;
+  }
+
+  .create-modal .survey-form {
+    padding-right: 14px !important;
+  }
+
+  .create-modal .survey-name,
+  .create-modal .description-field,
+  .create-modal .deadline-field {
+    position: relative !important;
+    padding-right: 0 !important;
+  }
+
+  .create-modal .input-line {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .create-modal .question-card .input-line,
+  .create-modal .mockup-question-card .input-line,
+  .create-modal .saved-question-card .input-line {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .create-modal .input-line > input,
+  .create-modal .input-line > textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-right: 10px !important;
+  }
+
+  .create-modal .input-line > .trash-btn {
+    position: absolute !important;
+    right: 2px !important;
+    top: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  .create-modal .description-field .input-line > .trash-btn {
+    top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .create-modal .deadline-field .input-line > .trash-btn {
+    right: -22px !important;
+    top: 23px !important;
+  }
+
+  .create-modal .survey-name .input-line > .trash-btn,
+  .create-modal .description-field .input-line > .trash-btn {
+    right: 2px !important;
+    top: 0 !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    grid-template-columns: 20px minmax(0, calc(100% - 46px)) 16px !important;
+    column-gap: 5px !important;
+  }
+
+  .create-modal .answer-row .trash-btn,
+  .create-modal .saved-answer-row .trash-btn {
+    position: static !important;
+    transform: none !important;
+    margin: 0 !important;
+    justify-self: center !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .modal-backdrop {
+    display: block !important;
+    min-height: 100vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  .create-modal {
+    width: min(286px, calc(100vw - 40px)) !important;
+    max-width: min(286px, calc(100vw - 40px)) !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 92px auto 22px !important;
+    padding: 22px 10px 26px !important;
+  }
+
+  .create-modal .modal-header {
+    margin: 0 0 16px !important;
+  }
+
+  .create-modal h2 {
+    font-size: 30px !important;
+    line-height: 27px !important;
+  }
+
+  .create-modal .survey-form {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    padding: 18px 9px 24px !important;
+    gap: 10px !important;
+    overflow: visible !important;
+  }
+
+  .create-modal label,
+  .create-modal .field,
+  .create-modal .field small,
+  .create-modal .question-title-row,
+  .create-modal .answers-title,
+  .create-modal .multiple-check,
+  .create-modal .answer-row span,
+  .create-modal .saved-answer-row span,
+  .create-modal .add-answer-btn,
+  .create-modal .add-question-btn,
+  .create-modal input,
+  .create-modal textarea,
+  .create-modal select {
+    font-size: 11px !important;
+    line-height: 13px !important;
+  }
+
+  .create-modal .multiple-check {
+    font-size: 8px !important;
+    line-height: 9px !important;
+  }
+
+  .create-modal input[type='text'],
+  .create-modal input[type='date'],
+  .create-modal .question-card input[type='text'],
+  .create-modal .mockup-question-card input[type='text'],
+  .create-modal .saved-question-card input[type='text'],
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    height: 25px !important;
+    min-height: 25px !important;
+    padding: 4px 7px !important;
+  }
+
+  .create-modal textarea,
+  .create-modal .description-field textarea {
+    height: 78px !important;
+    min-height: 78px !important;
+    padding: 6px 7px !important;
+  }
+
+  .create-modal .mockup-question-area,
+  .create-modal .question-area {
+    gap: 18px !important;
+    margin-top: 8px !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    margin-bottom: 7px !important;
+  }
+
+  .create-modal .add-question-btn {
+    width: 148px !important;
+    height: 31px !important;
+    margin: 22px auto 0 !important;
+  }
+
+  .create-modal .publish-btn {
+    position: static !important;
+    width: 94px !important;
+    height: 39px !important;
+    margin: 28px auto 0 !important;
+    transform: none !important;
+    font-size: 16px !important;
+    line-height: 18px !important;
+  }
+
+  .create-modal .question-title-row {
+    width: 100% !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 16px !important;
+    align-items: center !important;
+    column-gap: 8px !important;
+    margin-bottom: 7px !important;
+  }
+
+  .create-modal .question-title-row > span {
+    min-width: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .create-modal .question-title-row > .trash-btn {
+    position: static !important;
+    transform: none !important;
+    margin: 0 !important;
+    justify-self: end !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    grid-template-columns: 18px minmax(0, 1fr) 16px !important;
+    column-gap: 6px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .create-modal .answer-row .trash-btn,
+  .create-modal .saved-answer-row .trash-btn {
+    width: 14px !important;
+    min-width: 14px !important;
+    justify-self: end !important;
+  }
+
+  .create-modal .question-card > .field {
+    display: block !important;
+    position: relative !important;
+  }
+
+  .create-modal .question-card > .field .question-title-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 16px !important;
+    width: 100% !important;
+  }
+
+  .create-modal .question-card > .field .question-title-row .trash-btn {
+    position: static !important;
+    right: auto !important;
+    top: auto !important;
+    justify-self: end !important;
+    grid-column: 2 !important;
+  }
+
+  .create-modal .question-card > .field .input-line {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .create-modal .question-card > .field .input-line input {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .create-modal .question-title-row {
+    position: relative !important;
+    padding-right: 18px !important;
+  }
+
+  .create-modal .question-title-row .question-delete-btn {
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+  }
+
+  .create-modal .question-title-row > span {
+    display: block !important;
+    padding-left: 0 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .create-modal .current-question-title-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 0 7px !important;
+  }
+
+  .create-modal .current-question-title {
+    display: inline-block !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-indent: 0 !important;
+  }
+
+  .create-modal .current-question-title-row .question-delete-btn {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    flex: 0 0 16px !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .create-modal .deadline-field .input-line > .trash-btn {
+    right: 2px !important;
+    top: 0 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .create-modal .question-card:not(.saved-question-card) .current-question-title-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .create-modal .question-card:not(.saved-question-card) .current-question-title {
+    order: 1 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .create-modal .question-card:not(.saved-question-card) .question-delete-btn {
+    order: 2 !important;
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    margin-left: auto !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .create-modal .question-card:not(.saved-question-card) .current-question-title-row {
+    position: relative !important;
+    display: block !important;
+    padding-right: 20px !important;
+  }
+
+  .create-modal
+    .question-card:not(.saved-question-card)
+    .current-question-title-row
+    .question-delete-btn {
+    opacity: 0 !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+    width: 16px !important;
+    height: 16px !important;
+    pointer-events: auto !important;
+  }
+
+  .create-modal
+    .question-card:not(.saved-question-card)
+    .current-question-title-row
+    .question-delete-btn::before,
+  .create-modal
+    .question-card:not(.saved-question-card)
+    .current-question-title-row
+    .question-delete-btn::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .create-modal .question-card:not(.saved-question-card) .current-question-title-row::before {
+    content: '' !important;
+    position: absolute !important;
+    right: 3px !important;
+    top: 4px !important;
+    width: 8px !important;
+    height: 9px !important;
+    border: 1.7px solid #ffffff !important;
+    border-top: 0 !important;
+    border-radius: 1px !important;
+    pointer-events: none !important;
+  }
+
+  .create-modal .question-card:not(.saved-question-card) .current-question-title-row::after {
+    content: '' !important;
+    position: absolute !important;
+    right: 2px !important;
+    top: 2px !important;
+    width: 10px !important;
+    height: 2px !important;
+    border-top: 1.7px solid #ffffff !important;
+    box-shadow: 2px -2px 0 -0.8px #ffffff !important;
+    pointer-events: none !important;
+  }
+}
+/* Final current-question delete icon fix: keep only the right trash icon. */
+.create-modal .question-clear-icon {
+  position: relative !important;
+  display: inline-block !important;
+  width: 14px !important;
+  height: 14px !important;
+  flex: 0 0 14px !important;
+  padding: 0 !important;
+  margin: 0 0 0 auto !important;
+  border: 0 !important;
+  background: transparent !important;
+  appearance: none !important;
+  cursor: pointer !important;
+}
+
+.create-modal .question-clear-icon::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 3px !important;
+  top: 4px !important;
+  width: 8px !important;
+  height: 8px !important;
+  border: 1.6px solid #ffffff !important;
+  border-top: 0 !important;
+  border-radius: 1px !important;
+  box-sizing: border-box !important;
+}
+
+.create-modal .question-clear-icon::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 2px !important;
+  top: 2px !important;
+  width: 10px !important;
+  height: 2px !important;
+  border-top: 1.6px solid #ffffff !important;
+  box-shadow: 2px -2px 0 -0.8px #ffffff !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 700px) {
+  .create-modal .question-card:not(.saved-question-card) .current-question-title-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 0 7px !important;
+  }
+
+  .create-modal .question-card:not(.saved-question-card) .current-question-title-row::before,
+  .create-modal .question-card:not(.saved-question-card) .current-question-title-row::after,
+  .create-modal .question-card:not(.saved-question-card) .current-question-title::before,
+  .create-modal .question-card:not(.saved-question-card) .current-question-title::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .create-modal .question-card:not(.saved-question-card) .current-question-title {
+    display: inline-block !important;
+    flex: 1 1 auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-indent: 0 !important;
+  }
+
+  .create-modal .question-card:not(.saved-question-card) .question-clear-icon {
+    position: relative !important;
+    inset: auto !important;
+    margin: 0 0 0 auto !important;
+    transform: none !important;
+  }
+}
+
+/* Final override for the current question icon: remove the drawn line and use one fixed icon. */
+.create-modal .current-question-title-row .question-clear-icon,
+.create-modal
+  .question-card:not(.saved-question-card)
+  .current-question-title-row
+  .question-clear-icon {
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  left: auto !important;
+  width: 14px !important;
+  height: 14px !important;
+  flex: 0 0 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.5 5.1V11.2H9.5V5.1' stroke='white' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M3.5 4H10.5' stroke='white' stroke-width='1.4' stroke-linecap='round'/%3E%3Cpath d='M5.6 3H8.4' stroke='white' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 14px 14px !important;
+  appearance: none !important;
+}
+
+.create-modal .current-question-title-row .question-clear-icon::before,
+.create-modal .current-question-title-row .question-clear-icon::after,
+.create-modal
+  .question-card:not(.saved-question-card)
+  .current-question-title-row
+  .question-clear-icon::before,
+.create-modal
+  .question-card:not(.saved-question-card)
+  .current-question-title-row
+  .question-clear-icon::after {
+  display: none !important;
+  content: none !important;
+}
+
+.create-modal .current-question-title-row {
+  position: relative !important;
+  padding-right: 18px !important;
+}
+
+/* Final hard reset: the active question title must not draw any delete icon. */
+.create-modal .current-question-title-row,
+.create-modal .question-card:not(.saved-question-card) .current-question-title-row {
+  display: block !important;
+  padding-right: 0 !important;
+}
+
+.create-modal .current-question-title-row::before,
+.create-modal .current-question-title-row::after,
+.create-modal .question-card:not(.saved-question-card) .current-question-title-row::before,
+.create-modal .question-card:not(.saved-question-card) .current-question-title-row::after,
+.create-modal .current-question-title::before,
+.create-modal .current-question-title::after {
+  display: none !important;
+  content: none !important;
+}
+
+@media (max-width: 700px) {
+  .create-modal .question-title-row,
+  .create-modal .current-question-title-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 0 6px !important;
+    font-family: Mulish !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: 0 !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+  }
+
+  .create-modal .question-title-row > span,
+  .create-modal .current-question-title {
+    display: inline-block !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-indent: 0 !important;
+    overflow: visible !important;
+  }
+
+  .create-modal .saved-question-card .question-title-row > .trash-btn {
+    position: relative !important;
+    inset: auto !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    flex: 0 0 14px !important;
+    width: 14px !important;
+    height: 14px !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+}
+
+.create-modal .question-label {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 4px !important;
+  white-space: nowrap !important;
+}
+
+.create-modal .question-label .question-number {
+  display: inline-block !important;
+  min-width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+@media (max-width: 700px) {
+  .create-modal .question-label {
+    display: inline-flex !important;
+    align-items: baseline !important;
+    gap: 4px !important;
+  }
+}
+
+/* Mobile mockup sizing for the question block. */
+@media (max-width: 700px) {
+  .create-modal .mockup-question-card {
+    gap: 5px !important;
+  }
+
+  .create-modal .question-title-row,
+  .create-modal .current-question-title-row,
+  .create-modal .question-label,
+  .create-modal .current-question-title {
+    font-family: Mulish !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    gap: 2px !important;
+    margin-bottom: 5px !important;
+  }
+
+  .create-modal .question-card .field {
+    gap: 0 !important;
+  }
+
+  .create-modal .question-card input[type='text'] {
+    height: 22px !important;
+    min-height: 22px !important;
+    padding: 3px 7px !important;
+    border-radius: 4px !important;
+    font-size: 9px !important;
+    line-height: 1 !important;
+  }
+
+  .create-modal .answers-title {
+    margin: 5px 0 4px !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+  }
+
+  .create-modal .multiple-check {
+    font-size: 7px !important;
+    line-height: 1 !important;
+    gap: 3px !important;
+  }
+
+  .create-modal .multiple-check input {
+    width: 8px !important;
+    height: 8px !important;
+  }
+
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row {
+    grid-template-columns: 16px minmax(0, 1fr) 12px !important;
+    gap: 4px !important;
+    margin-bottom: 5px !important;
+    font-size: 10px !important;
+    line-height: 1 !important;
+  }
+
+  .create-modal .answer-row > span,
+  .create-modal .saved-answer-row > span {
+    font-size: 10px !important;
+    line-height: 22px !important;
+  }
+
+  .create-modal .question-title-row > .trash-btn,
+  .create-modal .saved-question-card .question-title-row > .trash-btn,
+  .create-modal .answer-row .trash-btn,
+  .create-modal .saved-answer-row .trash-btn {
+    width: 10px !important;
+    height: 10px !important;
+    align-self: center !important;
+  }
+
+  .create-modal .add-answer-btn {
+    margin-top: 3px !important;
+    font-size: 9px !important;
+    line-height: 1 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .create-modal .question-title-row,
+  .create-modal .current-question-title-row {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 0 14px 0 0 !important;
+    margin: 0 0 5px !important;
+    font-family: Mulish !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    color: #ffffff !important;
+  }
+
+  .create-modal .question-title-row::before,
+  .create-modal .question-title-row::after,
+  .create-modal .current-question-title-row::before,
+  .create-modal .current-question-title-row::after,
+  .create-modal .question-label::before,
+  .create-modal .question-label::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .create-modal .question-label,
+  .create-modal .current-question-title {
+    display: inline-block !important;
+    flex: 1 1 auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-indent: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .create-modal .question-clear-icon,
+  .create-modal .saved-question-card .question-title-row > .trash-btn {
+    position: absolute !important;
+    right: 0 !important;
+    top: -1px !important;
+    width: 10px !important;
+    height: 10px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background-color: transparent !important;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 10 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.2 3.6V8H6.8V3.6' stroke='white' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2.5 2.8H7.5' stroke='white' stroke-width='1.1' stroke-linecap='round'/%3E%3Cpath d='M4 2H6' stroke='white' stroke-width='1.1' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 10px 10px !important;
+    appearance: none !important;
+  }
+
+  .create-modal .question-clear-icon::before,
+  .create-modal .question-clear-icon::after,
+  .create-modal .saved-question-card .question-title-row > .trash-btn::before,
+  .create-modal .saved-question-card .question-title-row > .trash-btn::after {
+    display: none !important;
+    content: none !important;
+  }
+}
+
+/* Feedback pass: keep create-form text readable and never below 16px. */
+@media (max-width: 700px) {
+  .create-modal .survey-form,
+  .create-modal .survey-form label,
+  .create-modal .survey-form input,
+  .create-modal .survey-form textarea,
+  .create-modal .survey-form select,
+  .create-modal .survey-form button {
+    font-size: 16px !important;
+  }
+
+  .create-modal .question-title-row,
+  .create-modal .current-question-title-row,
+  .create-modal .question-label,
+  .create-modal .answers-title,
+  .create-modal .answer-row,
+  .create-modal .saved-answer-row,
+  .create-modal .add-answer-btn {
+    font-size: 16px !important;
+    line-height: 1.1 !important;
+  }
+
+  .create-modal .multiple-check,
+  .create-modal .field small {
+    font-size: 12px !important;
+  }
+
+  .create-modal .question-card input[type='text'],
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    min-height: 28px !important;
+    height: 28px !important;
+    padding: 4px 8px !important;
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .create-modal .question-label,
+  .create-modal .current-question-title.question-label {
+    display: inline-flex !important;
+    align-items: baseline !important;
+    gap: 5px !important;
+    white-space: nowrap !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+  }
+
+  .create-modal .question-index,
+  .create-modal .question-word {
+    display: inline-block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-indent: 0 !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+  }
+
+  .create-modal .current-question-title .question-word {
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .create-modal .current-question-title-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 0 8px !important;
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  .create-modal .current-question-title {
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .create-modal .current-question-title .question-word {
+    display: inline-block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+  }
+
+  .create-modal .question-clear-icon {
+    position: static !important;
+    flex: 0 0 18px !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin-left: 8px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  html,
+  body,
+  app-root,
+  .home-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    overflow-x: hidden !important;
+    background: #2f2034 !important;
+  }
+
+  .home-page {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .hero,
+  .ending-soon,
+  .survey-list {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    background: #2f2034 !important;
+  }
+}
+
+.survey-card * {
+  min-width: 0 !important;
+  overflow-wrap: anywhere !important;
+}
+
+@media (min-width: 701px) and (max-width: 900px) {
+  .home-page {
+    padding-inline: clamp(24px, 5vw, 44px) !important;
+  }
+
+  .hero,
+  .ending-soon,
+  .survey-list,
+  .survey-controls {
+    width: 100% !important;
+    max-width: 700px !important;
+  }
+
+  .hero-content {
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 260px) !important;
+    padding-inline: 0 !important;
+  }
+
+  .ending-soon .survey-grid,
+  .survey-list .survey-grid {
+    grid-auto-flow: row !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px !important;
+    overflow: visible !important;
+    padding-right: 0 !important;
+  }
+
+  .ending-soon .survey-card,
+  .survey-list .survey-card {
+    width: auto !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .home-page {
+    padding-inline: clamp(14px, 5vw, 22px) !important;
+  }
+
+  .hero,
+  .ending-soon,
+  .survey-list,
+  .survey-controls {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .ending-soon {
+    margin-bottom: 28px !important;
+  }
+
+  .hero-content {
+    grid-template-columns: minmax(0, 1fr) clamp(96px, 33vw, 122px) !important;
+  }
+
+  .hero-right,
+  .hero-phone {
+    width: clamp(96px, 33vw, 122px) !important;
+  }
+
+  .ending-soon .survey-grid {
+    grid-auto-flow: row !important;
+    grid-template-columns: repeat(auto-fit, 156px) !important;
+    gap: 14px !important;
+    justify-content: start !important;
+    overflow: visible !important;
+  }
+
+  .ending-soon .survey-card {
+    width: 156px !important;
+    padding: 18px 14px 38px !important;
+  }
+
+  .survey-list .survey-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-right: 0 !important;
+  }
+
+  .survey-list .survey-card {
+    width: 100% !important;
+    padding-right: 104px !important;
+  }
+
+  .create-modal .question-label,
+  .create-modal .current-question-title {
+    gap: 4px !important;
+  }
+
+  .create-modal .answer-row input,
+  .create-modal .saved-answer-row input {
+    border-radius: 7px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .home-page {
+    min-width: 320px !important;
+    overflow-x: auto !important;
+  }
+
+  .survey-list .survey-card {
+    min-width: 280px !important;
+  }
+
+  .ending-soon .survey-grid {
+    min-width: 326px !important;
   }
 }
