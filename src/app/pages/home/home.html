@@ -1,11 +1,10 @@
 ﻿<main class="home-page">
-  <header class="hero">
-    <div class="hero-top">
-      <div class="brand">
-        <img src="assets/image/Logo.svg" alt="Poll App" class="brand-logo" />
-      </div>
+  <nav class="hero-top">
+    <div class="brand">
+      <img src="assets/image/Logo.svg" alt="Poll App" class="brand-logo" />
     </div>
-
+  </nav>
+  <header class="hero">
     <div class="hero-content">
       <div class="hero-left">
         <h1>
@@ -28,8 +27,9 @@
     </div>
   </header>
 
-  <h2 class="page-title">Your surveys</h2>
+  
   <section class="ending-soon">
+    <div class="page-title">Your surveys</div>
     <h2 class="ending-soon-title">Ending soon surveys</h2>
 
     @if (endingSoonSurveys.length > 0) {
@@ -124,6 +124,7 @@
 
   @if (isCreateModalOpen) {
     <div class="modal-backdrop" (click)="closeCreateModal()">
+      <img src="assets/image/Purple dark logo.svg" alt="Poll App" class="mobile-create-logo" />
       <section class="create-modal" (click)="$event.stopPropagation()">
         <div class="modal-header">
           <div>
@@ -144,13 +145,9 @@
           [class.has-max-current-answers]="showCurrentQuestion && answers.length > 4"
           (ngSubmit)="publishSurvey()"
         >
-          @if (errorMessage) {
-            <p class="error-message">{{ errorMessage }}</p>
-          }
-
           <div class="top-row">
             <label class="field survey-name" for="survey-title">
-              Survey name
+              <span class="field-label">Survey name <span class="required-mark" aria-hidden="true">*</span></span>
               <div class="input-line">
                 <input
                   id="survey-title"
@@ -158,6 +155,8 @@
                   [(ngModel)]="title"
                   name="title"
                   placeholder="Survey name"
+                  [class.field-invalid]="titleError"
+                  [attr.aria-invalid]="titleError ? 'true' : null"
                 />
                 <button
                   type="button"
@@ -166,13 +165,11 @@
                   aria-label="Delete"
                 ></button>
               </div>
-              @if (titleError) {
-                <small class="field-error">{{ titleError }}</small>
-              }
+              <small class="field-error" [class.field-error-visible]="titleError">{{ titleError }}</small>
             </label>
 
             <label class="field description-field" for="survey-description">
-              Describing text <small>(optional)</small>
+              <span class="field-label">Describing text <small>(optional)</small></span>
               <div class="input-line">
                 <textarea
                   id="survey-description"
@@ -192,7 +189,7 @@
 
           <div class="small-row">
             <label class="field deadline-field" for="survey-deadline">
-              Set end date <small>(optional)</small>
+              <span class="field-label">Set end date <small>(optional)</small></span>
               <div class="input-line">
                 <input
                   id="survey-deadline"
@@ -200,6 +197,8 @@
                   [(ngModel)]="deadline"
                   name="deadline"
                   [min]="minDeadline"
+                  [class.field-invalid]="deadlineError"
+                  [attr.aria-invalid]="deadlineError ? 'true' : null"
                 />
                 <button
                   type="button"
@@ -208,9 +207,7 @@
                   aria-label="Delete"
                 ></button>
               </div>
-              @if (deadlineError) {
-                <small class="field-error">{{ deadlineError }}</small>
-              }
+              <small class="field-error" [class.field-error-visible]="deadlineError">{{ deadlineError }}</small>
             </label>
 
             <label class="field category-field" for="survey-category">
@@ -220,6 +217,8 @@
                   [(ngModel)]="category"
                   name="category"
                   class="custom-select"
+                  [class.field-invalid]="categoryError"
+                  [attr.aria-invalid]="categoryError ? 'true' : null"
                 >
                   <option value="">Choose category</option>
                   <option value="Team activities">Team activities</option>
@@ -231,9 +230,7 @@
 
                 <span class="select-arrow"></span>
               </div>
-              @if (categoryError) {
-                <small class="field-error">{{ categoryError }}</small>
-              }
+              <small class="field-error" [class.field-error-visible]="categoryError">{{ categoryError }}</small>
             </label>
           </div>
 
@@ -337,13 +334,13 @@
                       [(ngModel)]="question"
                       name="question"
                       placeholder="Which date would work best for you?"
+                      [class.field-invalid]="questionError"
+                      [attr.aria-invalid]="questionError ? 'true' : null"
                     />
                   </div>
                 </label>
 
-                @if (questionError) {
-                  <small class="field-error">{{ questionError }}</small>
-                }
+                <small class="field-error" [class.field-error-visible]="questionError">{{ questionError }}</small>
 
                 <div class="answers-title">
                   <span>Answers</span>
@@ -372,6 +369,8 @@
                       [(ngModel)]="answers[index]"
                       name="answer{{ index }}"
                       placeholder="Answer"
+                      [class.field-invalid]="answersError"
+                      [attr.aria-invalid]="answersError ? 'true' : null"
                     />
 
                     <button
@@ -383,9 +382,7 @@
                   </div>
                 }
 
-                @if (answersError) {
-                  <small class="field-error">{{ answersError }}</small>
-                }
+                <small class="field-error" [class.field-error-visible]="answersError">{{ answersError }}</small>
 
                 <button class="add-answer-btn" type="button" (click)="addAnswer()">
                   Add answer <span class="plus-circle" aria-hidden="true"></span>
@@ -403,7 +400,7 @@
           </div>
 
           <button class="publish-btn" type="submit">
-            Publish <span class="publish-check" aria-hidden="true"></span>
+            Publish
           </button>
         </form>
       </section>
@@ -412,7 +409,7 @@
   @if (showPublishOverlay) {
     <div class="publish-toast" role="status" aria-live="polite">
       <strong>Your survey is now published!</strong>
-      <button type="button" aria-label="Close message" (click)="finishPublishedSurvey()">X</button>
+      <button type="button" aria-label="Close message" (click)="showPublishOverlay = false">X</button>
     </div>
   }
 </main>

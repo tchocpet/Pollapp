@@ -2,7 +2,7 @@
   <main class="survey-detail-page">
     <header class="survey-header">
       <a routerLink="/" aria-label="Back to home">
-        <img src="assets/image/Logo.svg" alt="Poll App" class="poll-logo" />
+        <img src="assets/image/Purple dark logo.svg" alt="Poll App" class="poll-logo" />
       </a>
 
       <button class="create-survey-btn" routerLink="/" [state]="{ openCreate: true }">Create survey</button>
@@ -11,6 +11,7 @@
     <div class="survey-layout">
       <section class="survey-box">
         <span class="survey-status">Published</span>
+        <button class="mobile-close-btn" type="button" routerLink="/" aria-label="Close survey">×</button>
 
         <div class="survey-top-info">
           <p class="survey-end-date">Ends on {{ survey.deadline }}</p>

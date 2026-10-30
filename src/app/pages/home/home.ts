@@ -27,10 +27,8 @@ export class Home {
   allowMultipleAnswers = false;
   showCurrentQuestion = true;
   showPublishOverlay = false;
-  publishedSurveyId: number | null = null;
   answers = ['', ''];
   questions: Question[] = [];
-  errorMessage = '';
   answersError = '';
 
   titleError = '';
@@ -38,6 +36,7 @@ export class Home {
   categoryError = '';
   questionError = '';
   private modalHistoryEntryActive = false;
+  private publishToastTimer?: ReturnType<typeof setTimeout>;
 
   constructor(
     private surveyService: SurveyService,
@@ -190,7 +189,6 @@ export class Home {
 
     if (!this.showCurrentQuestion) {
       this.showCurrentQuestion = true;
-      this.errorMessage = '';
       return;
     }
 
@@ -201,13 +199,11 @@ export class Home {
     this.questions.push(this.createQuestion());
     this.resetCurrentQuestion();
     this.showCurrentQuestion = true;
-    this.errorMessage = '';
     this.scrollCreateFormToTop();
   }
 
   clearQuestionOne(): void {
     this.resetCurrentQuestion();
-    this.errorMessage = '';
 
     if (this.questions.length > 0) {
       this.showCurrentQuestion = false;
@@ -249,7 +245,6 @@ export class Home {
     }
 
     this.questions.splice(index, 1);
-    this.errorMessage = '';
     this.clearQuestionErrors();
   }
 
@@ -266,44 +261,38 @@ export class Home {
   }
 
   publishSurvey(): void {
-    if (!this.prepareSurveySubmit()) {
-      return;
-    }
-
-    if (!this.isSurveyFormValid()) {
-      return;
-    }
-
-    const createdSurvey = this.saveSurvey();
-    this.publishedSurveyId = createdSurvey.id;
-    this.showPublishOverlay = true;
-  }
-
-  private prepareSurveySubmit(): boolean {
     this.clearFieldErrors();
-    this.errorMessage = '';
 
-    if (this.showCurrentQuestion && (this.question.trim() !== '' || this.answers.some((answer) => answer.trim() !== ''))) {
+    if (!this.validateSurveyFields()) {
+      return;
+    }
+
+    if (this.showCurrentQuestion && this.hasCurrentQuestionContent()) {
       if (!this.hasValidQuestion()) {
-        this.errorMessage = 'Please complete the current question before publishing.';
-        return false;
+        return;
       }
 
       this.questions.push(this.createQuestion());
       this.resetCurrentQuestion();
     }
 
-    return true;
-  }
-
-  private isSurveyFormValid(): boolean {
-    const isValid = this.validateRequiredFields();
-
-    if (!isValid) {
-      this.errorMessage = 'Please fill in the missing fields before publishing.';
+    if (this.questions.length === 0) {
+      this.questionError = 'At least one question is required.';
+      return;
     }
 
-    return isValid;
+    this.saveSurvey();
+    this.closeCreateModal(false);
+    this.showPublishOverlay = true;
+    clearTimeout(this.publishToastTimer);
+    this.publishToastTimer = setTimeout(() => {
+      this.showPublishOverlay = false;
+    }, 5000);
+    this.router.navigate(['/']);
+  }
+
+  private hasCurrentQuestionContent(): boolean {
+    return this.question.trim() !== '' || this.answers.some((answer) => answer.trim() !== '');
   }
 
   private saveSurvey(): Survey {
@@ -325,7 +314,6 @@ export class Home {
   private resetForm(): void {
     this.resetSurveyFields();
     this.questions = [];
-    this.errorMessage = '';
     this.clearFieldErrors();
   }
 
@@ -358,21 +346,7 @@ export class Home {
 
     this.questions = [];
 
-    this.showPublishOverlay = false;
-    this.publishedSurveyId = null;
     this.showCurrentQuestion = true;
-  }
-
-  finishPublishedSurvey(): void {
-    const surveyId = this.publishedSurveyId;
-
-    this.showPublishOverlay = false;
-    this.closeCreateModal(false);
-    this.publishedSurveyId = null;
-
-    if (surveyId !== null) {
-      this.router.navigate(['/survey', surveyId]);
-    }
   }
 
   private getDateInputValue(date: Date): string {
@@ -403,17 +377,15 @@ export class Home {
     return new Date(date).getTime();
   }
 
-  private validateRequiredFields(): boolean {
+  private validateSurveyFields(): boolean {
     this.validateTitle();
-    this.validateDeadline();
     this.validateCategory();
-    this.validateQuestions();
 
-    if (!this.deadlineError && this.deadline.trim() !== '') {
+    if (this.deadline.trim() !== '') {
       this.hasValidDeadline();
     }
 
-    return !this.hasFieldErrors();
+    return !this.titleError && !this.deadlineError && !this.categoryError;
   }
 
   private validateTitle(): void {
@@ -422,32 +394,10 @@ export class Home {
     }
   }
 
-  private validateDeadline(): void {
-    if (this.deadline.trim() === '') {
-      this.deadlineError = 'Deadline is required.';
-    }
-  }
-
   private validateCategory(): void {
     if (this.category.trim() === '') {
       this.categoryError = 'Category is required.';
     }
-  }
-
-  private validateQuestions(): void {
-    if (this.questions.length === 0) {
-      this.questionError = 'At least one question is required.';
-    }
-  }
-
-  private hasFieldErrors(): boolean {
-    return Boolean(
-      this.titleError ||
-      this.deadlineError ||
-      this.categoryError ||
-      this.questionError ||
-      this.answersError,
-    );
   }
 
   private hasValidDeadline(): boolean {
