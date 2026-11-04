@@ -1,81 +1,134 @@
-# Poll App
+# PollApp – Survey & Voting Application
 
-Eine responsive Survey- und Voting-App mit Angular.
+A modern, responsive survey and voting application built with **Angular 21**, **TypeScript**, and **SCSS**.
 
-Mit der App koennen Umfragen erstellt, mehrere Fragen und Antwortmoeglichkeiten hinzugefuegt, Stimmen abgegeben und Live-Ergebnisse angesehen werden. Die Daten werden im Local Storage des Browsers gespeichert.
+PollApp allows users to create surveys, add multiple questions and answer options, participate in polls, and view live voting results. All survey data is stored locally in the browser using **Local Storage**.
 
-## Wichtig zum Starten
+## Features
 
-Diese App ist eine Angular-App. Sie funktioniert nicht ueber die VS Code Erweiterung "Live Server" und auch nicht durch direktes Oeffnen einer einzelnen HTML-Datei.
+- Create and manage surveys
+- Add multiple questions to each survey
+- Add multiple answer options per question
+- Support for single-choice and multiple-choice questions
+- Participate in surveys and submit votes
+- View live voting results
+- Display active and expired surveys
+- Filter surveys by category
+- Delete surveys
+- Persistent data storage using Browser Local Storage
+- Responsive design for desktop and mobile devices
 
-## Voraussetzungen
+## Technologies
 
-- Node.js
-- npm
-- Angular CLI wird ueber die Projekt-Abhaengigkeiten genutzt
+- **Angular 21**
+- **TypeScript**
+- **SCSS**
+- **HTML5**
+- **CSS3**
+- **Local Storage API**
+
+## Requirements
+
+Before running the application, make sure you have installed:
+
+- [Node.js](https://nodejs.org/)
+- npm (included with Node.js)
+
+Angular CLI is managed through the project's dependencies.
 
 ## Installation
 
+Clone the repository:
+
 ```bash
 git clone https://github.com/tchocpet/Pollapp.git
+```
+
+Navigate to the Angular project directory:
+
+```bash
 cd Pollapp/pollapp
+```
+
+Install the dependencies:
+
+```bash
 npm install
 ```
 
-## App lokal starten
+## Run the Application
+
+Start the development server:
 
 ```bash
 npm start
 ```
 
-Danach die App im Browser oeffnen:
+Open your browser:
 
 ```text
 http://localhost:4200
 ```
 
-## Build fuer die Abgabe pruefen
+**Important:** This is an Angular application. It cannot be started using the VS Code Live Server extension or by opening an HTML file directly.
+
+## Build the Application
+
+To verify that the application builds successfully, run:
 
 ```bash
 npm run build
 ```
 
-Wenn der Build erfolgreich ist, liegt die gebaute App im Ordner `dist/`.
+The production build will be generated in the `dist/` directory.
 
-## Funktionen
+## Project Structure
 
-- Umfragen erstellen
-- Mehrere Fragen pro Umfrage hinzufuegen
-- Mehrere Antworten pro Frage hinzufuegen
-- Single-Choice und Multiple-Choice Antworten
-- Live-Ergebnisse anzeigen
-- Laufende und abgelaufene Umfragen anzeigen
-- Nach Kategorien filtern
-- Umfragen loeschen
-- Speicherung im Local Storage
-- Responsive Darstellung fuer Desktop und Mobile
+```text
+Pollapp/
+├── public/
+├── src/
+├── angular.json
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+└── README.md
+```
 
-## Technologien
+## Data Storage
 
-- Angular 21
-- TypeScript
-- SCSS
-- HTML
+PollApp uses the browser's Local Storage API to save survey data locally.
 
-## Hinweis zur Abgabe
+Data is stored in the user's browser and is not synchronized between different devices or users.
 
-Folgende Ordner sollten nicht mit abgegeben oder hochgeladen werden:
+## Git Commit Convention
+
+This project uses clear and descriptive commit messages.
+
+Examples:
+
+```text
+docs: update project setup instructions
+fix: improve create survey form behavior
+style: adjust responsive layout
+feat: add survey voting flow
+```
+
+## Notes for Submission
+
+The following folders are generally excluded from source-code submissions:
 
 - `node_modules/`
 - `.angular/`
 - `.vscode/`
-- `dist/`, falls nur der Quellcode abgegeben werden soll
+- `dist/` (when submitting source code only)
 
-## Commit-Konvention
+## Author
 
-Fuer die Abgabe sind klare Commit-Namen hilfreich. Empfohlene Beispiele:
+**Thierno Diallo**
 
-- `docs: update project setup instructions`
-- `fix: improve create survey form behavior`
-- `style: adjust poll app responsive layout`
-- `feat: add survey voting flow`
+GitHub: [@tchocpet](https://github.com/tchocpet)
+
+---
+
+_Built with Angular and TypeScript._
