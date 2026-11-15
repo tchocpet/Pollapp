@@ -72,7 +72,11 @@ export class Home {
     this.isCreateModalOpen = true;
 
     if (addHistoryEntry) {
-      window.history.pushState({ ...window.history.state, createModalOpen: true }, '', window.location.href);
+      window.history.pushState(
+        { ...window.history.state, createModalOpen: true },
+        '',
+        window.location.href,
+      );
       this.modalHistoryEntryActive = true;
     }
   }
@@ -199,7 +203,7 @@ export class Home {
     this.questions.push(this.createQuestion());
     this.resetCurrentQuestion();
     this.showCurrentQuestion = true;
-    this.scrollCreateFormToTop();
+    // this.scrollCreateFormToTop();
   }
 
   clearQuestionOne(): void {

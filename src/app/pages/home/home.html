@@ -27,7 +27,6 @@
     </div>
   </header>
 
-  
   <section class="ending-soon">
     <div class="page-title">Your surveys</div>
     <h2 class="ending-soon-title">Ending soon surveys</h2>
@@ -147,7 +146,9 @@
         >
           <div class="top-row">
             <label class="field survey-name" for="survey-title">
-              <span class="field-label">Survey name <span class="required-mark" aria-hidden="true">*</span></span>
+              <span class="field-label"
+                >Survey name <span class="required-mark" aria-hidden="true">*</span></span
+              >
               <div class="input-line">
                 <input
                   id="survey-title"
@@ -165,7 +166,9 @@
                   aria-label="Delete"
                 ></button>
               </div>
-              <small class="field-error" [class.field-error-visible]="titleError">{{ titleError }}</small>
+              <small class="field-error" [class.field-error-visible]="titleError">{{
+                titleError
+              }}</small>
             </label>
 
             <label class="field description-field" for="survey-description">
@@ -207,7 +210,9 @@
                   aria-label="Delete"
                 ></button>
               </div>
-              <small class="field-error" [class.field-error-visible]="deadlineError">{{ deadlineError }}</small>
+              <small class="field-error" [class.field-error-visible]="deadlineError">{{
+                deadlineError
+              }}</small>
             </label>
 
             <label class="field category-field" for="survey-category">
@@ -230,12 +235,14 @@
 
                 <span class="select-arrow"></span>
               </div>
-              <small class="field-error" [class.field-error-visible]="categoryError">{{ categoryError }}</small>
+              <small class="field-error" [class.field-error-visible]="categoryError">{{
+                categoryError
+              }}</small>
             </label>
           </div>
 
           <div class="question-area mockup-question-area">
-            @for (savedQuestion of questions; track savedQuestion.text; let savedIndex = $index) {
+            @for (savedQuestion of questions; track savedQuestion; let savedIndex = $index) {
               <div class="question-card mockup-question-card saved-question-card">
                 <div class="question-title-row">
                   <span class="question-label">
@@ -275,11 +282,7 @@
                   </label>
                 </div>
 
-                @for (
-                  answer of savedQuestion.answers;
-                  track answer.text;
-                  let answerIndex = $index
-                ) {
+                @for (answer of savedQuestion.answers; track answer; let answerIndex = $index) {
                   <div class="answer-row saved-answer-row">
                     <span>{{ getAnswerLetter(answerIndex) }}.</span>
                     <label class="sr-only" for="saved-answer-{{ savedIndex }}-{{ answerIndex }}"
@@ -340,7 +343,9 @@
                   </div>
                 </label>
 
-                <small class="field-error" [class.field-error-visible]="questionError">{{ questionError }}</small>
+                <small class="field-error" [class.field-error-visible]="questionError">{{
+                  questionError
+                }}</small>
 
                 <div class="answers-title">
                   <span>Answers</span>
@@ -382,7 +387,9 @@
                   </div>
                 }
 
-                <small class="field-error" [class.field-error-visible]="answersError">{{ answersError }}</small>
+                <small class="field-error" [class.field-error-visible]="answersError">{{
+                  answersError
+                }}</small>
 
                 <button class="add-answer-btn" type="button" (click)="addAnswer()">
                   Add answer <span class="plus-circle" aria-hidden="true"></span>
@@ -399,9 +406,7 @@
             </button>
           </div>
 
-          <button class="publish-btn" type="submit">
-            Publish
-          </button>
+          <button class="publish-btn" type="submit">Publish</button>
         </form>
       </section>
     </div>
@@ -409,7 +414,9 @@
   @if (showPublishOverlay) {
     <div class="publish-toast" role="status" aria-live="polite">
       <strong>Your survey is now published!</strong>
-      <button type="button" aria-label="Close message" (click)="showPublishOverlay = false">X</button>
+      <button type="button" aria-label="Close message" (click)="showPublishOverlay = false">
+        X
+      </button>
     </div>
   }
 </main>

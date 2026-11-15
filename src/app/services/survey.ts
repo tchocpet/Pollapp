@@ -6,7 +6,7 @@ import { Survey } from '../models/survey';
 })
 export class SurveyService {
   private readonly storageVersionKey = 'surveysVersion';
-  private readonly currentStorageVersion = 'figma-defaults-v2';
+  private readonly currentStorageVersion = 'figma-defaults-v4';
 
   private surveys: Survey[] = [
     {
@@ -157,19 +157,98 @@ export class SurveyService {
       ],
       isPast: false,
     },
+    {
+      id: 7,
+      title: 'Test Survey – Completed',
+      description: 'This survey is for testing completed surveys.',
+      deadline: '2026-11-13',
+      category: 'Team activities',
+      questions: [
+        {
+          text: 'Did you enjoy this test survey?',
+          allowMultipleAnswers: false,
+          answers: [
+            { text: 'Yes', votes: 5 },
+            { text: 'No', votes: 2 },
+          ],
+        },
+      ],
+      isPast: true,
+    },
   ];
 
   constructor() {
     const savedSurveys = localStorage.getItem('surveys');
     const savedVersion = localStorage.getItem(this.storageVersionKey);
 
-    if (savedSurveys && savedVersion === this.currentStorageVersion) {
+    if (savedSurveys) {
       this.surveys = JSON.parse(savedSurveys);
+
+      if (savedVersion !== this.currentStorageVersion) {
+        this.updateDemoSurveyDeadlines();
+        localStorage.setItem(this.storageVersionKey, this.currentStorageVersion);
+      }
+
+      if (!this.surveys.some((survey) => survey.id === 7)) {
+        this.surveys.push({
+          id: 7,
+          title: 'Test Survey – Completed',
+          description: 'This survey is for testing completed surveys.',
+          deadline: '2026-11-13',
+          category: 'Team activities',
+          questions: [
+            {
+              text: 'Did you enjoy this test survey?',
+              allowMultipleAnswers: false,
+              answers: [
+                { text: 'Yes', votes: 5 },
+                { text: 'No', votes: 2 },
+              ],
+            },
+          ],
+          isPast: true,
+        });
+      }
+
+      this.saveSurveys();
       return;
     }
 
-    localStorage.setItem('surveys', JSON.stringify(this.surveys));
+    this.updateDemoSurveyDeadlines();
+    this.saveSurveys();
+
     localStorage.setItem(this.storageVersionKey, this.currentStorageVersion);
+  }
+
+  private updateDemoSurveyDeadlines(): void {
+    const demoDeadlines = new Map<number, number>([
+      [1, 7],
+      [2, 10],
+      [3, 14],
+      [4, 21],
+      [5, 25],
+      [6, 30],
+    ]);
+
+    this.surveys.forEach((survey) => {
+      const daysToAdd = demoDeadlines.get(survey.id);
+
+      if (daysToAdd !== undefined) {
+        survey.deadline = this.getDateAfterDays(daysToAdd);
+        survey.isPast = false;
+      }
+    });
+  }
+
+  private getDateAfterDays(days: number): string {
+    const date = new Date();
+    date.setDate(date.getDate() + days);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
   }
 
   getSurveys(): Survey[] {
