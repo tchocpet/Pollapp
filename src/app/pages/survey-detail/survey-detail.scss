@@ -77,6 +77,11 @@
   display: none;
 }
 
+.mobile-close-btn,
+.vote-toast button {
+  cursor: pointer;
+}
+
 .survey-status {
   display: inline-flex;
   min-height: 1.5rem;
@@ -362,6 +367,11 @@
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 1;
+  }
+
+  .mobile-close-btn,
+  .vote-toast button {
+    cursor: pointer;
   }
 
   .survey-box {

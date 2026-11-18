@@ -38,6 +38,10 @@ export class Home {
   private modalHistoryEntryActive = false;
   private publishToastTimer?: ReturnType<typeof setTimeout>;
 
+  private setBodyScrollLocked(locked: boolean): void {
+    document.body.style.overflow = locked ? 'hidden' : '';
+  }
+
   constructor(
     private surveyService: SurveyService,
     private router: Router,
@@ -70,6 +74,7 @@ export class Home {
     }
 
     this.isCreateModalOpen = true;
+    this.setBodyScrollLocked(true);
 
     if (addHistoryEntry) {
       window.history.pushState(
@@ -90,6 +95,7 @@ export class Home {
 
     this.isCreateModalOpen = false;
     this.resetForm();
+    this.setBodyScrollLocked(false);
   }
 
   setCategory(category: string): void {
@@ -112,6 +118,10 @@ export class Home {
     const today = this.getToday();
 
     return this.surveys.filter((survey) => {
+      if (!survey.deadline) {
+        return isRunning;
+      }
+
       const deadline = this.getDateOnly(survey.deadline);
 
       return isRunning ? deadline >= today : deadline < today;
@@ -123,7 +133,7 @@ export class Home {
     const limit = this.getEndingSoonLimit(today);
 
     return this.surveys
-      .filter((survey) => this.isEndingSoon(survey, today, limit))
+      .filter((survey) => !!survey.deadline && this.isEndingSoon(survey, today, limit))
       .sort((a, b) => this.getTime(a.deadline) - this.getTime(b.deadline))
       .slice(0, 3);
   }
@@ -438,6 +448,10 @@ export class Home {
   }
 
   getEndsInText(deadline: string): string {
+    if (!deadline) {
+      return 'No end date';
+    }
+
     const today = new Date();
     const endDate = new Date(deadline);
 

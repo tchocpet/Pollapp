@@ -5,16 +5,26 @@
         <img src="assets/image/Purple dark logo.svg" alt="Poll App" class="poll-logo" />
       </a>
 
-      <button class="create-survey-btn" routerLink="/" [state]="{ openCreate: true }">Create survey</button>
+      <button class="create-survey-btn" routerLink="/" [state]="{ openCreate: true }">
+        Create survey
+      </button>
     </header>
 
     <div class="survey-layout">
       <section class="survey-box">
         <span class="survey-status">Published</span>
-        <button class="mobile-close-btn" type="button" routerLink="/" aria-label="Close survey">×</button>
+        <button class="mobile-close-btn" type="button" routerLink="/" aria-label="Close survey">
+          ×
+        </button>
 
         <div class="survey-top-info">
-          <p class="survey-end-date">Ends on {{ survey.deadline }}</p>
+          <p class="survey-end-date">
+            @if (survey.deadline) {
+              Ends on {{ survey.deadline }}
+            } @else {
+              No end date
+            }
+          </p>
           <span class="survey-category">Category: {{ survey.category }}</span>
         </div>
 
