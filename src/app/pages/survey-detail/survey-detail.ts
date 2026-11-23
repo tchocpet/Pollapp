@@ -32,7 +32,7 @@ export class SurveyDetail {
   }
 
   completeSurvey(): void {
-    if (!this.survey || this.hasVoted || !this.hasSelectedAnswers()) {
+    if (!this.survey || this.hasVoted || this.isExpired || !this.hasSelectedAnswers()) {
       return;
     }
 
@@ -65,8 +65,19 @@ export class SurveyDetail {
     return totalVotes === 0 ? 0 : Math.round((votes / totalVotes) * 100);
   }
 
+  get isExpired(): boolean {
+    if (!this.survey?.deadline) return false;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const deadline = new Date(`${this.survey.deadline}T00:00:00`);
+
+    return deadline < today;
+  }
+
   voteForQuestion(questionIndex: number, answerIndex: number, event: Event): void {
-    if (!this.survey || this.hasVoted) {
+    if (!this.survey || this.hasVoted || this.isExpired) {
       return;
     }
 

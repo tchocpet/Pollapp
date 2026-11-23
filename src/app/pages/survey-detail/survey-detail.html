@@ -11,7 +11,10 @@
     </header>
 
     <div class="survey-layout">
-      <section class="survey-box">
+      <section
+        class="survey-box"
+        [class.survey-completed]="hasVoted || surveyCompleted || isExpired"
+      >
         <span class="survey-status">Published</span>
         <button class="mobile-close-btn" type="button" routerLink="/" aria-label="Close survey">
           ×
@@ -48,7 +51,7 @@
                     [type]="question.allowMultipleAnswers ? 'checkbox' : 'radio'"
                     name="question{{ qIndex }}"
                     [checked]="isAnswerSelected(qIndex, index)"
-                    [disabled]="hasVoted"
+                    [disabled]="hasVoted || isExpired"
                     (change)="voteForQuestion(qIndex, index, $event)"
                   />
 
@@ -63,8 +66,8 @@
         <button
           class="complete-btn"
           type="button"
-          [disabled]="surveyCompleted || !hasSelectedAnswers()"
-          [class.disabled-look]="surveyCompleted || !hasSelectedAnswers()"
+          [disabled]="surveyCompleted || isExpired || !hasSelectedAnswers()"
+          [class.disabled-look]="surveyCompleted || isExpired || !hasSelectedAnswers()"
           [class.completed-look]="surveyCompleted"
           (click)="completeSurvey()"
         >

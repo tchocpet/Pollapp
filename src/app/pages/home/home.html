@@ -1,7 +1,7 @@
 ﻿<main class="home-page">
   <nav class="hero-top">
     <div class="brand">
-      <img src="assets/image/Logo.svg" alt="Poll App" class="brand-logo" />
+      <img src="/assets/image/Logo.svg" alt="Poll App" class="brand-logo" />
     </div>
   </nav>
   <header class="hero">
@@ -24,7 +24,7 @@
       </div>
 
       <div class="hero-right">
-        <img src="assets/image/Visual.svg" alt="" class="hero-phone" />
+        <img src="/assets/image/Visual.svg" alt="" class="hero-phone" />
       </div>
     </div>
   </header>
@@ -43,9 +43,7 @@
 
             <h3>{{ survey.title }}</h3>
 
-            <span class="survey-deadline">
-              {{ getEndsInText(survey.deadline) }}
-            </span>
+            <span class="survey-deadline">{{ getEndsInText(survey.deadline) }}</span>
           </a>
         }
       </div>
@@ -109,12 +107,12 @@
       @if (filteredPastSurveys.length > 0) {
         <div class="survey-grid">
           @for (survey of filteredPastSurveys; track survey.id) {
-            <div class="survey-card past-card">
+            <a class="survey-card past-card" [routerLink]="['/survey', survey.id]">
               <small class="survey-category">{{ survey.category }}</small>
               <h3>{{ survey.title }}</h3>
               <p>{{ survey.description }}</p>
               <span class="survey-deadline">{{ getEndsInText(survey.deadline) }}</span>
-            </div>
+            </a>
           }
         </div>
       } @else {
@@ -125,7 +123,7 @@
 
   @if (isCreateModalOpen) {
     <div class="modal-backdrop" (click)="closeCreateModal()">
-      <img src="assets/image/Purple dark logo.svg" alt="Poll App" class="mobile-create-logo" />
+      <img src="/assets/image/Purple dark logo.svg" alt="Poll App" class="mobile-create-logo" />
       <section class="create-modal" (click)="$event.stopPropagation()">
         <div class="modal-header">
           <div>
@@ -338,7 +336,7 @@
                       type="text"
                       [(ngModel)]="question"
                       name="question"
-                      placeholder="Which date would work best for you?"
+                      placeholder="Enter your question"
                       [class.field-invalid]="questionError"
                       [attr.aria-invalid]="questionError ? 'true' : null"
                     />

@@ -193,9 +193,10 @@ export class Home {
   }
 
   removeAnswer(index: number): void {
-    if (this.answers.length > 2) {
-      this.answers.splice(index, 1);
-    }
+    if (index < 0 || index >= this.answers.length) return;
+
+    this.answers.splice(index, 1);
+    this.answersError = '';
   }
 
   addQuestion(): void {
@@ -216,28 +217,14 @@ export class Home {
     // this.scrollCreateFormToTop();
   }
 
-  clearQuestionOne(): void {
-    this.resetCurrentQuestion();
-
-    if (this.questions.length > 0) {
-      this.showCurrentQuestion = false;
-    }
-  }
-
   private hasValidQuestion(): boolean {
     const filledAnswers = this.answers.filter((answer) => answer.trim() !== '');
 
-    if (this.question.trim() === '') {
-      this.questionError = 'Please add a question.';
-      return false;
-    }
+    this.questionError = this.question.trim() === '' ? 'Please add a question.' : '';
 
-    if (filledAnswers.length < 2) {
-      this.answersError = 'Please add at least two answers.';
-      return false;
-    }
+    this.answersError = filledAnswers.length < 2 ? 'Please add at least two answers.' : '';
 
-    return true;
+    return !this.questionError && !this.answersError;
   }
 
   private createQuestion(): Question {
@@ -254,12 +241,18 @@ export class Home {
   }
 
   removeQuestion(index: number): void {
-    if (index < 0 || index >= this.questions.length) {
-      return;
-    }
-
     this.questions.splice(index, 1);
+
+    if (this.questions.length === 0) {
+      this.showCurrentQuestion = true;
+    }
+  }
+
+  clearQuestionOne(): void {
+    this.resetCurrentQuestion();
     this.clearQuestionErrors();
+
+    this.showCurrentQuestion = this.questions.length === 0;
   }
 
   addAnswerToQuestion(questionIndex: number): void {
@@ -267,25 +260,44 @@ export class Home {
   }
 
   removeAnswerFromQuestion(questionIndex: number, answerIndex: number): void {
-    const answers = this.questions[questionIndex].answers;
+    const answers = this.questions[questionIndex]?.answers;
 
-    if (answers.length > 2) {
-      answers.splice(answerIndex, 1);
+    if (!answers || answerIndex < 0 || answerIndex >= answers.length) {
+      return;
     }
+
+    answers.splice(answerIndex, 1);
   }
 
   publishSurvey(): void {
     this.clearFieldErrors();
+    this.clearQuestionErrors();
 
-    if (!this.validateSurveyFields()) {
+    this.validateTitle();
+    this.validateCategory();
+
+    if (this.deadline.trim() !== '') {
+      this.hasValidDeadline();
+    }
+
+    const hasQuestionContent = this.hasCurrentQuestionContent();
+
+    if (this.showCurrentQuestion && (this.questions.length === 0 || hasQuestionContent)) {
+      this.hasValidQuestion();
+    }
+
+    const hasFormErrors =
+      !!this.titleError ||
+      !!this.categoryError ||
+      !!this.deadlineError ||
+      !!this.questionError ||
+      !!this.answersError;
+
+    if (hasFormErrors) {
       return;
     }
 
-    if (this.showCurrentQuestion && this.hasCurrentQuestionContent()) {
-      if (!this.hasValidQuestion()) {
-        return;
-      }
-
+    if (this.showCurrentQuestion && hasQuestionContent) {
       this.questions.push(this.createQuestion());
       this.resetCurrentQuestion();
     }
@@ -298,10 +310,12 @@ export class Home {
     this.saveSurvey();
     this.closeCreateModal(false);
     this.showPublishOverlay = true;
+
     clearTimeout(this.publishToastTimer);
     this.publishToastTimer = setTimeout(() => {
       this.showPublishOverlay = false;
     }, 5000);
+
     this.router.navigate(['/']);
   }
 
@@ -425,6 +439,7 @@ export class Home {
 
     return true;
   }
+
   getAnswerLetter(index: number): string {
     return String.fromCharCode(65 + index);
   }

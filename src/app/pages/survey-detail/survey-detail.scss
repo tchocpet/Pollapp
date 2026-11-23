@@ -49,7 +49,7 @@
   color: #221227;
   font-family: 'Nokora', sans-serif;
   font-weight: 800;
-  cursor: pointer;
+  cursor: default;
 }
 
 .create-survey-btn {
@@ -119,6 +119,16 @@
   line-height: 0.95;
 }
 
+.survey-box .answer-item,
+.survey-box .answer-item * {
+  cursor: default !important;
+}
+
+.survey-box:not(.survey-completed) .answer-item:has(input:not(:disabled)),
+.survey-box:not(.survey-completed) .answer-item:has(input:not(:disabled)) * {
+  cursor: pointer !important;
+}
+
 .survey-description {
   max-width: 34.25rem;
   margin: 0 0 2.125rem;
@@ -149,19 +159,43 @@
   font-weight: 500;
 }
 
+.question-card:has(input[type='radio']) .multi-answer-note {
+  display: none;
+}
+
+.question-card:has(input[type='radio']) h3 {
+  margin-bottom: 0.875rem;
+}
+
 .answer-item {
   display: grid;
   grid-template-columns: 1rem 1.25rem minmax(0, 1fr);
-  align-items: center;
+  align-items: start;
   gap: 0.5rem;
   margin-bottom: 0.6875rem;
-  cursor: pointer;
+  cursor: default;
 }
 
-.answer-item input {
+.answer-item input[type='checkbox'] {
   width: 1rem;
   height: 1rem;
-  margin: 0;
+  margin: 0.125rem 0 0;
+  appearance: none;
+  border: 0.1rem solid var(--ink);
+  border-radius: 0.2rem;
+  background: transparent;
+}
+
+.answer-item input[type='checkbox']:checked {
+  border-color: var(--orange);
+  background: var(--orange);
+  box-shadow: inset 0 0 0 0.15rem var(--box);
+}
+
+.answer-item input[type='radio'] {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.125rem 0 0;
   accent-color: var(--orange);
 }
 
@@ -179,13 +213,26 @@
   position: absolute;
   right: 2.375rem;
   bottom: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
   min-width: 9.375rem;
   min-height: 2.75rem;
   padding: 0 1.125rem;
+  background: var(--peach);
+  font-size: 1rem;
+}
+
+.complete-btn:not(.completed-look)::after {
+  content: '✓';
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .complete-btn:disabled {
-  cursor: not-allowed;
+  cursor: default;
   opacity: 0.65;
 }
 
@@ -257,6 +304,7 @@
   color: var(--orange);
   font-size: 1rem;
   font-weight: 800;
+  text-align: right;
 }
 
 .vote-toast {
@@ -284,7 +332,7 @@
   color: inherit;
 }
 
-@media (max-width: 68.75rem) {
+@media (max-width: 60rem) {
   .survey-detail-page {
     padding-inline: 1.5rem;
   }
@@ -321,90 +369,65 @@
     margin-bottom: 1rem;
   }
 
-  .create-survey-btn {
-    min-width: 6.625rem;
-    min-height: 1.875rem;
-    padding: 0 0.75rem;
-    border-radius: 0.5rem;
-    font-size: 16px;
-    min-width: 2rem;
-    width: 2rem;
-    padding: 0;
-    border-radius: 50%;
-    font-size: 0;
-  }
-
-  .create-survey-btn::after {
-    content: '×';
-    font-family: 'Mulish', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    line-height: 1;
-  }
-
   .survey-header .create-survey-btn {
     display: none;
-  }
-
-  .survey-box {
-    position: relative;
   }
 
   .mobile-close-btn {
     position: absolute;
     top: 1.125rem;
-    right: 1rem;
+    right: 1.125rem;
     display: grid;
     width: 2rem;
     height: 2rem;
     place-items: center;
     padding: 0;
     border: 0;
-    border-radius: 50%;
+    border-radius: 0.5rem;
     background: var(--button);
     color: var(--ink);
     font-family: 'Mulish', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 400;
+    font-size: 1.375rem;
+    font-weight: 500;
     line-height: 1;
   }
 
-  .mobile-close-btn,
-  .vote-toast button {
-    cursor: pointer;
-  }
-
   .survey-box {
+    position: relative;
     min-height: 0;
-    padding: 1.125rem 1rem 1.5rem;
+    padding: 1.25rem 1.125rem 1.75rem;
     border-radius: 0 3.625rem 0 0;
   }
 
   .survey-status {
-    min-height: 1.2rem;
-    padding: 0.2rem 0.5rem;
-    font-size: 16px;
+    min-height: 1.5rem;
+    padding: 0.25rem 0.625rem;
+    font-size: 1rem;
   }
 
   .survey-top-info {
-    flex-direction: column;
-    gap: 0.3rem;
-    margin: 0.45rem 0 0.5rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.35rem 0.75rem;
+    margin: 0.625rem 0 0.75rem;
   }
 
   .survey-end-date,
   .survey-category {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .survey-box h1 {
     max-width: 100%;
-    font-size: 2rem;
+    font-size: 2.25rem;
+    line-height: 0.98;
   }
 
   .survey-description {
-    margin-bottom: 1.375rem;
-    font-size: 16px;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.3;
   }
 
   .question-grid {
@@ -412,7 +435,11 @@
     gap: 1.5rem;
   }
 
-  .question-card h3,
+  .question-card h3 {
+    min-height: 0;
+    font-size: 1rem;
+  }
+
   .multi-answer-note,
   .answer-letter,
   .answer-text {
@@ -424,48 +451,52 @@
   }
 
   .answer-item {
-    grid-template-columns: 0.8rem 1.1rem minmax(0, 1fr);
-    gap: 0.4rem;
+    grid-template-columns: 1rem 1.25rem minmax(0, 1fr);
+    gap: 0.45rem;
     margin-bottom: 0.5rem;
-  }
-
-  .answer-item input {
-    width: 0.8rem;
-    height: 0.8rem;
   }
 
   .complete-btn {
     position: static;
-    display: block;
-    min-width: 4.75rem;
-    min-height: 1.75rem;
-    margin: 1.25rem 0 0 auto;
-    padding: 0 0.625rem;
-    border-radius: 0.4rem;
-    font-size: 16px;
+    display: flex;
+    width: fit-content;
+    min-width: 7.5rem;
+    min-height: 2.375rem;
+    margin: 1.5rem 0 0 auto;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
   }
 
   .results-box {
-    margin-top: 1.75rem;
+    margin-top: 2rem;
   }
 
   .results-box h2 {
-    margin-bottom: 1.125rem;
-    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.75rem;
   }
 
-  .result-question h3,
+  .result-question {
+    margin-bottom: 1.5rem;
+  }
+
+  .result-question h3 {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
   .result-letter,
   .result-percent {
-    font-size: 16px;
+    font-size: 1rem;
   }
 
   .result-row {
-    grid-template-columns: minmax(0, 1fr) 1.875rem;
+    grid-template-columns: minmax(0, 1fr) 2.75rem;
   }
 
   .bar {
-    height: 0.5rem;
+    height: 0.55rem;
   }
 
   .vote-toast {
